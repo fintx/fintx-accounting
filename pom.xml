@@ -1,0 +1,21 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>fintx-accounting</artifactId>
+	<version>${parent.version}</version>
+	<name>fintx-accounting</name>
+	<description>FinTx accounting project</description>
+	<url>www.fintx.org</url>
+	<parent>
+		<groupId>org.fintx</groupId>
+		<artifactId>fintx-parent</artifactId>
+		<version>0.0.1</version>
+	</parent>
+	<dependencies>
+		<dependency>
+			<groupId>org.fintx</groupId>
+			<artifactId>fintx-common</artifactId>
+			<version>${parent.version}</version>
+		</dependency>
+	</dependencies>
+</project>
