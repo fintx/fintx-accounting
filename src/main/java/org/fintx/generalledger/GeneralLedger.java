@@ -15,13 +15,15 @@
  */
 package org.fintx.generalledger;
 
+import java.math.BigDecimal;
+
 /**
  * @author bluecreator(qiang.x.wang@gmail.com)
  *
  */
 public interface GeneralLedger {
 	public void createDailyAccounts();
-	public void post();
+	public void post(String subject, BigDecimal amount);
 	public void check();
 	
 
