@@ -19,7 +19,6 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 
 import org.fintx.lang.Pair;
-import org.fintx.ledger.Registration.Builder.RegistrationVerifer;
 
 import lombok.Getter;
 
@@ -42,7 +41,9 @@ public class Transaction {
 	// private ArrayList buffCreditEntrys;
 	// private ArrayList buffDebitEntrys;
 	
-
+	public static Builder builder() {
+		return new Builder();
+	}
 
 	public static class Builder {
 		private Transaction transaction = new Transaction();
@@ -79,6 +80,11 @@ public class Transaction {
 		public static class TransactionVerifer implements Verifer<Transaction>{
 			
 			public boolean verify(Transaction txn) {
+				//acctno type length?? on the setting
+				//amount ??on the setting
+				//one debit one credit:every dr entry match cr entry
+				//one to many: dr entry single or cr entry is single
+				//many to many: not allowed
 				return true;
 			};
 

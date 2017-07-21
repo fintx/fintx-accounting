@@ -5,13 +5,20 @@ import java.util.ArrayList;
 
 import org.fintx.lang.Pair;
 
+import lombok.Getter;
 
 
+@Getter
 public class Operation {
 	private Voucher voucher;
 	private ArrayList<Pair<String, BigDecimal>> freezeEntrys;
 	private ArrayList<Pair<String, BigDecimal>> unfreezeEntrys;
+	public static Builder builder() {
+		return new Builder();
+	}
 	public static class Builder{
+		private Builder() {
+		}
 		private Operation operation = new Operation();
 		private Verifer<Operation> verifer = null;
 		private static final Verifer<Operation> defaultVerifer=new OperationVerifer();
@@ -47,6 +54,8 @@ public class Operation {
 		public static class OperationVerifer implements Verifer<Operation> {
 			
 			public boolean verify(Operation operation) {
+				//acctno type length?? on the setting
+				//amount ??on the setting
 				return true;
 			};
 

@@ -19,12 +19,14 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 
 import org.fintx.lang.Pair;
-import org.fintx.ledger.Operation.Builder.OperationVerifer;
+
+import lombok.Getter;
 
 /**
  * @author bluecreator(qiang.x.wang@gmail.com)
  *
  */
+@Getter
 public class Registration {
 	private Registration() {
 
@@ -34,8 +36,11 @@ public class Registration {
 	
 	private ArrayList<Pair<String, BigDecimal>> receiptEntrys;
 	private ArrayList<Pair<String, BigDecimal>> payEntrys;
+	
 
 	public static class Builder {
+		private Builder() {
+		}
 		private Registration registration = new Registration();
 		private Verifer<Registration> verifer = null;
 		private static final Verifer<Registration> defaultVerifer=new RegistrationVerifer();
@@ -61,6 +66,8 @@ public class Registration {
 		public static class RegistrationVerifer implements Verifer<Registration> {
 			
 			public boolean verify(Registration registration) {
+				//acctno type length?? on the setting
+				//amount ??on the setting
 				return true;
 			};
 
