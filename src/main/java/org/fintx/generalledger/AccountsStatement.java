@@ -19,6 +19,6 @@ package org.fintx.generalledger;
  * @author bluecreator(qiang.x.wang@gmail.com)
  *
  */
-public class AccountsDaily {
+public class AccountsStatement {
 
 }
