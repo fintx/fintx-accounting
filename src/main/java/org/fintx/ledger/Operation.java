@@ -10,6 +10,9 @@ import lombok.Getter;
 
 @Getter
 public class Operation {
+    private Operation() {
+        
+    }
 	private Voucher voucher;
 	private ArrayList<Pair<String, BigDecimal>> freezeEntrys;
 	private ArrayList<Pair<String, BigDecimal>> unfreezeEntrys;
