@@ -30,7 +30,9 @@ import lombok.Setter;
 @Setter
 @Builder
 public class Voucher {
-
+/*
+ * 是否已结算
+ */
     private Boolean settlement;
     /*
      * 凭证ID
@@ -138,7 +140,7 @@ public class Voucher {
     /*
      * 入账标识
      */
-    private String countflag;
+//    private String effective;
     /*
      * transaction date 交易日期
      */
@@ -150,9 +152,9 @@ public class Voucher {
     /*
      * 收方金额
      */
-    private BigDecimal recvAmount;
+    private BigDecimal rrAmount;
     /*
      * 收方金额
      */
-    private BigDecimal payAmount;
+    private BigDecimal prAmount;
 }

@@ -22,84 +22,84 @@ import java.math.BigDecimal;
  *
  */
 public class Entry {
-    private String accttitlecode;
+    private String acctsCode;
 
-    private String correspaccttitlecode;
+    private String coAcctsCode;
 
-    private String custno;
+    private String custNo;
+/*
+    private String custType;
+*/
+    private String coCustNo;
+/*
+    private String acctSn;
 
-    private String custtype;
+    private String coAcctSn;
+*/
+   
+    private String orgNo;
 
-    private String correspcustno;
+    private String productNo;
+    
+    private String acctNo;
 
-    private String acctsn;
+    private String coAcctNo;
 
-    private String correspacctsn;
+    private String txnId;
 
-    private String acctno;
+    private String operOrgNo;
 
-    private String orgcode;
+    private String operNo;
 
-    private String productno;
+  
 
-    private String correspacctno;
+    private String txnDate;
 
-    private String txnsn;
+    private String txnCode;
 
-    private String proxorgcode;
-
-    private String proxoperno;
-
-
-    private String channeldate;
-
-    private String txndate;
-//��ctime mtime
-//    private String sysdate;
-//
-//    private Long systime;
-//��ֹ����� �ʽ���Դȥ����  ����һ����  ���һ��  ��ʱ���Լ�齻���� 
-    private String txncode;
-
-
-    private BigDecimal txnamt;
+    private BigDecimal txnAmt;
 
     private BigDecimal balance;
 
-    private BigDecimal balaccum;
+    private BigDecimal balAccum;
 
-    private String drorcr;
-
-    private String counted;
+    /*
+     * dr:debit record/cr:credit record/rr:receipt record/pr:payment record/or:operation record 借/贷/收/付
+     */
+    private short symbol;
+    /*
+     * is this accounting entry effective to account
+     */
+    private boolean effective;
 
     private String cashortxfr;
 
-    private String vouchertype;
+    private String voucherType;
 
-    private String voucherno;
+    private String voucherId;
 
-    private String bizsn;
+    private String channelCode;
 
-    private String bizcode;
-
-    private String channelcode;
-
-    private String channelbizsn;
-
-    private String paymentchannel;
-
-    private String paymenttype;
+    private String sourceBizId;
+    private String sourceBizDate;
 
     private String summary;
-
-    private String checksum;
-
-    private String extend1; // �����ֶ�1
-    private String extend2; // �����ֶ�1
-    private String extend3; // �����ֶ�1
     
-    private String bizId; // ҵ��Id  
-    private String bizDate; // ҵ������
-    private String changeflag; // �����ʶ 0 δ���  1����  2����
-    private String countflag; // ���˱�ʶ
+    /*
+     * extend column
+     */
+    private String extend1;
+    /*
+     * extend column
+     */
+    private String extend2;
+    
+    private String bizCode;
+    private String bizId; 
+    private String bizDate; 
+    private String changeflag;
+    /*
+     * DAC: Data Anti Change
+     */
+    private String checksum;
 }
