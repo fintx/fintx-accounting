@@ -1,4 +1,4 @@
-package org.fintx.ledger;
+package org.fintx.ledger.service;
 
 public interface Verifer<T> {
 	

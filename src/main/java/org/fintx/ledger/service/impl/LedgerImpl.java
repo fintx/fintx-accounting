@@ -1,11 +1,11 @@
-package org.fintx.ledger.impl;
+package org.fintx.ledger.service.impl;
 
-import org.fintx.ledger.Ledger;
-import org.fintx.ledger.Operation;
-import org.fintx.ledger.Transaction;
 import org.fintx.ledger.entity.Account;
 import org.fintx.ledger.entity.OperationEntry;
 import org.fintx.ledger.entity.TransactionEntry;
+import org.fintx.ledger.service.Ledger;
+import org.fintx.ledger.service.Operation;
+import org.fintx.ledger.service.Transaction;
 
 import java.util.List;
 
