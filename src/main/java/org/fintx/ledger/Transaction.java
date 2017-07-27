@@ -19,10 +19,12 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 
 import org.fintx.lang.Pair;
+import org.fintx.ledger.entity.Voucher;
 
 import lombok.Getter;
 
 /**
+ * This class is not thread safe
  * @author bluecreator(qiang.x.wang@gmail.com)
  *
  */
@@ -35,6 +37,9 @@ public class Transaction {
 	private Voucher voucher;
 	private ArrayList<Pair<String, BigDecimal>> creditEntrys;
 	private ArrayList<Pair<String, BigDecimal>> debitEntrys;
+	private ArrayList<Pair<String, BigDecimal>> receiptEntrys;
+    private ArrayList<Pair<String, BigDecimal>> payEntrys;
+    
 	// control and buff should be a configuration not a function
 	// private ArrayList controlCreditEntrys;
 	// private ArrayList controlDebitEntrys;
@@ -55,18 +60,29 @@ public class Transaction {
 			
 			return this;
 		}
-		public Builder credit(String acctNo, BigDecimal amt) {
+		public Builder credit(String accountNo, BigDecimal amount) {
 			if(null==transaction.creditEntrys) {
 				synchronized (transaction){
-					transaction.creditEntrys=new ArrayList<Pair<String, BigDecimal>>(5);
+				    if(null==transaction.creditEntrys) {
+				        transaction.creditEntrys=new ArrayList<Pair<String, BigDecimal>>(5);
+				    }
 				}
 			}
-			transaction.creditEntrys.add(new Pair<String, BigDecimal>(acctNo,amt));
+			transaction.creditEntrys.add(new Pair<String, BigDecimal>(accountNo,amount));
 			return this;
 		}
-		public Builder debit(String acctNo, BigDecimal amt) {
+		public Builder debit(String accountNo, BigDecimal amount) {
 			return this;
 		}
+		
+		public  Builder freeze(String accountNo, BigDecimal amount) {
+            return this;
+        }
+
+ 
+        public Builder pay(String accountNo, BigDecimal amount) {
+            return this;
+        }
 		public Builder transactionVerifer(TransactionVerifer verifer) {
 			this.verifer = verifer;
 			return this;
@@ -80,7 +96,7 @@ public class Transaction {
 		public static class TransactionVerifer implements Verifer<Transaction>{
 			
 			public boolean verify(Transaction txn) {
-				//acctno type length?? on the setting
+				//accountNo type length?? on the setting
 				//amount ??on the setting
 				//one debit one credit:every dr entry match cr entry
 				//one to many: dr entry single or cr entry is single

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.fintx.ledger;
+package org.fintx.ledger.entity;
 
 import java.math.BigDecimal;
 
@@ -33,49 +33,64 @@ public class Account {
     // 设有借方、贷方发生额和借方、贷方余额四栏，适用于借、贷双方反映余额的存贷往来账户。
     // 丁种账
     // 设有借方、贷方发生额、余额和销账四栏，适用于逐笔销账的一次性业务，并兼有分户核算作用的账户。
-    private String acctsCode;
+    private String accountsNo;
 
-    private String orgNo;
+    private String organizationNo;
 
-    private String custNo;
+    private String customerNo;
 
-    private String acctSn;
+    private String accountSn;
 
-    private String acctNo;
+    private String accountNo;
 
     private String productNo;
-
-    private String symbol;
+    /*
+     * 1 debtor 2 creditor
+     */
+    private String accountSide;
     /*
      * 1 normal 2closed
      */
-    private String acctStatus;
+    private String accountStatus;
 
     private BigDecimal overdraftLimit;
 
     private BigDecimal frozenAmt;
 
     private BigDecimal lastfrozenamt;
-/*
- * control amount
- */
+    /*
+     * control amount
+     */
     private BigDecimal ctrlAmt;
-/*
- * last control amount
- */
- //   private BigDecimal lastCtrlAmt;
-/*
- * account control characters
- */
-    private String acctCtrl;
+    /*
+     * last control amount
+     */
+    // private BigDecimal lastCtrlAmt;
+    /*
+     * account control characters
+     */
+    private String accountCtrl;
 
     private BigDecimal balance;
 
     private BigDecimal lastBalance;
 
+    /*
+     * accumulation 积数
+     **/
+    private BigDecimal balanceAccum;
+    /*
+     * last balance accumulation
+     **/
+    private BigDecimal lastBalanceAccum;
+
     private BigDecimal drBalance;
 
     private BigDecimal lastDrBalance;
+
+    private BigDecimal crBalance;
+
+    private BigDecimal lastCrBalance;
 
     private BigDecimal drTxnAmt;
 
@@ -85,17 +100,24 @@ public class Account {
 
     private BigDecimal lastCrTxnAmt;
 
-    private String txnDate;
+    private BigDecimal rate;
 
-    private String acctType;
+    private String interestSettleDate;
+
+    private String accountType;
+    private String txnDate;
+/*
+* move to accountctrl
+*    // 销账类型
+*    // 1-一次销账 2-多次销账 
+*    private String writeOffType;
+*/
+    // 销账
+    private String writeOff;
 
     private String openDate;
 
     private String closeDate;
-    /*
-     * DAC
-     */
-    private String checksum;
 
     /*
      * extend column
@@ -104,4 +126,9 @@ public class Account {
     /*
      * extend column
      */
+    private String extend2;
+    /*
+     * DAC
+     */
+    private String checksum;
 }

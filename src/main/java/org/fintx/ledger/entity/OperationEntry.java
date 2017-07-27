@@ -13,7 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.fintx.ledger;
+package org.fintx.ledger.entity;
+
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 
@@ -21,50 +25,36 @@ import java.math.BigDecimal;
  * @author bluecreator(qiang.x.wang@gmail.com)
  *
  */
-public class Entry {
-    private String acctsCode;
+@Getter
+@Setter
+@Builder
+public class OperationEntry {
+    private String accountsCode;
 
-    private String coAcctsCode;
-
-    private String custNo;
-/*
-    private String custType;
-*/
-    private String coCustNo;
-/*
-    private String acctSn;
-
-    private String coAcctSn;
-*/
-   
-    private String orgNo;
-
+    private String customerNo;
+    private String organizationNo;
     private String productNo;
     
-    private String acctNo;
+    private String accountNo;
 
-    private String coAcctNo;
+    private String operationId;
 
-    private String txnId;
+    private String operatorOrgNo;
 
-    private String operOrgNo;
+    private String operatorNo;
 
-    private String operNo;
+    private String operationDate;
 
-  
+    private String transactionCode;
 
-    private String txnDate;
-
-    private String txnCode;
-
-    private BigDecimal txnAmt;
+    private BigDecimal transactionAmt;
 
     private BigDecimal balance;
 
-    private BigDecimal balAccum;
+    private BigDecimal balanceAccum;
 
     /*
-     * dr:debit record/cr:credit record/rr:receipt record/pr:payment record/or:operation record 借/贷/收/付
+     * dr:debit record/cr:credit record/rr:receipt record/pr:payment record/or:operation record 借/贷/收/付/操作
      */
     private short symbol;
     /*
@@ -80,8 +70,8 @@ public class Entry {
 
     private String channelCode;
 
-    private String sourceBizId;
-    private String sourceBizDate;
+    private String sourcebusinessId;
+    private String sourcebusinessDate;
 
     private String summary;
     
@@ -94,9 +84,9 @@ public class Entry {
      */
     private String extend2;
     
-    private String bizCode;
-    private String bizId; 
-    private String bizDate; 
+    private String businessCode;
+    private String businessId; 
+    private String businessDate; 
     private String changeflag;
     /*
      * DAC: Data Anti Change

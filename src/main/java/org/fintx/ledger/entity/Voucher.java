@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.fintx.ledger;
+package org.fintx.ledger.entity;
 
 import java.math.BigDecimal;
 
@@ -118,21 +118,30 @@ public class Voucher {
     /*
      * 业务码
      */
-    private String bizCode;
+    private String businessCode;
 //    /*
 //     * 渠道号
 //     */
 //    private String channelId;
     
     //private String paymenttype;
+    
     /*
      * business Id
      */
-    private String bizId;
+    private String originBizId;
     /*
      * business date业务日期
      */
-    private String bizDate;
+    private String originBizDate;
+    /*
+     * business Id
+     */
+    private String businessId;
+    /*
+     * business date业务日期
+     */
+    private String businessDate;
     /*
      * 修改标识
      */
@@ -144,17 +153,27 @@ public class Voucher {
     /*
      * transaction date 交易日期
      */
-    private String txnDate;
+    private String transactionDate;
+  
     /*
      * 借方金额
      */
-    private BigDecimal drAmount;
+    private BigDecimal debitRecordAmt;
+    /*
+     * 贷方金额
+     */
+    private BigDecimal creditRecordAmt;
     /*
      * 收方金额
      */
-    private BigDecimal rrAmount;
+    private BigDecimal receiptRecordAmt;
     /*
-     * 收方金额
+     * 冻结金额
      */
-    private BigDecimal prAmount;
+    private BigDecimal freezeRecordAmt;
+    
+    /*
+     * 解冻金额
+     */
+    private BigDecimal unfreezeRecordAmt;
 }
