@@ -1,13 +1,8 @@
 account   acct
 accounts  accts
 serial number  SN
-correspond   co
 transaction  txn
 control ctrl
-dr  debit record
-cr  credit record
-rr  receipt record
-pr  pay record
-or  operate record
 operator  oper
-amt  amount
+amount amt  
+accumulation accum
