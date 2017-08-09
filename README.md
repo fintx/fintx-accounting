@@ -1,5 +1,7 @@
 # FinTx[1]
 
+[![Join the chat at https://gitter.im/fintx/fintx-accounting](https://badges.gitter.im/fintx/fintx-accounting.svg)](https://gitter.im/fintx/fintx-accounting?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 ## What's is FinTx?
 
 FinTx is an open source group focus on financial technologies.
