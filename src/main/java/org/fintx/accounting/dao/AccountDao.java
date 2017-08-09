@@ -8,43 +8,26 @@ import org.fintx.accounting.entity.Account;
 import org.fintx.accounting.entity.TransactionEntry;
 
 import org.apache.ibatis.annotations.Param;
-
-
+/**
+ * 
+ * @author 
+ *
+ */
 public interface AccountDao {
-	
-	int save(Account record);
 
+    int save(Account account);
 
+    int minusToFrozenAmt(BigDecimal amount);
 
-	
-	int minusToFrozenAmt(BigDecimal amount);
+    int plusToFrozenAmt(BigDecimal amount);
 
+    Account lockAccount(String accountNo);
 
-	int plusToFrozenAmt(BigDecimal amount);
+    int modifyBalance(Account account);
+  
+    Account getByAccountNo(String accountNo);
 
-
-	Account lockAccount(String accountNo);
-
-	
-	int updateBalance(Account account);
-
-
-	/**
-	 * @param mapkey
-	 *            :tableName,acctNo
-	 * @return
-	 */
-	Account getByAcctNo(String accountNo);
-
-	/**
-	 * 某一个科目流水中某一个定单的发生金额(订单)
-	 * 
-	 * @param acctTitleService
-	 * @param productNo
-	 * @param dueBillNo
-	 * @return
-	 */
-	BigDecimal selectAcctTitleSumAmtList(String accountsNo, String orderId);
-
+    
+    BigDecimal selectAcctTitleSumAmtList(String accountsNo, String orderId);
 
 }

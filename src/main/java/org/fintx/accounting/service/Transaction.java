@@ -79,7 +79,7 @@ public class Transaction {
                     }
                 }
             }
-            //transaction.creditEntrys.add(new TransactionEntry(accountNo, amount));
+            // transaction.creditEntrys.add(new TransactionEntry(accountNo, amount));
             return this;
         }
 

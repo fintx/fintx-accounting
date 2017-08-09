@@ -32,7 +32,7 @@ import lombok.Setter;
 @Setter
 @Builder
 public class Voucher {
-   
+
     /*
      * 凭证ID
      */
@@ -90,7 +90,7 @@ public class Voucher {
      * （经办）操作员号
      */
     private String operatorNo;
-    
+
     /*
      * 复核操作员号
      */
@@ -123,7 +123,7 @@ public class Voucher {
      * 扩展字段2
      */
     private String extend2;
-    
+
     /*
      * 是否已结算
      */
@@ -157,16 +157,15 @@ public class Voucher {
      */
     private LocalDate businessDate;
     /*
-     *  1 post 记账 1 flash 冲正 2 cancel 撤销 
+     * 1 post 记账 1 flash 冲正 2 cancel 撤销
      */
     private String voucherflag;
-    
+
     /*
-     *  1 flash 冲正 2 cancel 撤销 
+     * 1 flash 冲正 2 cancel 撤销
      */
     private String originVoucherId;
-    
-    
+
     /*
      * 入账标识
      */

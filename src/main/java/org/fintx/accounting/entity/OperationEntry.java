@@ -34,7 +34,7 @@ public class OperationEntry {
     private String customerNo;
     private String organizationNo;
     private String productNo;
-    
+
     private String accountNo;
 
     private String operationId;
@@ -47,20 +47,18 @@ public class OperationEntry {
 
     private String transactionCode;
 
-   
-
     /*
      * dr:debit record/cr:credit record/rr:receipt record/pr:payment record/or:operation record 借/贷/收/付/操作
      */
     private short symbol;
-  
+
     private String originbusinessId;
     private String originbusinessDate;
-    
+
     private BigDecimal amount;
 
     private String summary;
-    
+
     /*
      * extend column
      */
@@ -69,10 +67,10 @@ public class OperationEntry {
      * extend column
      */
     private String extend2;
-    
+
     private String businessCode;
-    private String businessId; 
-    private String businessDate; 
+    private String businessId;
+    private String businessDate;
     private String changeflag;
     /*
      * DAC: Data Anti Change

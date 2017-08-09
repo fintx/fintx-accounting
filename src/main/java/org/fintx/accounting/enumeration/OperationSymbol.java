@@ -1,5 +1,5 @@
 package org.fintx.accounting.enumeration;
 
 public enum OperationSymbol {
-    FREEZE,UNFREEZE,OVERDRAFT,PAY
+    FREEZE, UNFREEZE, OVERDRAFT, PAY
 }

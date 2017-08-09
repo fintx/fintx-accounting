@@ -6,15 +6,15 @@ import lombok.Setter;
 @Getter
 @Setter
 public class CodeOfTransaction {
-	private String transactionCode;
+    private String transactionCode;
 
-	private String transactionName;
+    private String transactionName;
 
-	private String transactionCtrl;
+    private String transactionCtrl;
 
-	private String debitRecordAcctsNo;
+    private String debitRecordAcctsNo;
 
-	private String creditRecordAcctsNo;
-	
-	private String receiptAndPayRecordAcctsNo;
+    private String creditRecordAcctsNo;
+
+    private String receiptAndPayRecordAcctsNo;
 }

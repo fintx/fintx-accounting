@@ -3,31 +3,31 @@ package org.fintx.accounting.util;
 public class AccountUtil {
 
     /**
-     * 根据客户号获取科目号，如果是二级科目号，截取前六位；如果是三级科目号，截取前八位
+     * Parse code of accounts number from account nnumber
      * 
-     * @param acctNo
-     * @return
+     * @param accountNo the account number
+     * @return String of the code of accounts number
      */
-    public static String parseAccountsNo(String acctNo) {
-        if (acctNo.length() == 38 || acctNo.length() == 30) {
-            String accountsNo = acctNo.substring(0, 8);
-            if (accountsNo.endsWith("00")) {
-                accountsNo = accountsNo.substring(0, 6);
-                if (accountsNo.endsWith("00")) {
-                    accountsNo = accountsNo.substring(0, 4);
-                }
-            }
+    public static String parseAccountsCodeNo(String accountNo) {
+        if (accountNo.length() == 38) {
+            String accountsNo = accountNo.substring(0, 8);
+            // if (accountsNo.endsWith("00")) {
+            // accountsNo = accountsNo.substring(0, 6);
+            // if (accountsNo.endsWith("00")) {
+            // accountsNo = accountsNo.substring(0, 4);
+            // }
+            // }
             return accountsNo;
         } else {
-            throw new RuntimeException("Wrong accountNo for parsing:" + acctNo);
+            throw new RuntimeException("Wrong accountNo for parsing:" + accountNo);
         }
     }
 
     /**
-     * 根据客户或账号解析 客户类型
+     * Parse the customer type from customer number or account number
      * 
-     * @param
-     * @return
+     * @param custNoOrAcctNo customer number or account number
+     * @return string of the customer type
      */
     public static String parseCustType(String custNoOrAcctNo) {
         int len = 0;
@@ -50,26 +50,30 @@ public class AccountUtil {
         }
     }
 
-    public static String parseAcctSn(String acctNo) {
-        if (acctNo.length() == 38) {
-            return acctNo.substring(30, 38);
-        } else if (acctNo.length() == 30) {
-            return acctNo.substring(24, 30);
+    /**
+     * Parse the account serial number
+     * 
+     * @param accountNo the account number
+     * @return string of account serial number
+     */
+    public static String parseAcctSn(String accountNo) {
+        if (accountNo.length() == 38) {
+            return accountNo.substring(30, 38);
         } else {
-            throw new RuntimeException("Invalid Parameter: " + acctNo + " with length:" + acctNo.length());
+            throw new RuntimeException("Invalid Parameter: " + accountNo + " with length:" + accountNo.length());
         }
     }
 
     /**
-     * 获取客户号
+     * Parse the customer number from account number
      * 
-     * @param acctNo
-     * @return
+     * @param accountNo the account number
+     * @return string the customer number
      */
-    public String parseCustNo(String acctNo) {
+    public String parseCustNo(String accountNo) {
         int len = 0;
-        if (null != acctNo) {
-            len = acctNo.length();
+        if (null != accountNo) {
+            len = accountNo.length();
         } else {
             throw new NullPointerException("Parameter could not be NULL");
         }
@@ -77,11 +81,9 @@ public class AccountUtil {
             throw new RuntimeException("Parameter length could not be 0");
         }
         if (38 == len) {
-            return acctNo.substring(8, 28);
-        } else if (30 == len) {
-            return acctNo.substring(8, 16);
+            return accountNo.substring(8, 28);
         } else {
-            throw new RuntimeException("Invalid Parameter: " + acctNo + " with length:" + acctNo.length());
+            throw new RuntimeException("Invalid Parameter: " + accountNo + " with length:" + accountNo.length());
         }
     }
 

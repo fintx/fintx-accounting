@@ -32,12 +32,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public class LedgerImpl implements LedgerService {
+public class LedgerServiceImpl implements LedgerService {
     @Autowired
     private AccountDao accountDao;
     @Autowired
     private TransactionEntryDao transactionEntryDao;
-    
+
     @Autowired
     private OperationEntryDao operationEntryDao;
     @Autowired
@@ -53,12 +53,12 @@ public class LedgerImpl implements LedgerService {
     private CodeOfAccountsDao codeOfAccountsDao;
 
     /*
-     *  冲正是否可为负
+     * 冲正是否可为负
      */
     public static Boolean flash_not_negative = false;
 
     /*
-     *  是否验证昨日余额
+     * 是否验证昨日余额
      */
     public static Boolean check_last_balance = false;
 
@@ -76,7 +76,7 @@ public class LedgerImpl implements LedgerService {
 
     @Override
     public Account auditAccount(String accountNo) {
-        return accountDao.getByAcctNo(accountNo);
+        return accountDao.getByAccountNo(accountNo);
     }
 
     @Override
@@ -113,7 +113,7 @@ public class LedgerImpl implements LedgerService {
         BigDecimal drBalance = currentAccount.getDrBalance();
         BigDecimal crBalance = currentAccount.getCrBalance();
         entry.setBalanceAccum(new BigDecimal("0.00"));
-        Operator operator = getOperatorBySymbolAndSide(entry.getSymbol(),codeOfAccountsDao.getByAccountsCodeNo(entry.getAccountsCodeNo()).getAccountsSide());
+        Operator operator = getOperatorBySymbolAndSide(entry.getSymbol(), codeOfAccountsDao.getByAccountsCodeNo(entry.getAccountsCodeNo()).getAccountsSide());
 
         // 处理冻结金额为负的情况，负数的冻结金额是异常情况，但是不影响交易
         if (frozenAmt.compareTo(BigDecimal.ZERO) < 0) {
@@ -148,7 +148,8 @@ public class LedgerImpl implements LedgerService {
         account.setAccountNo(entry.getAccountNo());
         // 金额足够做交易，判断是借还是贷
         if (latestTxnDate != null || !"".equals(latestTxnDate)) {
-            if (latestTxnDate.until(txnDate).getDays() == 1) { //Dates.getDayGap(latestTxnDate, txnDate) 上次交易日期是账期前一天，借贷发生额抄到昨日借贷发生额，冻结金额抄录到昨日冻结金额，冻结金额不变，交易为今天此账户第一笔交易,借方或贷方发生额为交易金额
+            if (latestTxnDate.until(txnDate).getDays() == 1) { // Dates.getDayGap(latestTxnDate, txnDate)
+                                                               // 上次交易日期是账期前一天，借贷发生额抄到昨日借贷发生额，冻结金额抄录到昨日冻结金额，冻结金额不变，交易为今天此账户第一笔交易,借方或贷方发生额为交易金额
                 account.setLastBalance(balance);
                 account.setLastDrBalance(drBalance);
                 account.setLastDrTransAmt(drTxnAmt);
@@ -170,7 +171,8 @@ public class LedgerImpl implements LedgerService {
                     // 不变
                     // accountA.setDrBalance(bean.getDrBalance());
                 }
-            } else if (latestTxnDate.until(txnDate).getDays()  > 1) {//Dates.getDayGap(latestTxnDate, txnDate) 上次交易日期在账期前一天之前，昨日借贷发生额清零，冻结金额抄录到昨日冻结金额，交易为今天此账户第一笔交易,借方或贷方发生额为交易金额
+            } else if (latestTxnDate.until(txnDate).getDays() > 1) {// Dates.getDayGap(latestTxnDate, txnDate)
+                                                                    // 上次交易日期在账期前一天之前，昨日借贷发生额清零，冻结金额抄录到昨日冻结金额，交易为今天此账户第一笔交易,借方或贷方发生额为交易金额
                 account.setLastBalance(balance);
                 account.setLastDrBalance(drBalance);
                 account.setLastDrTransAmt(BigDecimal.ZERO);
@@ -188,7 +190,7 @@ public class LedgerImpl implements LedgerService {
                     // 不变
                     // accountA.setDrBalance(bean.getDrBalance());
                 }
-            } else if (latestTxnDate.until(txnDate).getDays() == 0) {//Dates.getDayGap(latestTxnDate, txnDate) 上次交易日期为同日，交易不是当天第一笔，交易金额累计进借方或贷方发生额
+            } else if (latestTxnDate.until(txnDate).getDays() == 0) {// Dates.getDayGap(latestTxnDate, txnDate) 上次交易日期为同日，交易不是当天第一笔，交易金额累计进借方或贷方发生额
                 account.setBalance(newBalance);
                 if (TransactionSymbol.DEBIT.equals(entry.getSymbol())) {
                     account.setDrTransAmt(drTxnAmt.add(txnAmt));
@@ -199,15 +201,15 @@ public class LedgerImpl implements LedgerService {
                     // accountA.setDrBalance(bean.getDrBalance());
                 }
             } else if (latestTxnDate.until(txnDate).getDays() == -1) {// Dates.getDayGap(latestTxnDate, txnDate)上次交易日期为渠道账期后一天,此交易肯定不是上次交易日期为账期后一天第一笔交易，此时昨日余额
-                                                                       // 昨日发生额
-                                                                       // 昨日积数，肯定都是正确的，所以不用修正（抄录）
+                                                                      // 昨日发生额
+                                                                      // 昨日积数，肯定都是正确的，所以不用修正（抄录）
                 account.setBalance(newBalance);
                 BigDecimal newLastBal = new BigDecimal("0.00");
-//                BigDecimal lastFrozenAmt = currentAccount.getLastfrozenamt();
-//                // 处理昨日冻结金额为负的情况，负数的冻结金额是异常情况，但是不影响交易
-//                if (lastFrozenAmt.compareTo(BigDecimal.ZERO) < 0) {
-//                    lastFrozenAmt = new BigDecimal("0.00");
-//                }
+                // BigDecimal lastFrozenAmt = currentAccount.getLastfrozenamt();
+                // // 处理昨日冻结金额为负的情况，负数的冻结金额是异常情况，但是不影响交易
+                // if (lastFrozenAmt.compareTo(BigDecimal.ZERO) < 0) {
+                // lastFrozenAmt = new BigDecimal("0.00");
+                // }
                 BigDecimal lastBal = currentAccount.getLastBalance();
                 if (Operator.PLUS.equals(operator)) {
                     // 冲正的情况交易金额为负数，此时要检查余额是否足够冲正
@@ -278,7 +280,7 @@ public class LedgerImpl implements LedgerService {
         // acctTitleMap.put("tableName", "t_det_" + entry.getAccttitlecode());
         // acctTitleMap.put("detail", entry);
         // transactionEntryDao.recordDetailAccount(acctTitleMap);
-        accountDao.updateBalance(account);
+        accountDao.modifyBalance(account);
         return account;
     }
 
@@ -330,149 +332,152 @@ public class LedgerImpl implements LedgerService {
 
     @Override
     public String createInnerAccount(String accountsCodeNo, String organizationNo, String productNo, String transactionDate) {
-//        String newAcctNo = "";
-//        String acctSN = "";
-//        String drOrCr = SysInitService.getDebtorOrCreditor(acctTitleCode);
-//        String acctTitleCtrl = SysInitService.getAcctTitleCtrl(acctTitleCode);
-//        String accType = SysInitService.getAcctType(acctTitleCode);
-//        String txnDate = businessDateCtlMapper.getBusinessDate();
-//        Account record = new Account();
-//
-//        newAcctNo = acctNoGenerateService.buildInterAcctNo(acctTitleCode, Constant.ORG_CODE.getValue(), Constant.BIZ_CODE.getValue(), accType);
-//        record.setCusttype("");
-//
-//        InnerAcctNo recordInnerAcct = new InnerAcctNo();
-//        recordInnerAcct.setAccountNo(newAcctNo);
-//        recordInnerAcct.setOrgcode(orgCode);
-//        recordInnerAcct.setAccttitlecode(acctTitleCode);
-//        recordInnerAcct.setProductno(productNo);
-//        innerAccountNoDao.save(recordInnerAcct);
-//
-//        record.setDebtororcreditor(drOrCr);
-//        record.setAcctsn(acctSN);
-//        record.setAccountNo(newAcctNo);
-//        record.setProductno(productNo);
-//        record.setAccttitlecode(acctTitleCode);
-//        record.setOrgcode(orgCode);
-//        record.setCustno(Constant.ORG_CODE.getValue());
-//        record.setAcctstatus(Constant.ACCT_NORMAL_STATUS.getValue());
-//        record.setOverdraftlimit(new BigDecimal("0.00"));
-//        record.setFrozenamt(new BigDecimal("0.00"));
-//        record.setLastfrozenamt(new BigDecimal("0.00"));
-//        record.setAcctctrl(acctTitleCtrl);
-//        record.setBalance(new BigDecimal("0.00"));
-//        record.setLastBalance(new BigDecimal("0.00"));
-//        record.setDrTransAmt(new BigDecimal("0.00"));
-//        record.setLastDrTransAmt(new BigDecimal("0.00"));
-//        record.setCrTransAmt(new BigDecimal("0.00"));
-//        record.setLastCrTransAmt(new BigDecimal("0.00"));
-//        record.setDrBalance(new BigDecimal("0.00"));
-//        record.setLastDrBalance(new BigDecimal("0.00"));
-//        record.setLatestTransDate(txnDate);
-//        record.setAccttype(accType);
-//        record.setChecksum("");
-//        if (!Optional.ofNullable(record.getAcctopendate()).isPresent()) {
-//            record.setAcctopendate(txnDate);
-//        }
-//        if (!Optional.ofNullable(record.getAcctclosedate()).isPresent()) {
-//            record.setAcctclosedate("");
-//        }
-//        if (!Optional.ofNullable(record.getComment1()).isPresent()) {
-//            record.setComment1("");
-//        }
-//        if (!Optional.ofNullable(record.getComment2()).isPresent()) {
-//            record.setComment2("");
-//        }
-//        if (!Optional.ofNullable(record.getComment3()).isPresent()) {
-//            record.setComment3("");
-//        }
-//        String tableName = SysInitService.getAcctTableName(acctTitleCode);
-//        Map<String, Object> map = new HashMap<String, Object>();
-//        map.put("tableName", tableName);
-//        map.put("accountA", record);
-//        accountDao.insertSelective(map);
-//        return newAcctNo;
+        // String newAcctNo = "";
+        // String acctSN = "";
+        // String drOrCr = SysInitService.getDebtorOrCreditor(acctTitleCode);
+        // String acctTitleCtrl = SysInitService.getAcctTitleCtrl(acctTitleCode);
+        // String accType = SysInitService.getAcctType(acctTitleCode);
+        // String txnDate = businessDateCtlMapper.getBusinessDate();
+        // Account record = new Account();
+        //
+        // newAcctNo = acctNoGenerateService.buildInterAcctNo(acctTitleCode, Constant.ORG_CODE.getValue(), Constant.BIZ_CODE.getValue(), accType);
+        // record.setCusttype("");
+        //
+        // InnerAcctNo recordInnerAcct = new InnerAcctNo();
+        // recordInnerAcct.setAccountNo(newAcctNo);
+        // recordInnerAcct.setOrgcode(orgCode);
+        // recordInnerAcct.setAccttitlecode(acctTitleCode);
+        // recordInnerAcct.setProductno(productNo);
+        // innerAccountNoDao.save(recordInnerAcct);
+        //
+        // record.setDebtororcreditor(drOrCr);
+        // record.setAcctsn(acctSN);
+        // record.setAccountNo(newAcctNo);
+        // record.setProductno(productNo);
+        // record.setAccttitlecode(acctTitleCode);
+        // record.setOrgcode(orgCode);
+        // record.setCustno(Constant.ORG_CODE.getValue());
+        // record.setAcctstatus(Constant.ACCT_NORMAL_STATUS.getValue());
+        // record.setOverdraftlimit(new BigDecimal("0.00"));
+        // record.setFrozenamt(new BigDecimal("0.00"));
+        // record.setLastfrozenamt(new BigDecimal("0.00"));
+        // record.setAcctctrl(acctTitleCtrl);
+        // record.setBalance(new BigDecimal("0.00"));
+        // record.setLastBalance(new BigDecimal("0.00"));
+        // record.setDrTransAmt(new BigDecimal("0.00"));
+        // record.setLastDrTransAmt(new BigDecimal("0.00"));
+        // record.setCrTransAmt(new BigDecimal("0.00"));
+        // record.setLastCrTransAmt(new BigDecimal("0.00"));
+        // record.setDrBalance(new BigDecimal("0.00"));
+        // record.setLastDrBalance(new BigDecimal("0.00"));
+        // record.setLatestTransDate(txnDate);
+        // record.setAccttype(accType);
+        // record.setChecksum("");
+        // if (!Optional.ofNullable(record.getAcctopendate()).isPresent()) {
+        // record.setAcctopendate(txnDate);
+        // }
+        // if (!Optional.ofNullable(record.getAcctclosedate()).isPresent()) {
+        // record.setAcctclosedate("");
+        // }
+        // if (!Optional.ofNullable(record.getComment1()).isPresent()) {
+        // record.setComment1("");
+        // }
+        // if (!Optional.ofNullable(record.getComment2()).isPresent()) {
+        // record.setComment2("");
+        // }
+        // if (!Optional.ofNullable(record.getComment3()).isPresent()) {
+        // record.setComment3("");
+        // }
+        // String tableName = SysInitService.getAcctTableName(acctTitleCode);
+        // Map<String, Object> map = new HashMap<String, Object>();
+        // map.put("tableName", tableName);
+        // map.put("accountA", record);
+        // accountDao.insertSelective(map);
+        // return newAcctNo;
         return null;
     }
 
     @Override
     public String createCustomerAccount(String accountsNo, String organizationNo, String custNo, String productNo, String transactionDate) {
-//        // TODO 传入账期，作为账户创建日期 和最终交易日期
-//        String newAcctNo = "";
-//        String acctSN = "";
-//        String drOrCr = SysInitService.getDebtorOrCreditor(acctTitleCode);
-//        String acctTitleCtrl = SysInitService.getAcctTitleCtrl(acctTitleCode);
-//        String accType = SysInitService.getAcctType(acctTitleCode);
-//        String txnDate = businessDateCtlMapper.getBusinessDate();
-//        Account record = new Account();
-//        // 客户账号
-//        acctSN = customerAccountSnDao.generateCustomerAccountNo(custNo);
-//        if (acctSN == null) {
-//            throw new TransactionException(BCModules.ACCOUNT_LEDGER, LedgersMsg.BC11000002E.getCode(), LedgersMsg.BC11000002E.getDesc());
-//        }
-//        newAcctNo = acctNoGenerateService.buildCustomerAccountNo(acctTitleCode, custNo, accType, acctSN);
-//        record.setCusttype(SysInitService.parseCustType(custNo));
-//
-//        CustomerAccountNo recordCustomerAccountNo = new CustomerAccountNo();
-//        recordCustomerAccountNo.setAccountNo(newAcctNo);
-//        recordCustomerAccountNo.setAccttitlecode(acctTitleCode);
-//        recordCustomerAccountNo.setCustno(custNo);
-//        customerAccountNoDao.save(recordCustomerAccountNo);
-//        CustAccountSN accountSNRecord = new CustAccountSN();
-//        accountSNRecord.setAcctsn(acctSN);
-//        accountSNRecord.setCustno(custNo);
-//        customerAccountSnDao.updateCustomer(accountSNRecord);
-//
-//        record.setDebtororcreditor(drOrCr);
-//        record.setAcctsn(acctSN);
-//        record.setAccountNo(newAcctNo);
-//        record.setProductno(productNo);
-//        record.setAccttitlecode(acctTitleCode);
-//        record.setOrgcode(orgCode);
-//        record.setCustno(custNo);
-//        record.setAcctstatus(Constant.ACCT_NORMAL_STATUS.getValue());
-//        record.setOverdraftlimit(new BigDecimal("0.00"));
-//        record.setFrozenamt(new BigDecimal("0.00"));
-//        record.setLastfrozenamt(new BigDecimal("0.00"));
-//        record.setAcctctrl(acctTitleCtrl);
-//        record.setBalance(new BigDecimal("0.00"));
-//        record.setLastBalance(new BigDecimal("0.00"));
-//        record.setDrTransAmt(new BigDecimal("0.00"));
-//        record.setLastDrTransAmt(new BigDecimal("0.00"));
-//        record.setCrTransAmt(new BigDecimal("0.00"));
-//        record.setLastCrTransAmt(new BigDecimal("0.00"));
-//        record.setDrBalance(new BigDecimal("0.00"));
-//        record.setLastDrBalance(new BigDecimal("0.00"));
-//        record.setLatestTransDate(txnDate);
-//        record.setAccttype(accType);
-//        record.setChecksum("");
-//        if (!Optional.ofNullable(record.getAcctopendate()).isPresent()) {
-//            record.setAcctopendate(txnDate);
-//        }
-//        if (!Optional.ofNullable(record.getAcctclosedate()).isPresent()) {
-//            record.setAcctclosedate("");
-//        }
-//        if (!Optional.ofNullable(record.getComment1()).isPresent()) {
-//            record.setComment1("");
-//        }
-//        if (!Optional.ofNullable(record.getComment2()).isPresent()) {
-//            record.setComment2("");
-//        }
-//        if (!Optional.ofNullable(record.getComment3()).isPresent()) {
-//            record.setComment3("");
-//        }
-//        String tableName = SysInitService.getAcctTableName(acctTitleCode);
-//        Map<String, Object> map = new HashMap<String, Object>();
-//        map.put("tableName", tableName);
-//        map.put("accountA", record);
-//        accountDao.insertSelective(map);
-//        return newAcctNo;
+        // // TODO 传入账期，作为账户创建日期 和最终交易日期
+        // String newAcctNo = "";
+        // String acctSN = "";
+        // String drOrCr = SysInitService.getDebtorOrCreditor(acctTitleCode);
+        // String acctTitleCtrl = SysInitService.getAcctTitleCtrl(acctTitleCode);
+        // String accType = SysInitService.getAcctType(acctTitleCode);
+        // String txnDate = businessDateCtlMapper.getBusinessDate();
+        // Account record = new Account();
+        // // 客户账号
+        // acctSN = customerAccountSnDao.generateCustomerAccountNo(custNo);
+        // if (acctSN == null) {
+        // throw new TransactionException(BCModules.ACCOUNT_LEDGER, LedgersMsg.BC11000002E.getCode(), LedgersMsg.BC11000002E.getDesc());
+        // }
+        // newAcctNo = acctNoGenerateService.buildCustomerAccountNo(acctTitleCode, custNo, accType, acctSN);
+        // record.setCusttype(SysInitService.parseCustType(custNo));
+        //
+        // CustomerAccountNo recordCustomerAccountNo = new CustomerAccountNo();
+        // recordCustomerAccountNo.setAccountNo(newAcctNo);
+        // recordCustomerAccountNo.setAccttitlecode(acctTitleCode);
+        // recordCustomerAccountNo.setCustno(custNo);
+        // customerAccountNoDao.save(recordCustomerAccountNo);
+        // CustAccountSN accountSNRecord = new CustAccountSN();
+        // accountSNRecord.setAcctsn(acctSN);
+        // accountSNRecord.setCustno(custNo);
+        // customerAccountSnDao.updateCustomer(accountSNRecord);
+        //
+        // record.setDebtororcreditor(drOrCr);
+        // record.setAcctsn(acctSN);
+        // record.setAccountNo(newAcctNo);
+        // record.setProductno(productNo);
+        // record.setAccttitlecode(acctTitleCode);
+        // record.setOrgcode(orgCode);
+        // record.setCustno(custNo);
+        // record.setAcctstatus(Constant.ACCT_NORMAL_STATUS.getValue());
+        // record.setOverdraftlimit(new BigDecimal("0.00"));
+        // record.setFrozenamt(new BigDecimal("0.00"));
+        // record.setLastfrozenamt(new BigDecimal("0.00"));
+        // record.setAcctctrl(acctTitleCtrl);
+        // record.setBalance(new BigDecimal("0.00"));
+        // record.setLastBalance(new BigDecimal("0.00"));
+        // record.setDrTransAmt(new BigDecimal("0.00"));
+        // record.setLastDrTransAmt(new BigDecimal("0.00"));
+        // record.setCrTransAmt(new BigDecimal("0.00"));
+        // record.setLastCrTransAmt(new BigDecimal("0.00"));
+        // record.setDrBalance(new BigDecimal("0.00"));
+        // record.setLastDrBalance(new BigDecimal("0.00"));
+        // record.setLatestTransDate(txnDate);
+        // record.setAccttype(accType);
+        // record.setChecksum("");
+        // if (!Optional.ofNullable(record.getAcctopendate()).isPresent()) {
+        // record.setAcctopendate(txnDate);
+        // }
+        // if (!Optional.ofNullable(record.getAcctclosedate()).isPresent()) {
+        // record.setAcctclosedate("");
+        // }
+        // if (!Optional.ofNullable(record.getComment1()).isPresent()) {
+        // record.setComment1("");
+        // }
+        // if (!Optional.ofNullable(record.getComment2()).isPresent()) {
+        // record.setComment2("");
+        // }
+        // if (!Optional.ofNullable(record.getComment3()).isPresent()) {
+        // record.setComment3("");
+        // }
+        // String tableName = SysInitService.getAcctTableName(acctTitleCode);
+        // Map<String, Object> map = new HashMap<String, Object>();
+        // map.put("tableName", tableName);
+        // map.put("accountA", record);
+        // accountDao.insertSelective(map);
+        // return newAcctNo;
         return null;
     }
 
     /**
-     * @Title:
-     * @Description:根据科目号和借贷方向判断，该账户是做加做减
+     * Get plus and minus operator from TransactionSymbol and AccountSide
+     * 
+     * @param symbol TransactionSymbol
+     * @param side AccountSide
+     * @return Operator the plus or minus
      */
     public Operator getOperatorBySymbolAndSide(TransactionSymbol symbol, AccountSide side) {
         if (symbol.equals(TransactionSymbol.DEBIT)) {

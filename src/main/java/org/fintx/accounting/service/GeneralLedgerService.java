@@ -22,9 +22,10 @@ import java.math.BigDecimal;
  *
  */
 public interface GeneralLedgerService {
-	public void createDailyAccounts();
-	public void post(String subject, BigDecimal amount);
-	public void check();
-	
+    public void createDailyAccounts();
+
+    public void post(String subject, BigDecimal amount);
+
+    public void check();
 
 }

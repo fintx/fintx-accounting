@@ -54,18 +54,11 @@ public class Account {
      * 1 debtor 2 creditor
      */
     private String accountSide;
-    //账类 
-    /** 01-对私活期
-     * 02-对公活期
-     * 03-对私定期
-     * 04-对公定期
-     * 05-拨款、贷款
-     * 06-损益
-     * 07-现金
-     * 08-其他内部帐
-     * 09-其他
-     * 99-表外 */
-     private String accountingType;
+    // 账类
+    /**
+     * 01-对私活期 02-对公活期 03-对私定期 04-对公定期 05-拨款、贷款 06-损益 07-现金 08-其他内部帐 09-其他 99-表外
+     */
+    private String accountingType;
     /*
      * 1 normal 2closed
      */
@@ -74,10 +67,10 @@ public class Account {
     private BigDecimal overdraftLimit;
 
     private BigDecimal frozenAmt;
-/*
- * do not use double value
- */
-    //private BigDecimal lastfrozenamt;
+    /*
+     * do not use double value
+     */
+    // private BigDecimal lastfrozenamt;
     /*
      * control amount
      */
@@ -126,12 +119,9 @@ public class Account {
 
     private String accountType;
     private LocalDate latestTransDate;
-/*
-* move to accountctrl
-*    // 销账类型
-*    // 1-一次销账 2-多次销账 
-*    private String writeOffType;
-*/
+    /*
+     * move to accountctrl // 销账类型 // 1-一次销账 2-多次销账 private String writeOffType;
+     */
     // 销账
     private String writeOff;
 

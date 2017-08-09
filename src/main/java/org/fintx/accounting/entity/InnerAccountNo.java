@@ -6,8 +6,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class InnerAccountNo {
-	private String acctNo;
+    private String acctNo;
 
-	private String orgNo;
+    private String orgNo;
 
 }

@@ -29,13 +29,21 @@ import java.util.List;
  *
  */
 public interface LedgerService {
-    public String createInnerAccount(String accountsNo, String organizationNo, String productNo,String transactionDate); 
-    public String createCustomerAccount(String accountsNo, String organizationNo, String custNo, String productNo,String transactionDate);
+    public String createInnerAccount(String accountsNo, String organizationNo, String productNo, String transactionDate);
+
+    public String createCustomerAccount(String accountsNo, String organizationNo, String custNo, String productNo, String transactionDate);
+
     public void post(Transaction transaction);
+
     public void cancel(String transactionId);
-    public void flush(String transactionId,String transactionDate);
+
+    public void flush(String transactionId, String transactionDate);
+
     public void post(Operation operation);
-    public Account  auditAccount(String accountNo);
-    public List<TransactionEntry>  auditTransaction(String accountNo,String date);
-    public List<OperationEntry>  auditOperation(String accountNo,String date);
+
+    public Account auditAccount(String accountNo);
+
+    public List<TransactionEntry> auditTransaction(String accountNo, String date);
+
+    public List<OperationEntry> auditOperation(String accountNo, String date);
 }
