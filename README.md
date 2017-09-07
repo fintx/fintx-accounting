@@ -5,7 +5,8 @@
 [![GitHub release](https://img.shields.io/github/release/fintx/fintx-accounting.svg)](https://github.com/fintx/fintx-accounting/releases)
 ![Apache 2](http://img.shields.io/badge/license-Apache%202-red.svg)
 [![Join the chat at https://gitter.im/fintx/fintx-accounting](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/fintx/fintx-accounting?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-[![codecov.io](https://codecov.io/github/fintx/fintx-accounting/coverage.svg?branch=master)](https://codecov.io/github/fintx/fintx-accounting?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/fintx/fintx-accounting/badge.svg)](https://coveralls.io/github/fintx/fintx-accounting)
+[![Dependency Status](https://www.versioneye.com/user/projects/598c0fd5368b0838d3a25438/badge.svg?style=flat)](https://www.versioneye.com/user/projects/598c0fd5368b0838d3a25438)
 
 # FinTx[1]
 
@@ -20,4 +21,23 @@ Double entry accounting/booking;
 Single entry accounting/booking;
 Account operation/control;
 
-[1] FinTx https://www.fintx.org/
+## Using
+This is something that you get for free just by adding the following dependency inside your project:
+
+```xml
+<dependency>
+    <groupId>org.fintx</groupId>
+    <artifactId>fintx-accounting</artifactId>
+    <version>${latest.version></version>
+</dependency>
+```
+## Example
+1. ...
+
+```java
+
+```
+
+
+[1] FinTx https://www.fintx.org/    
+[2] Maven https://maven.apache.org/
