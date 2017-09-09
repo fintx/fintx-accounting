@@ -113,17 +113,18 @@ public class Account {
 
     private BigDecimal lastCrTransAmt;
 
-    private BigDecimal rate;
+    //Calculate the interest is a business!
+    //private BigDecimal rate;
 
-    private LocalDate interestSettleDate;
+    //private LocalDate interestSettleDate;
 
     private String accountType;
     private LocalDate latestTransDate;
     /*
      * move to accountctrl // 销账类型 // 1-一次销账 2-多次销账 private String writeOffType;
      */
-    // 销账
-    private String writeOff;
+    // write off is a business 销账
+    //private String writeOff;
 
     private LocalDate openDate;
 
