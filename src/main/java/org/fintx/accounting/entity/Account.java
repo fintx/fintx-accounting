@@ -129,6 +129,8 @@ public class Account {
     private LocalDate openDate;
 
     private LocalDate closeDate;
+    
+    private String timeZone;
 
     /*
      * extend column
