@@ -19,7 +19,6 @@ import org.fintx.accounting.enumeration.TransactionSymbol;
 import org.fintx.accounting.service.LedgerService;
 import org.fintx.accounting.service.Operation;
 import org.fintx.accounting.service.Transaction;
-import org.fintx.util.Dates;
 import org.fintx.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
