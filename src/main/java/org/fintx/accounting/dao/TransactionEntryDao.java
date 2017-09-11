@@ -1,11 +1,9 @@
 package org.fintx.accounting.dao;
 
-import java.util.List;
 import java.util.Map;
 
 import org.fintx.accounting.entity.TransactionEntry;
 
-import org.apache.ibatis.annotations.Param;
 
 public interface TransactionEntryDao {
     int save(TransactionEntry record);

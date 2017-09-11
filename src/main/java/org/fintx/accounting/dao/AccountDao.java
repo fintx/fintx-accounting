@@ -1,13 +1,9 @@
 package org.fintx.accounting.dao;
 
 import java.math.BigDecimal;
-import java.util.List;
-import java.util.Map;
 
 import org.fintx.accounting.entity.Account;
-import org.fintx.accounting.entity.TransactionEntry;
 
-import org.apache.ibatis.annotations.Param;
 /**
  * 
  * @author 

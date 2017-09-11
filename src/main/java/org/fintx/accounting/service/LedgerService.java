@@ -18,7 +18,6 @@ package org.fintx.accounting.service;
 import org.fintx.accounting.entity.Account;
 import org.fintx.accounting.entity.OperationEntry;
 import org.fintx.accounting.entity.TransactionEntry;
-import org.fintx.accounting.service.Operation.Builder;
 
 import java.util.List;
 

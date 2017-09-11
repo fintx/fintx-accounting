@@ -20,7 +20,6 @@ import java.util.ArrayList;
 
 import org.fintx.accounting.entity.TransactionEntry;
 import org.fintx.accounting.entity.Voucher;
-import org.fintx.lang.Pair;
 
 import lombok.Getter;
 

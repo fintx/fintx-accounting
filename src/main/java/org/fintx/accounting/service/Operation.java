@@ -20,7 +20,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import org.fintx.accounting.entity.OperationEntry;
-import org.fintx.lang.Pair;
 
 import lombok.Getter;
 
