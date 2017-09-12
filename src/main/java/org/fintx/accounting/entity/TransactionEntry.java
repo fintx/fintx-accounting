@@ -41,9 +41,9 @@ public class TransactionEntry {
 
     private String coCustomerNo;
     /*
-     * 原账户机构
+     * 原账户机构??是否需要 账户中有原账户机构
      */
-    private String organizationNo;
+    //private String organizationNo;
 
     private String productNo;
 
@@ -70,7 +70,7 @@ public class TransactionEntry {
     private BigDecimal balanceAccum;
 
     /*
-     * dr:debit record/cr:credit record/rr:receipt record/pr:payment record/or:operation record 借/贷/收/付/操作
+     * dr:debit record/cr:credit record/rr:receipt record/pr:payment record 借/贷/收/付
      */
     private TransactionSymbol symbol;
     /*
