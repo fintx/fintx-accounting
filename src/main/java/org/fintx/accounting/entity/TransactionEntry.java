@@ -41,9 +41,9 @@ public class TransactionEntry {
 
     private String coCustomerNo;
     /*
-     * 原账户机构??是否需要 账户中有原账户机构
+     * 原账户机构??是否需要 账户中有原账户机构--需要，是凭证必备属性，记账应校验
      */
-    //private String organizationNo;
+    private String organizationNo;
 
     private String productNo;
 
