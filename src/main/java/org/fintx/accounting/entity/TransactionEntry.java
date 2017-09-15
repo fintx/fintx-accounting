@@ -23,6 +23,7 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.ZoneOffset;
 
 /**
  * @author bluecreator(qiang.x.wang@gmail.com)
@@ -89,6 +90,8 @@ public class TransactionEntry {
      * 凭证日期
      */
     private LocalDate voucherDate;
+    
+    private ZoneOffset zoneOffset;
 
     /*
      * 款项 现金、银行存款以及其他视同现金和银行存款的银行汇票存款、银行本票存款、信用卡存款、信用证保证金存款、外埠存款和存出投资款等 三方备付金。
