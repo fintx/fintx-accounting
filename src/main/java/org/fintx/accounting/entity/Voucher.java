@@ -69,6 +69,8 @@ public class Voucher {
      * 订单日期
      */
     private LocalDate orderDate;
+    
+    
     /*
      * 辅助核算项目
      */
