@@ -32,7 +32,6 @@ This is something that you get for free just by adding the following dependency 
 </dependency>
 ```
 ## Example
-1. ...
 
 ```java
 String accountNo = ledgerService.createCustomerAccount(accountsNo, organizationNo, custNo, productNo, transactionDate);
