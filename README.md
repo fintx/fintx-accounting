@@ -35,6 +35,14 @@ This is something that you get for free just by adding the following dependency 
 1. ...
 
 ```java
+String accountNo = ledgerService.createCustomerAccount(accountsNo, organizationNo, custNo, productNo, transactionDate);
+Transaction.Builder builder = Transaction.builder();
+builder.associate(vou);
+builder.credit(accountNo, new BigDecimal("100.00"));
+builder.debit(accountNo1, new BigDecimal("50.00"));
+builder.debit(accountNo2, new BigDecimal("50.00"));
+Transaction trans = builder.build();
+ledgerService.post(trans);
 
 ```
 
