@@ -16,10 +16,13 @@
 package org.fintx.accounting.service;
 
 import java.math.BigDecimal;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 
 import org.fintx.accounting.entity.TransactionEntry;
 import org.fintx.accounting.entity.Voucher;
+import org.fintx.accounting.enumeration.TransactionFlag;
+import org.fintx.util.UniqueId;
 
 import lombok.Getter;
 
@@ -36,8 +39,12 @@ public class Transaction {
     }
 
     private Voucher voucher;
-    private String transactionId;
-    private String transactionDate;
+    private String transactionId=UniqueId.get().toString();
+    private ZonedDateTime transactionDateTime=ZonedDateTime.now();
+    /*
+     * 1 post 记账 1 flash 冲正 2 cancel 撤销
+     */
+    private TransactionFlag transactionflag = TransactionFlag.POST;
     private ArrayList<TransactionEntry> creditEntrys;
     private ArrayList<TransactionEntry> debitEntrys;
     private ArrayList<TransactionEntry> receiptEntrys;
@@ -93,13 +100,20 @@ public class Transaction {
         /*
          * if transactionDate is different with voucher's businessDate
          */
-        // public Builder transactionId(String transactionId) {
-        // return this;
-        // }
+         public Builder transactionId(String transactionId) {
+         return this;
+         }
         /*
          * if transactionDate is different with voucher's businessDate
          */
         public Builder transactionDate(String transactionDate) {
+            return this;
+        }
+        
+        /*
+         * if transactionDate is different with voucher's businessDate
+         */
+        public Builder transactionFlag(TransactionFlag transactionFlag) {
             return this;
         }
 
