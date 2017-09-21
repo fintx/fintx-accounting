@@ -30,13 +30,19 @@ import java.util.List;
 public interface LedgerService {
     public String createInnerAccount(String accountsNo, String organizationNo, String productNo, String transactionDate);
 
-    public String createCustomerAccount(String accountsNo, String organizationNo, String custNo, String productNo, String transactionDate);
+    public String createCustomerAccount(String accountsNo, String organizationNo,  String productNo,String custNo, String transactionDate);
 
+    /**
+     * 冲正 金额必须为负 更新余额 流水入账 撤销金额必须为负 更新余额 流水不入账
+     * @param transaction
+     */
     public void post(Transaction transaction);
+/**
+ * use TransactionFlag instead of cancel and flush
+ */
+    // public void cancel(Transaction transaction);
 
-    public void cancel(String transactionId);
-
-    public void flush(String transactionId, String transactionDate);
+    // public void flush(String transactionId, String transactionDate);
 
     public void post(Operation operation);
 

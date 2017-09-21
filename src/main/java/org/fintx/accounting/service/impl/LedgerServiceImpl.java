@@ -317,18 +317,7 @@ public class LedgerServiceImpl implements LedgerService {
         operationEntryDao.save(entry);
     }
 
-    @Override
-    public void cancel(String transactionId) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void flush(String transactionId, String transactionDate) {
-        // TODO Auto-generated method stub
-
-    }
-
+   
     @Override
     public String createInnerAccount(String accountsCodeNo, String organizationNo, String productNo, String transactionDate) {
         // String newAcctNo = "";
@@ -397,7 +386,7 @@ public class LedgerServiceImpl implements LedgerService {
     }
 
     @Override
-    public String createCustomerAccount(String accountsNo, String organizationNo, String custNo, String productNo, String transactionDate) {
+    public String createCustomerAccount(String accountsNo, String organizationNo,  String productNo,String custNo, String transactionDate) {
         // // TODO 传入账期，作为账户创建日期 和最终交易日期
         // String newAcctNo = "";
         // String acctSN = "";
