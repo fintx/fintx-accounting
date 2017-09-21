@@ -20,6 +20,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import org.fintx.accounting.entity.OperationEntry;
+import org.fintx.accounting.enumeration.OperationFlag;
+import org.fintx.util.UniqueId;
 
 import lombok.Getter;
 
@@ -33,9 +35,14 @@ public class Operation {
     private Operation() {
 
     }
-
+    private String authorizerNo;
     private String operatorNo;
+    private String operationId=UniqueId.get().toString();
     private LocalDate operationDate;
+    /*
+     * 1 post 记账 1 flash 冲正 2 cancel 撤销
+     */
+    private OperationFlag operationflag = OperationFlag.POST;
 
     private ArrayList<OperationEntry> closeAcctEntrys;
     private ArrayList<OperationEntry> freezeEntrys;
@@ -60,8 +67,13 @@ public class Operation {
 
         private Builder() {
         }
+        
+        public Builder authorizerNo(String authorizerNo) {
 
-        public Builder operateBy(String operatorNo) {
+            return this;
+        }
+
+        public Builder operateNo(String operatorNo) {
 
             return this;
         }
@@ -84,6 +96,20 @@ public class Operation {
         }
 
         public Builder closeAccount(String acctNo) {
+            return this;
+        }
+        
+        /*
+         * if operationDate is different with voucher's businessDate
+         */
+         public Builder operationId(String operationId) {
+         return this;
+         }
+        
+        /*
+         * if operationFlag is not post
+         */
+        public Builder operationFlag(OperationFlag operationFlag) {
             return this;
         }
 
