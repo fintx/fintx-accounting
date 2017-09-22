@@ -143,7 +143,7 @@ public class Voucher {
     // private String paymenttype;
 
     /*
-     * business Id
+     * original business Id 原业务ID
      */
     private String originBizId;
     /*
@@ -173,7 +173,7 @@ public class Voucher {
      */
     // private String effective;
     /*
-     * transaction date 交易日期就是businessDate
+     * transaction date 交易日期就是businessDate X--transaction date 应该在创建transaction 时确定
      */
     // private LocalDate transactionDate;
 
