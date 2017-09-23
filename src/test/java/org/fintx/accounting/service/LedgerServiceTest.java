@@ -108,7 +108,7 @@ public class LedgerServiceTest {
 
     @Test
     public void test() {
-        Voucher vou = null;
+        Voucher voucher = null;
         String accountsNo = null;
         String organizationNo = null;
         String custNo = null;
@@ -118,12 +118,12 @@ public class LedgerServiceTest {
         String accountNo2 = null;
         String accountNo = ledgerService.createCustomerAccount(accountsNo, organizationNo, custNo, productNo, transactionDate);
         Transaction.Builder builder = Transaction.builder();
-        builder.associate(vou);
+        builder.associate(voucher);
         builder.credit(accountNo, new BigDecimal("100.00"));
         builder.debit(accountNo1, new BigDecimal("50.00"));
         builder.debit(accountNo2, new BigDecimal("50.00"));
-        Transaction trans = builder.build();
-        ledgerService.post(trans);
+        Transaction transaction = builder.build();
+        ledgerService.post(transaction);
     }
 
 }
