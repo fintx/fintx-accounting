@@ -19,6 +19,8 @@ import org.fintx.accounting.entity.Account;
 import org.fintx.accounting.entity.OperationEntry;
 import org.fintx.accounting.entity.TransactionEntry;
 
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
 import java.util.List;
 
 /**
@@ -28,12 +30,12 @@ import java.util.List;
  *
  */
 public interface LedgerService {
-    public String createInnerAccount(String accountsNo, String organizationNo, String productNo, String transactionDate);
+    public String createInnerAccount(String accountsNo, String organizationNo, String productNo, OffsetDateTime creationDateTime);
 
-    public String createCustomerAccount(String accountsNo, String organizationNo,  String productNo,String custNo, String transactionDate);
+    public String createCustomerAccount(String accountsNo, String organizationNo,  String productNo,String custNo, OffsetDateTime creationDateTime);
 
     /**
-     * 冲正 金额必须为负 更新余额 流水入账 撤销金额必须为负 更新余额 流水不入账
+     * 冲正 金额必须为负 更新余额 流水入账 撤销 金额必须为负 更新余额 流水不入账
      * @param transaction
      */
     public void post(Transaction transaction);
@@ -48,7 +50,7 @@ public interface LedgerService {
 
     public Account auditAccount(String accountNo);
 
-    public List<TransactionEntry> auditTransaction(String accountNo, String date);
+    public List<TransactionEntry> auditTransaction(String accountNo, LocalDate date);
 
-    public List<OperationEntry> auditOperation(String accountNo, String date);
+    public List<OperationEntry> auditOperation(String accountNo, LocalDate date);
 }

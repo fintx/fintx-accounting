@@ -25,6 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.OffsetDateTime;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -79,13 +80,13 @@ public class LedgerServiceImpl implements LedgerService {
     }
 
     @Override
-    public List<TransactionEntry> auditTransaction(String accountNo, String date) {
+    public List<TransactionEntry> auditTransaction(String accountNo, LocalDate date) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public List<OperationEntry> auditOperation(String accountNo, String date) {
+    public List<OperationEntry> auditOperation(String accountNo, LocalDate date) {
         // TODO Auto-generated method stub
         return null;
     }
@@ -319,7 +320,7 @@ public class LedgerServiceImpl implements LedgerService {
 
    
     @Override
-    public String createInnerAccount(String accountsCodeNo, String organizationNo, String productNo, String transactionDate) {
+    public String createInnerAccount(String accountsCodeNo, String organizationNo, String productNo, OffsetDateTime creationDateTime) {
         // String newAcctNo = "";
         // String acctSN = "";
         // String drOrCr = SysInitService.getDebtorOrCreditor(acctTitleCode);
@@ -386,7 +387,7 @@ public class LedgerServiceImpl implements LedgerService {
     }
 
     @Override
-    public String createCustomerAccount(String accountsNo, String organizationNo,  String productNo,String custNo, String transactionDate) {
+    public String createCustomerAccount(String accountsNo, String organizationNo,  String productNo,String custNo, OffsetDateTime creationDateTime) {
         // // TODO 传入账期，作为账户创建日期 和最终交易日期
         // String newAcctNo = "";
         // String acctSN = "";

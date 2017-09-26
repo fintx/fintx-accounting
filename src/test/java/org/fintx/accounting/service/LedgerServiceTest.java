@@ -23,6 +23,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;
+import java.time.OffsetDateTime;
 
 /**
  * @author bluecreator(qiang.x.wang@gmail.com)
@@ -116,7 +117,7 @@ public class LedgerServiceTest {
         String transactionDate = null;
         String accountNo1 = null;
         String accountNo2 = null;
-        String accountNo = ledgerService.createCustomerAccount(accountsNo, organizationNo, custNo, productNo, transactionDate);
+        String accountNo = ledgerService.createCustomerAccount(accountsNo, organizationNo, custNo, productNo, OffsetDateTime.now());
         Transaction.Builder builder = Transaction.builder();
         builder.associate(voucher);
         builder.credit(accountNo, new BigDecimal("100.00"));
