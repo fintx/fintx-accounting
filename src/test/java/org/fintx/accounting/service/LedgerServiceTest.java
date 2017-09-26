@@ -23,7 +23,10 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 
 /**
  * @author bluecreator(qiang.x.wang@gmail.com)
@@ -31,7 +34,7 @@ import java.time.OffsetDateTime;
  */
 public class LedgerServiceTest {
     @Autowired
-    LedgerService ledgerService;
+    LedgerService ledgerService = null;
 
     /**
      * Test method for
@@ -109,15 +112,27 @@ public class LedgerServiceTest {
 
     @Test
     public void test() {
+        OffsetDateTime offsetDateTime = OffsetDateTime.now();
+        System.out.println(offsetDateTime.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME));
+        LocalDate localDate = offsetDateTime.toLocalDate();
+        System.out.println(localDate.format(DateTimeFormatter.ISO_DATE));
+        offsetDateTime = offsetDateTime.withOffsetSameInstant(ZoneOffset.UTC);
+        System.out.println(offsetDateTime.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME));
+        localDate = offsetDateTime.toLocalDate();
+        System.out.println(localDate.format(DateTimeFormatter.ISO_DATE));
+        offsetDateTime = offsetDateTime.withOffsetSameInstant(ZoneOffset.MAX);
+        System.out.println(offsetDateTime.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME));
+        localDate = offsetDateTime.toLocalDate();
+        System.out.println(localDate.format(DateTimeFormatter.ISO_DATE));
         Voucher voucher = null;
         String accountsNo = null;
         String organizationNo = null;
         String custNo = null;
         String productNo = null;
-        String transactionDate = null;
+        OffsetDateTime creationDate = OffsetDateTime.now();
         String accountNo1 = null;
         String accountNo2 = null;
-        String accountNo = ledgerService.createCustomerAccount(accountsNo, organizationNo, custNo, productNo, OffsetDateTime.now());
+        String accountNo = ledgerService.createCustomerAccount(accountsNo, organizationNo, custNo, productNo, creationDate);
         Transaction.Builder builder = Transaction.builder();
         builder.associate(voucher);
         builder.credit(accountNo, new BigDecimal("100.00"));
