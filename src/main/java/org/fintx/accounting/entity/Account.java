@@ -130,7 +130,7 @@ public class Account {
 
     private LocalDate closeDate;
     
-    private String timeZone;
+    private int offset;
 
     /*
      * extend column
