@@ -45,7 +45,7 @@ public class Account {
 
     private String customerNo;
 
-    private String accountSn;
+    //private String accountSn;
 
     private String accountNo;
 
@@ -117,7 +117,9 @@ public class Account {
     //private BigDecimal rate;
 
     //private LocalDate interestSettleDate;
-
+/**
+ * 甲 乙 丙  丁
+ */
     private String accountType;
     private LocalDate latestTransDate;
     /*
@@ -130,7 +132,7 @@ public class Account {
 
     private LocalDate closeDate;
     
-    private int offset;
+    private int ZoneOffset;
 
     /*
      * extend column
