@@ -9,6 +9,7 @@ import org.fintx.accounting.dao.InnerAccountSnDao;
 import org.fintx.accounting.dao.OperationEntryDao;
 import org.fintx.accounting.dao.TransactionEntryDao;
 import org.fintx.accounting.entity.Account;
+import org.fintx.accounting.entity.AccountOpeningEntry;
 import org.fintx.accounting.entity.CodeOfAccounts;
 import org.fintx.accounting.entity.CustomerAccountNo;
 import org.fintx.accounting.entity.OperationEntry;
@@ -16,7 +17,8 @@ import org.fintx.accounting.entity.TransactionEntry;
 import org.fintx.accounting.enumeration.AccountSide;
 import org.fintx.accounting.enumeration.Operator;
 import org.fintx.accounting.enumeration.TransactionSymbol;
-import org.fintx.accounting.service.LedgerService;
+import org.fintx.accounting.service.AccountOpening;
+import org.fintx.accounting.service.DetailLedgerService;
 import org.fintx.accounting.service.Operation;
 import org.fintx.accounting.service.Transaction;
 import org.fintx.util.Objects;
@@ -32,7 +34,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public class LedgerServiceImpl implements LedgerService {
+public class DetailLedgerServiceImpl implements DetailLedgerService {
     @Autowired
     private AccountDao accountDao;
     @Autowired
@@ -76,17 +78,18 @@ public class LedgerServiceImpl implements LedgerService {
 
     @Override
     public Account auditAccount(String accountNo) {
+         
         return accountDao.getByAccountNo(accountNo);
     }
 
     @Override
-    public List<TransactionEntry> auditTransaction(String accountNo, LocalDate date) {
+    public List<TransactionEntry> auditTransaction(String accountNo, LocalDate date,String businessId) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public List<OperationEntry> auditOperation(String accountNo, LocalDate date) {
+    public List<OperationEntry> auditOperation(String accountNo, LocalDate date,String businessId) {
         // TODO Auto-generated method stub
         return null;
     }
@@ -319,147 +322,7 @@ public class LedgerServiceImpl implements LedgerService {
     }
 
    
-    @Override
-    public String createInnerAccount(String accountsCodeNo, String organizationNo, String productNo, OffsetDateTime creationDateTime) {
-        // String newAcctNo = "";
-        // String acctSN = "";
-        // String drOrCr = SysInitService.getDebtorOrCreditor(acctTitleCode);
-        // String acctTitleCtrl = SysInitService.getAcctTitleCtrl(acctTitleCode);
-        // String accType = SysInitService.getAcctType(acctTitleCode);
-        // String txnDate = businessDateCtlMapper.getBusinessDate();
-        // Account record = new Account();
-        //
-        // newAcctNo = acctNoGenerateService.buildInterAcctNo(acctTitleCode, Constant.ORG_CODE.getValue(), Constant.BIZ_CODE.getValue(), accType);
-        // record.setCusttype("");
-        //
-        // InnerAcctNo recordInnerAcct = new InnerAcctNo();
-        // recordInnerAcct.setAccountNo(newAcctNo);
-        // recordInnerAcct.setOrgcode(orgCode);
-        // recordInnerAcct.setAccttitlecode(acctTitleCode);
-        // recordInnerAcct.setProductno(productNo);
-        // innerAccountNoDao.save(recordInnerAcct);
-        //
-        // record.setDebtororcreditor(drOrCr);
-        // record.setAcctsn(acctSN);
-        // record.setAccountNo(newAcctNo);
-        // record.setProductno(productNo);
-        // record.setAccttitlecode(acctTitleCode);
-        // record.setOrgcode(orgCode);
-        // record.setCustno(Constant.ORG_CODE.getValue());
-        // record.setAcctstatus(Constant.ACCT_NORMAL_STATUS.getValue());
-        // record.setOverdraftlimit(new BigDecimal("0.00"));
-        // record.setFrozenamt(new BigDecimal("0.00"));
-        // record.setLastfrozenamt(new BigDecimal("0.00"));
-        // record.setAcctctrl(acctTitleCtrl);
-        // record.setBalance(new BigDecimal("0.00"));
-        // record.setLastBalance(new BigDecimal("0.00"));
-        // record.setDrTransAmt(new BigDecimal("0.00"));
-        // record.setLastDrTransAmt(new BigDecimal("0.00"));
-        // record.setCrTransAmt(new BigDecimal("0.00"));
-        // record.setLastCrTransAmt(new BigDecimal("0.00"));
-        // record.setDrBalance(new BigDecimal("0.00"));
-        // record.setLastDrBalance(new BigDecimal("0.00"));
-        // record.setLatestTransDate(txnDate);
-        // record.setAccttype(accType);
-        // record.setChecksum("");
-        // if (!Optional.ofNullable(record.getAcctopendate()).isPresent()) {
-        // record.setAcctopendate(txnDate);
-        // }
-        // if (!Optional.ofNullable(record.getAcctclosedate()).isPresent()) {
-        // record.setAcctclosedate("");
-        // }
-        // if (!Optional.ofNullable(record.getComment1()).isPresent()) {
-        // record.setComment1("");
-        // }
-        // if (!Optional.ofNullable(record.getComment2()).isPresent()) {
-        // record.setComment2("");
-        // }
-        // if (!Optional.ofNullable(record.getComment3()).isPresent()) {
-        // record.setComment3("");
-        // }
-        // String tableName = SysInitService.getAcctTableName(acctTitleCode);
-        // Map<String, Object> map = new HashMap<String, Object>();
-        // map.put("tableName", tableName);
-        // map.put("accountA", record);
-        // accountDao.insertSelective(map);
-        // return newAcctNo;
-        return null;
-    }
-
-    @Override
-    public String createCustomerAccount(String accountsNo, String organizationNo,  String productNo,String custNo, OffsetDateTime creationDateTime) {
-        // // TODO 传入账期，作为账户创建日期 和最终交易日期
-        // String newAcctNo = "";
-        // String acctSN = "";
-        // String drOrCr = SysInitService.getDebtorOrCreditor(acctTitleCode);
-        // String acctTitleCtrl = SysInitService.getAcctTitleCtrl(acctTitleCode);
-        // String accType = SysInitService.getAcctType(acctTitleCode);
-        // String txnDate = businessDateCtlMapper.getBusinessDate();
-        // Account record = new Account();
-        // // 客户账号
-        // acctSN = customerAccountSnDao.generateCustomerAccountNo(custNo);
-        // if (acctSN == null) {
-        // throw new TransactionException(BCModules.ACCOUNT_LEDGER, LedgersMsg.BC11000002E.getCode(), LedgersMsg.BC11000002E.getDesc());
-        // }
-        // newAcctNo = acctNoGenerateService.buildCustomerAccountNo(acctTitleCode, custNo, accType, acctSN);
-        // record.setCusttype(SysInitService.parseCustType(custNo));
-        //
-        // CustomerAccountNo recordCustomerAccountNo = new CustomerAccountNo();
-        // recordCustomerAccountNo.setAccountNo(newAcctNo);
-        // recordCustomerAccountNo.setAccttitlecode(acctTitleCode);
-        // recordCustomerAccountNo.setCustno(custNo);
-        // customerAccountNoDao.save(recordCustomerAccountNo);
-        // CustAccountSN accountSNRecord = new CustAccountSN();
-        // accountSNRecord.setAcctsn(acctSN);
-        // accountSNRecord.setCustno(custNo);
-        // customerAccountSnDao.updateCustomer(accountSNRecord);
-        //
-        // record.setDebtororcreditor(drOrCr);
-        // record.setAcctsn(acctSN);
-        // record.setAccountNo(newAcctNo);
-        // record.setProductno(productNo);
-        // record.setAccttitlecode(acctTitleCode);
-        // record.setOrgcode(orgCode);
-        // record.setCustno(custNo);
-        // record.setAcctstatus(Constant.ACCT_NORMAL_STATUS.getValue());
-        // record.setOverdraftlimit(new BigDecimal("0.00"));
-        // record.setFrozenamt(new BigDecimal("0.00"));
-        // record.setLastfrozenamt(new BigDecimal("0.00"));
-        // record.setAcctctrl(acctTitleCtrl);
-        // record.setBalance(new BigDecimal("0.00"));
-        // record.setLastBalance(new BigDecimal("0.00"));
-        // record.setDrTransAmt(new BigDecimal("0.00"));
-        // record.setLastDrTransAmt(new BigDecimal("0.00"));
-        // record.setCrTransAmt(new BigDecimal("0.00"));
-        // record.setLastCrTransAmt(new BigDecimal("0.00"));
-        // record.setDrBalance(new BigDecimal("0.00"));
-        // record.setLastDrBalance(new BigDecimal("0.00"));
-        // record.setLatestTransDate(txnDate);
-        // record.setAccttype(accType);
-        // record.setChecksum("");
-        // if (!Optional.ofNullable(record.getAcctopendate()).isPresent()) {
-        // record.setAcctopendate(txnDate);
-        // }
-        // if (!Optional.ofNullable(record.getAcctclosedate()).isPresent()) {
-        // record.setAcctclosedate("");
-        // }
-        // if (!Optional.ofNullable(record.getComment1()).isPresent()) {
-        // record.setComment1("");
-        // }
-        // if (!Optional.ofNullable(record.getComment2()).isPresent()) {
-        // record.setComment2("");
-        // }
-        // if (!Optional.ofNullable(record.getComment3()).isPresent()) {
-        // record.setComment3("");
-        // }
-        // String tableName = SysInitService.getAcctTableName(acctTitleCode);
-        // Map<String, Object> map = new HashMap<String, Object>();
-        // map.put("tableName", tableName);
-        // map.put("accountA", record);
-        // accountDao.insertSelective(map);
-        // return newAcctNo;
-        return null;
-    }
+  
 
     /**
      * Get plus and minus operator from TransactionSymbol and AccountSide
@@ -487,5 +350,23 @@ public class LedgerServiceImpl implements LedgerService {
         } else {
             return Operator.MINUS;
         }
+    }
+
+    /* (non-Javadoc)
+     * @see org.fintx.accounting.service.DetailLedgerService#post(org.fintx.accounting.service.AccountOpening)
+     */
+    @Override
+    public void post(AccountOpening accountOpening) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    /* (non-Javadoc)
+     * @see org.fintx.accounting.service.DetailLedgerService#auditAccountOpening(java.lang.String, java.time.LocalDate, java.lang.String)
+     */
+    @Override
+    public List<AccountOpeningEntry> auditAccountOpening(String accountNo, LocalDate date, String businessId) {
+        // TODO Auto-generated method stub
+        return null;
     }
 }

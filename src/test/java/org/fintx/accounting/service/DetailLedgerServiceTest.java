@@ -32,13 +32,13 @@ import java.time.format.DateTimeFormatter;
  * @author bluecreator(qiang.x.wang@gmail.com)
  *
  */
-public class LedgerServiceTest {
+public class DetailLedgerServiceTest {
     @Autowired
-    LedgerService ledgerService = null;
+    DetailLedgerService ledgerService = null;
 
     /**
      * Test method for
-     * {@link org.fintx.accounting.service.LedgerService#createInnerAccount(java.lang.String, java.lang.String, java.lang.String, java.lang.String)}.
+     * {@link org.fintx.accounting.service.DetailLedgerService#createInnerAccount(java.lang.String, java.lang.String, java.lang.String, java.lang.String)}.
      */
     @Test
     public void testCreateInnerAccount() {
@@ -47,7 +47,7 @@ public class LedgerServiceTest {
 
     /**
      * Test method for
-     * {@link org.fintx.accounting.service.LedgerService#createCustomerAccount(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)}.
+     * {@link org.fintx.accounting.service.DetailLedgerService#createCustomerAccount(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)}.
      */
     @Test
     public void testCreateCustomerAccount() {
@@ -55,7 +55,7 @@ public class LedgerServiceTest {
     }
 
     /**
-     * Test method for {@link org.fintx.accounting.service.LedgerService#post(org.fintx.accounting.service.Transaction)}.
+     * Test method for {@link org.fintx.accounting.service.DetailLedgerService#post(org.fintx.accounting.service.Transaction)}.
      */
     @Test
     public void testPostTransaction() {
@@ -63,7 +63,7 @@ public class LedgerServiceTest {
     }
 
     /**
-     * Test method for {@link org.fintx.accounting.service.LedgerService#cancel(java.lang.String)}.
+     * Test method for {@link org.fintx.accounting.service.DetailLedgerService#cancel(java.lang.String)}.
      */
     @Test
     public void testCancel() {
@@ -71,7 +71,7 @@ public class LedgerServiceTest {
     }
 
     /**
-     * Test method for {@link org.fintx.accounting.service.LedgerService#flush(java.lang.String, java.lang.String)}.
+     * Test method for {@link org.fintx.accounting.service.DetailLedgerService#flush(java.lang.String, java.lang.String)}.
      */
     @Test
     public void testFlush() {
@@ -79,7 +79,7 @@ public class LedgerServiceTest {
     }
 
     /**
-     * Test method for {@link org.fintx.accounting.service.LedgerService#post(org.fintx.accounting.service.Operation)}.
+     * Test method for {@link org.fintx.accounting.service.DetailLedgerService#post(org.fintx.accounting.service.Operation)}.
      */
     @Test
     public void testPostOperation() {
@@ -87,7 +87,7 @@ public class LedgerServiceTest {
     }
 
     /**
-     * Test method for {@link org.fintx.accounting.service.LedgerService#auditAccount(java.lang.String)}.
+     * Test method for {@link org.fintx.accounting.service.DetailLedgerService#auditAccount(java.lang.String)}.
      */
     @Test
     public void testAuditAccount() {
@@ -95,7 +95,7 @@ public class LedgerServiceTest {
     }
 
     /**
-     * Test method for {@link org.fintx.accounting.service.LedgerService#auditTransaction(java.lang.String, java.lang.String)}.
+     * Test method for {@link org.fintx.accounting.service.DetailLedgerService#auditTransaction(java.lang.String, java.lang.String)}.
      */
     @Test
     public void testAuditTransaction() {
@@ -103,7 +103,7 @@ public class LedgerServiceTest {
     }
 
     /**
-     * Test method for {@link org.fintx.accounting.service.LedgerService#auditOperation(java.lang.String, java.lang.String)}.
+     * Test method for {@link org.fintx.accounting.service.DetailLedgerService#auditOperation(java.lang.String, java.lang.String)}.
      */
     @Test
     public void testAuditOperation() {
@@ -125,14 +125,9 @@ public class LedgerServiceTest {
         localDate = offsetDateTime.toLocalDate();
         System.out.println(localDate.format(DateTimeFormatter.ISO_DATE));
         Voucher voucher = null;
-        String accountsNo = null;
-        String organizationNo = null;
-        String custNo = null;
-        String productNo = null;
-        OffsetDateTime creationDate = OffsetDateTime.now();
         String accountNo1 = null;
         String accountNo2 = null;
-        String accountNo = ledgerService.createCustomerAccount(accountsNo, organizationNo, custNo, productNo, creationDate);
+        String accountNo = "1122334455667788";
         Transaction.Builder builder = Transaction.builder();
         builder.associate(voucher);
         builder.credit(accountNo, new BigDecimal("100.00"));
