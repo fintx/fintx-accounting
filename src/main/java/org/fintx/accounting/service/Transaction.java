@@ -126,7 +126,12 @@ public class Transaction {
             if (null == verifer) {
                 verifer = defaultVerifer;
             }
-            return transaction;
+            if(verifer.verify(transaction)) {
+                return transaction; 
+            }else {
+                //TODO add special Exception
+                throw new RuntimeException("Fail to verify the transaction info");
+            }
         };
 
         public static class TransactionVerifer implements Verifer<Transaction> {

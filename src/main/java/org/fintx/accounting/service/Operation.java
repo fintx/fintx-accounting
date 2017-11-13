@@ -122,7 +122,12 @@ public class Operation {
             if (null == verifer) {
                 verifer = defaultVerifer;
             }
-            return operation;
+            if(verifer.verify(operation)) {
+                return operation; 
+            }else {
+                //TODO add special Exception
+                throw new RuntimeException("Fail to verify the transaction info");
+            }
         };
 
         public static class OperationVerifer implements Verifer<Operation> {
