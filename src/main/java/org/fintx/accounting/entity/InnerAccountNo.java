@@ -13,7 +13,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class InnerAccountNo {
-    private String acctNo;
+    private String accountNo;
 
     private String organizationNo;
     
