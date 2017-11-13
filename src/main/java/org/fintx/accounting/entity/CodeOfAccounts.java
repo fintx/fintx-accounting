@@ -1,6 +1,7 @@
 package org.fintx.accounting.entity;
 
-import org.fintx.accounting.enumeration.AccountSide;
+import org.fintx.accounting.enumeration.AccountOwnerFlag;
+import org.fintx.accounting.enumeration.AccountsSide;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -21,7 +22,7 @@ public class CodeOfAccounts {
     /**
      * 科目借贷方向
      */
-    private AccountSide accountsSide;
+    private AccountsSide accountsSide;
 
     /**
      * 管理科目号
@@ -36,7 +37,7 @@ public class CodeOfAccounts {
     /**
      * 父科目代号
      */
-    private String parentAccountsCodeNo;
+    private String parentAcctsCodeNo;
 
     /**
      * 科目级别
@@ -47,6 +48,9 @@ public class CodeOfAccounts {
      * 科目号控制
      */
     private String accountsControl;
+    
+    
+    private AccountOwnerFlag accountOwnerFlag;
 
     /**
      * 是否是叶子科目
