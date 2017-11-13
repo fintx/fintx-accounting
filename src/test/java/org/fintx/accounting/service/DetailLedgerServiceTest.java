@@ -127,12 +127,13 @@ public class DetailLedgerServiceTest {
         Voucher voucher = null;
         String accountNo1 = null;
         String accountNo2 = null;
+        String accountsCode = "11223344";
         String accountNo = "1122334455667788";
         Transaction.Builder builder = Transaction.builder();
         builder.associate(voucher);
-        builder.credit(accountNo, new BigDecimal("100.00"));
-        builder.debit(accountNo1, new BigDecimal("50.00"));
-        builder.debit(accountNo2, new BigDecimal("50.00"));
+        builder.credit(accountsCode,accountNo, new BigDecimal("100.00"));
+        builder.debit(accountsCode,accountNo1, new BigDecimal("50.00"));
+        builder.debit(accountsCode,accountNo2, new BigDecimal("50.00"));
         Transaction transaction = builder.build();
         ledgerService.post(transaction);
     }

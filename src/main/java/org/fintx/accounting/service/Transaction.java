@@ -69,15 +69,15 @@ public class Transaction {
         }
 
         public Builder associate(Voucher voucher) {
-
+            transaction.voucher=voucher;
             return this;
         }
 
-        public Builder debit(String accountNo, BigDecimal amount) {
+        public Builder debit(String accountsCode,String accountNo, BigDecimal amount) {
             return this;
         }
 
-        public Builder credit(String accountNo, BigDecimal amount) {
+        public Builder credit(String accountsCode,String accountNo, BigDecimal amount) {
             if (null == transaction.creditEntrys) {
                 synchronized (transaction) {
                     if (null == transaction.creditEntrys) {
@@ -89,11 +89,11 @@ public class Transaction {
             return this;
         }
 
-        public Builder receipt(String accountNo, BigDecimal amount) {
+        public Builder receipt(String accountsCode,String accountNo, BigDecimal amount) {
             return this;
         }
 
-        public Builder pay(String accountNo, BigDecimal amount) {
+        public Builder pay(String accountsCode,String accountNo, BigDecimal amount) {
             return this;
         }
 
