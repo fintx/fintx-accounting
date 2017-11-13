@@ -1,5 +1,5 @@
 package org.fintx.accounting.enumeration;
 
-public enum AccountSide {
+public enum AccountsSide {
     DEBTOR, CREDITOR,NONE;
 }
