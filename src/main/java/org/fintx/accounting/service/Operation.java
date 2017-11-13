@@ -42,7 +42,7 @@ public class Operation {
     /*
      * 1 post 记账 1 flash 冲正 2 cancel 撤销
      */
-    private OperationFlag operationflag = OperationFlag.POST;
+    private OperationFlag operationflag;
 
     private ArrayList<OperationEntry> closeAcctEntrys;
     private ArrayList<OperationEntry> freezeEntrys;

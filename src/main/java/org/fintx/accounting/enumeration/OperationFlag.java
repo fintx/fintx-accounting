@@ -1,5 +1,5 @@
 package org.fintx.accounting.enumeration;
 
 public enum OperationFlag {
-    POST, CANCEL
+    CLOSE, FREEZE,UNFREEZE,CONTROL
 }
