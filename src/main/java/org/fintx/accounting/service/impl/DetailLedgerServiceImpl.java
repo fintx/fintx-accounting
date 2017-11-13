@@ -14,7 +14,7 @@ import org.fintx.accounting.entity.CodeOfAccounts;
 import org.fintx.accounting.entity.CustomerAccountNo;
 import org.fintx.accounting.entity.OperationEntry;
 import org.fintx.accounting.entity.TransactionEntry;
-import org.fintx.accounting.enumeration.AccountSide;
+import org.fintx.accounting.enumeration.AccountsSide;
 import org.fintx.accounting.enumeration.Operator;
 import org.fintx.accounting.enumeration.TransactionSymbol;
 import org.fintx.accounting.service.AccountOpening;
@@ -331,16 +331,16 @@ public class DetailLedgerServiceImpl implements DetailLedgerService {
      * @param side AccountSide
      * @return Operator the plus or minus
      */
-    public Operator getOperatorBySymbolAndSide(TransactionSymbol symbol, AccountSide side) {
+    public Operator getOperatorBySymbolAndSide(TransactionSymbol symbol, AccountsSide side) {
         if (symbol.equals(TransactionSymbol.DEBIT)) {
-            if (side.equals(AccountSide.DEBTOR)) {
+            if (side.equals(AccountsSide.DEBTOR)) {
                 return Operator.PLUS;
             } else {
                 return Operator.MINUS;
             }
 
         } else if (symbol.equals(TransactionSymbol.CREDIT)) {
-            if (side.equals(AccountSide.CREDITOR)) {
+            if (side.equals(AccountsSide.CREDITOR)) {
                 return Operator.PLUS;
             } else {
                 return Operator.MINUS;
