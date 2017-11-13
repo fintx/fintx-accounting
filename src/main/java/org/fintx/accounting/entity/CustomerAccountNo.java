@@ -13,6 +13,10 @@ import lombok.Setter;
 @Setter
 public class CustomerAccountNo {
     private String customerNo;
+    
+    private String organizationNo; 
+    
+    private String productNo;
 
     private String accountNo;
     

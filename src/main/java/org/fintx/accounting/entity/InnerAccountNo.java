@@ -15,7 +15,9 @@ import lombok.Setter;
 public class InnerAccountNo {
     private String acctNo;
 
-    private String orgNo;
+    private String organizationNo;
+    
+    private String productNo;
 
     private String businessId;
 
