@@ -62,8 +62,8 @@ public class Operation {
     public static class Builder {
 
         private Operation operation = new Operation();
-        private Verifer<Operation> verifer = null;
-        private static final Verifer<Operation> defaultVerifer = new OperationVerifer();
+        private Verifier<Operation> verifer = null;
+        private static final Verifier<Operation> defaultVerifer = new OperationVerifer();
 
         private Builder() {
         }
@@ -130,7 +130,7 @@ public class Operation {
             }
         };
 
-        public static class OperationVerifer implements Verifer<Operation> {
+        public static class OperationVerifer implements Verifier<Operation> {
 
             public boolean verify(Operation txn) {
                 // acctno type length?? on the setting

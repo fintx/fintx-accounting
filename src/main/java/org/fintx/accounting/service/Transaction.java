@@ -62,8 +62,8 @@ public class Transaction {
 
     public static class Builder {
         private Transaction transaction = new Transaction();
-        private Verifer<Transaction> verifer = null;
-        private static final Verifer<Transaction> defaultVerifer = new TransactionVerifer();
+        private Verifier<Transaction> verifer = null;
+        private static final Verifier<Transaction> defaultVerifer = new TransactionVerifer();
 
         private Builder() {
         }
@@ -134,7 +134,7 @@ public class Transaction {
             }
         };
 
-        public static class TransactionVerifer implements Verifer<Transaction> {
+        public static class TransactionVerifer implements Verifier<Transaction> {
 
             public boolean verify(Transaction txn) {
                 // accountNo type length?? on the setting

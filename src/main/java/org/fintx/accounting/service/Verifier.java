@@ -1,6 +1,6 @@
 package org.fintx.accounting.service;
 
-public interface Verifer<T> {
+public interface Verifier<T> {
 
     public boolean verify(T verifiable);
 

@@ -70,8 +70,8 @@ public class AccountOpening {
     public static class Builder {
 
         private AccountOpening accountOpening = new AccountOpening();
-        private Verifer<AccountOpening> verifer = null;
-        private static final Verifer<AccountOpening> defaultVerifer = new AccountOpeningVerifer();
+        private Verifier<AccountOpening> verifer = null;
+        private static final Verifier<AccountOpening> defaultVerifer = new AccountOpeningVerifer();
 
         public Builder associate(Voucher voucher) {
             accountOpening.voucher=voucher;
@@ -103,7 +103,7 @@ public class AccountOpening {
         
       
 
-        public Builder accountOpeningVerifer(Verifer<AccountOpening> verifer) {
+        public Builder accountOpeningVerifer(Verifier<AccountOpening> verifer) {
             this.verifer = verifer;
             return this;
         }
@@ -121,7 +121,7 @@ public class AccountOpening {
             
         };
 
-        public static class AccountOpeningVerifer implements Verifer<AccountOpening> {
+        public static class AccountOpeningVerifer implements Verifier<AccountOpening> {
 
             public boolean verify(AccountOpening txn) {
                 // acctno type length?? on the setting
