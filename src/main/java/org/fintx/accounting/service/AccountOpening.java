@@ -103,7 +103,7 @@ public class AccountOpening {
         
       
 
-        public Builder accountOpeningVerifer(Verifer verifer) {
+        public Builder accountOpeningVerifer(Verifer<AccountOpening> verifer) {
             this.verifer = verifer;
             return this;
         }
