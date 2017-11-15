@@ -311,12 +311,22 @@ public class DetailLedgerServiceImpl implements DetailLedgerService {
     // transactionEntryDao.recordDetailAccount(acctTitleMap);
     // }
 
-    public void frozenBalance(OperationEntry entry) {
+    public void frozen(OperationEntry entry) {
         accountDao.plusToFrozenAmt(entry.getAmount());
         operationEntryDao.save(entry);
     }
 
-    public void unfrozenBalance(OperationEntry entry) {
+    public void unfrozen(OperationEntry entry) {
+        accountDao.minusToFrozenAmt(entry.getAmount());
+        operationEntryDao.save(entry);
+    }
+    
+    public void control(OperationEntry entry) {
+        accountDao.minusToFrozenAmt(entry.getAmount());
+        operationEntryDao.save(entry);
+    }
+    
+    public void close(OperationEntry entry) {
         accountDao.minusToFrozenAmt(entry.getAmount());
         operationEntryDao.save(entry);
     }
