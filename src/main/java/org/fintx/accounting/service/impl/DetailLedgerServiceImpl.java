@@ -330,6 +330,16 @@ public class DetailLedgerServiceImpl implements DetailLedgerService {
         accountDao.minusToFrozenAmt(entry.getAmount());
         operationEntryDao.save(entry);
     }
+    
+    public void lock(OperationEntry entry) {
+        accountDao.minusToFrozenAmt(entry.getAmount());
+        operationEntryDao.save(entry);
+    }
+    
+    public void release(OperationEntry entry) {
+        accountDao.minusToFrozenAmt(entry.getAmount());
+        operationEntryDao.save(entry);
+    }
 
     /**
      * Get plus and minus operator from TransactionSymbol and AccountSide

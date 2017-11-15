@@ -48,6 +48,8 @@ public class Operation {
     private ArrayList<OperationEntry> freezeEntrys;
     private ArrayList<OperationEntry> unfreezeEntrys;
     private ArrayList<OperationEntry> controlEntrys;
+    private ArrayList<OperationEntry> lockEntrys;
+    private ArrayList<OperationEntry> releaseEntrys;
 
     // control and buff should be a configuration not a function
     // private ArrayList controlCreditEntrys;
