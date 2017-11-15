@@ -46,7 +46,7 @@ public class Operation {
 
     private ArrayList<OperationEntry> closeAcctEntrys;
     private ArrayList<OperationEntry> freezeEntrys;
-    private ArrayList<OperationEntry> unfreezeEntrys;
+    private ArrayList<OperationEntry> liberateEntrys;
     private ArrayList<OperationEntry> controlEntrys;
     private ArrayList<OperationEntry> lockEntrys;
     private ArrayList<OperationEntry> releaseEntrys;
@@ -89,7 +89,7 @@ public class Operation {
             return this;
         }
 
-        public Builder unfreeze(String acctNo, BigDecimal amt) {
+        public Builder liberate(String acctNo, BigDecimal amt) {
             return this;
         }
 
