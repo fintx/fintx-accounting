@@ -49,7 +49,7 @@ public interface DetailLedgerService {
 
     public Account auditAccount(String accountNo);
     
-    public List<AccountOpeningEntry> auditAccountOpening(String accountNo,LocalDate date,String businessId);
+    public AccountOpeningEntry auditAccountOpening(String accountNo);
 
     public List<TransactionEntry> auditTransaction(String accountNo, LocalDate date,String businessId);
 

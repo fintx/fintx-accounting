@@ -78,18 +78,18 @@ public class DetailLedgerServiceImpl implements DetailLedgerService {
 
     @Override
     public Account auditAccount(String accountNo) {
-         
+
         return accountDao.getByAccountNo(accountNo);
     }
 
     @Override
-    public List<TransactionEntry> auditTransaction(String accountNo, LocalDate date,String businessId) {
+    public List<TransactionEntry> auditTransaction(String accountNo, LocalDate date, String businessId) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public List<OperationEntry> auditOperation(String accountNo, LocalDate date,String businessId) {
+    public List<OperationEntry> auditOperation(String accountNo, LocalDate date, String businessId) {
         // TODO Auto-generated method stub
         return null;
     }
@@ -321,9 +321,6 @@ public class DetailLedgerServiceImpl implements DetailLedgerService {
         operationEntryDao.save(entry);
     }
 
-   
-  
-
     /**
      * Get plus and minus operator from TransactionSymbol and AccountSide
      * 
@@ -352,20 +349,24 @@ public class DetailLedgerServiceImpl implements DetailLedgerService {
         }
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see org.fintx.accounting.service.DetailLedgerService#post(org.fintx.accounting.service.AccountOpening)
      */
     @Override
     public void post(AccountOpening accountOpening) {
         // TODO Auto-generated method stub
-        
+
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see org.fintx.accounting.service.DetailLedgerService#auditAccountOpening(java.lang.String, java.time.LocalDate, java.lang.String)
      */
     @Override
-    public List<AccountOpeningEntry> auditAccountOpening(String accountNo, LocalDate date, String businessId) {
+    public AccountOpeningEntry auditAccountOpening(String accountNo) {
         // TODO Auto-generated method stub
         return null;
     }
