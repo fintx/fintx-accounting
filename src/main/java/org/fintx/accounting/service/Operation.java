@@ -97,7 +97,15 @@ public class Operation {
             return this;
         }
 
-        public Builder closeAccount(String acctNo) {
+        public Builder close(String acctNo) {
+            return this;
+        }
+        
+        public Builder lock(String acctNo) {
+            return this;
+        }
+        
+        public Builder release(String acctNo) {
             return this;
         }
         
