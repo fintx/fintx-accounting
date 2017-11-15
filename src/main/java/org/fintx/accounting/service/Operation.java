@@ -101,11 +101,11 @@ public class Operation {
             return this;
         }
         
-        public Builder lock(String acctNo) {
+        public Builder lock(String acctNo,String key) {
             return this;
         }
         
-        public Builder release(String acctNo) {
+        public Builder release(String acctNo,String key) {
             return this;
         }
         
