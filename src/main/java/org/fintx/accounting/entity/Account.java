@@ -133,6 +133,8 @@ public class Account {
     private LocalDate closeDate;
     
     private int ZoneOffset;
+    
+    private String lockKey;
 
     /*
      * extend column
