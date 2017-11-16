@@ -316,7 +316,7 @@ public class DetailLedgerServiceImpl implements DetailLedgerService {
         operationEntryDao.save(entry);
     }
 
-    public void liberate(OperationEntry entry) {
+    public void release(OperationEntry entry) {
         accountDao.minusToFrozenAmt(entry.getAmount());
         operationEntryDao.save(entry);
     }
@@ -336,7 +336,7 @@ public class DetailLedgerServiceImpl implements DetailLedgerService {
         operationEntryDao.save(entry);
     }
     
-    public void release(OperationEntry entry) {
+    public void free(OperationEntry entry) {
         accountDao.minusToFrozenAmt(entry.getAmount());
         operationEntryDao.save(entry);
     }
