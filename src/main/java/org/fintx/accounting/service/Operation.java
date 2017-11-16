@@ -89,7 +89,7 @@ public class Operation {
             return this;
         }
 
-        public Builder liberate(String acctNo, BigDecimal amt) {
+        public Builder release(String acctNo, BigDecimal amt) {
             return this;
         }
 
@@ -105,7 +105,7 @@ public class Operation {
             return this;
         }
         
-        public Builder release(String acctNo,String key) {
+        public Builder free(String acctNo,String key) {
             return this;
         }
         
