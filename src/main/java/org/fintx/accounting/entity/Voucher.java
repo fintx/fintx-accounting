@@ -30,7 +30,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-@Builder
+@Builder(builderClassName="Builder")
 public class Voucher {
 
     /*
