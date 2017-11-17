@@ -56,12 +56,16 @@ public class DetailLedgerServiceImpl implements DetailLedgerService {
 
     /*
      * 冲正是否可为负
+     *
      */
+    //TODO 放入账户控制标识中
     public static Boolean flash_not_negative = false;
 
     /*
      * 是否验证昨日余额
+     * 
      */
+  //TODO 放入账户控制标识中
     public static Boolean check_last_balance = false;
 
     @Override
