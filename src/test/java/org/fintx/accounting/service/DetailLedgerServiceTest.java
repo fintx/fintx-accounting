@@ -17,6 +17,10 @@ package org.fintx.accounting.service;
 
 import static org.junit.Assert.*;
 
+import org.fintx.accounting.entity.Account;
+import org.fintx.accounting.entity.AccountOpeningEntry;
+import org.fintx.accounting.entity.OperationEntry;
+import org.fintx.accounting.entity.TransactionEntry;
 import org.fintx.accounting.entity.Voucher;
 
 import org.junit.Test;
@@ -27,6 +31,7 @@ import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 /**
  * @author bluecreator(qiang.x.wang@gmail.com)
@@ -34,108 +39,78 @@ import java.time.format.DateTimeFormatter;
  */
 public class DetailLedgerServiceTest {
     @Autowired
-    DetailLedgerService ledgerService = null;
+    AccountNoService accountNoService = null;
 
-    /**
-     * Test method for
-     * {@link org.fintx.accounting.service.DetailLedgerService#createInnerAccount(java.lang.String, java.lang.String, java.lang.String, java.lang.String)}.
-     */
-    @Test
-    public void testCreateInnerAccount() {
-        fail("Not yet implemented");
-    }
-
-    /**
-     * Test method for
-     * {@link org.fintx.accounting.service.DetailLedgerService#createCustomerAccount(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)}.
-     */
-    @Test
-    public void testCreateCustomerAccount() {
-        fail("Not yet implemented");
-    }
-
-    /**
-     * Test method for {@link org.fintx.accounting.service.DetailLedgerService#post(org.fintx.accounting.service.Transaction)}.
-     */
-    @Test
-    public void testPostTransaction() {
-        fail("Not yet implemented");
-    }
-
-    /**
-     * Test method for {@link org.fintx.accounting.service.DetailLedgerService#cancel(java.lang.String)}.
-     */
-    @Test
-    public void testCancel() {
-        fail("Not yet implemented");
-    }
-
-    /**
-     * Test method for {@link org.fintx.accounting.service.DetailLedgerService#flush(java.lang.String, java.lang.String)}.
-     */
-    @Test
-    public void testFlush() {
-        fail("Not yet implemented");
-    }
-
-    /**
-     * Test method for {@link org.fintx.accounting.service.DetailLedgerService#post(org.fintx.accounting.service.Operation)}.
-     */
-    @Test
-    public void testPostOperation() {
-        fail("Not yet implemented");
-    }
-
-    /**
-     * Test method for {@link org.fintx.accounting.service.DetailLedgerService#auditAccount(java.lang.String)}.
-     */
-    @Test
-    public void testAuditAccount() {
-        fail("Not yet implemented");
-    }
-
-    /**
-     * Test method for {@link org.fintx.accounting.service.DetailLedgerService#auditTransaction(java.lang.String, java.lang.String)}.
-     */
-    @Test
-    public void testAuditTransaction() {
-        fail("Not yet implemented");
-    }
-
-    /**
-     * Test method for {@link org.fintx.accounting.service.DetailLedgerService#auditOperation(java.lang.String, java.lang.String)}.
-     */
-    @Test
-    public void testAuditOperation() {
-        fail("Not yet implemented");
-    }
+    
+    @Autowired
+    DetailLedgerService detailLedgerService = null;
 
     @Test
     public void test() {
-        OffsetDateTime offsetDateTime = OffsetDateTime.now();
-        System.out.println(offsetDateTime.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME));
-        LocalDate localDate = offsetDateTime.toLocalDate();
-        System.out.println(localDate.format(DateTimeFormatter.ISO_DATE));
-        offsetDateTime = offsetDateTime.withOffsetSameInstant(ZoneOffset.UTC);
-        System.out.println(offsetDateTime.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME));
-        localDate = offsetDateTime.toLocalDate();
-        System.out.println(localDate.format(DateTimeFormatter.ISO_DATE));
-        offsetDateTime = offsetDateTime.withOffsetSameInstant(ZoneOffset.MAX);
-        System.out.println(offsetDateTime.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME));
-        localDate = offsetDateTime.toLocalDate();
-        System.out.println(localDate.format(DateTimeFormatter.ISO_DATE));
-        Voucher voucher = null;
-        String accountNo1 = null;
-        String accountNo2 = null;
+//        OffsetDateTime offsetDateTime = OffsetDateTime.now();
+//        System.out.println(offsetDateTime.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME));
+//        LocalDate localDate = offsetDateTime.toLocalDate();
+//        System.out.println(localDate.format(DateTimeFormatter.ISO_DATE));
+//        offsetDateTime = offsetDateTime.withOffsetSameInstant(ZoneOffset.UTC);
+//        System.out.println(offsetDateTime.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME));
+//        localDate = offsetDateTime.toLocalDate();
+//        System.out.println(localDate.format(DateTimeFormatter.ISO_DATE));
+//        offsetDateTime = offsetDateTime.withOffsetSameInstant(ZoneOffset.MAX);
+//        System.out.println(offsetDateTime.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME));
+//        localDate = offsetDateTime.toLocalDate();
+//        System.out.println(localDate.format(DateTimeFormatter.ISO_DATE));
+        
+        //build and persist accountNo
+        AccountNoSection.Builder accountNoSectionBuilder=AccountNoSection.builder();
+        //...
+        AccountNoSection acocuntNoSection=accountNoSectionBuilder.build();
+        String accountNo1 = accountNoService.createAccountNo(acocuntNoSection);
+        //
+        accountNo1=accountNoService.getAccountNo(acocuntNoSection);
+        
+        //Open account
+        AccountOpening.Builder accountOpeningBuilder=AccountOpening.builder();
+        //..
+        AccountOpening accountOpening=accountOpeningBuilder.build();
+        detailLedgerService.post(accountOpening);
+        
+        //audit accountOpening
+        AccountOpeningEntry accountingOpeningEntry=detailLedgerService.auditAccountOpening(accountNo1);
+        
+        //audit opened account
+        Account account1=detailLedgerService.auditAccount(accountNo1);
+        
+        //build voucher
+        Voucher.Builder voucherBuilder=Voucher.builder();
+        //...
+        Voucher voucher = voucherBuilder.build();
+        
+        //post transaction for associated voucher
         String accountsCode = "11223344";
-        String accountNo = "1122334455667788";
-        Transaction.Builder builder = Transaction.builder();
-        builder.associate(voucher);
-        builder.credit(accountsCode,accountNo, new BigDecimal("100.00"));
-        builder.debit(accountsCode,accountNo1, new BigDecimal("50.00"));
-        builder.debit(accountsCode,accountNo2, new BigDecimal("50.00"));
-        Transaction transaction = builder.build();
-        ledgerService.post(transaction);
+        String accountNo2 = "1122334455667777";
+        String accountNo3 = "1122334455667788";
+        Transaction.Builder transactionBuilder = Transaction.builder();
+        transactionBuilder.associate(voucher);
+        transactionBuilder.credit(accountsCode,accountNo1, new BigDecimal("100.00"));
+        transactionBuilder.debit(accountsCode,accountNo2, new BigDecimal("50.00"));
+        transactionBuilder.debit(accountsCode,accountNo3, new BigDecimal("50.00"));
+        Transaction transaction = transactionBuilder.build();
+        detailLedgerService.post(transaction);
+        
+        //audit transaction
+        List<TransactionEntry> transactionEntries=detailLedgerService.auditTransaction(accountNo1, LocalDate.now(), voucher.getBusinessId());
+        
+        //operate account
+        Operation.Builder operationBuilder=Operation.builder();
+        operationBuilder.freeze(accountNo1, new BigDecimal("50.00"));
+        operationBuilder.lock(accountNo1, voucher.getBusinessId());
+        //...
+        Operation operation=operationBuilder.build();
+        detailLedgerService.post(operation);
+        
+        //audit operation
+        List<OperationEntry> operationEntries= detailLedgerService.auditOperation(accountNo1, LocalDate.now(), voucher.getBusinessId());
+      
     }
 
 }
