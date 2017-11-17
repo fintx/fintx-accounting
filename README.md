@@ -34,15 +34,57 @@ This is something that you get for free just by adding the following dependency 
 ## Example
 
 ```java
-String accountNo = ledgerService.createCustomerAccount(accountsNo, organizationNo, custNo, productNo, transactionDate);
-Transaction.Builder builder = Transaction.builder();
-builder.associate(voucher);
-builder.credit(accountNo, new BigDecimal("100.00"));
-builder.debit(accountNo1, new BigDecimal("50.00"));
-builder.debit(accountNo2, new BigDecimal("50.00"));
-Transaction transaction = builder.build();
-ledgerService.post(transaction);
-
+        //build and persist accountNo
+        AccountNoSection.Builder accountNoSectionBuilder=AccountNoSection.builder();
+        //...
+        AccountNoSection acocuntNoSection=accountNoSectionBuilder.build();
+        String accountNo1 = accountNoService.createAccountNo(acocuntNoSection);
+        //
+        accountNo1=accountNoService.getAccountNo(acocuntNoSection);
+        
+        //Open account
+        AccountOpening.Builder accountOpeningBuilder=AccountOpening.builder();
+        //..
+        AccountOpening accountOpening=accountOpeningBuilder.build();
+        detailLedgerService.post(accountOpening);
+        
+        //audit accountOpening
+        AccountOpeningEntry accountingOpeningEntry=detailLedgerService.auditAccountOpening(accountNo1);
+        
+        //audit opened account
+        Account account1=detailLedgerService.auditAccount(accountNo1);
+        
+        //build voucher
+        Voucher.Builder voucherBuilder=Voucher.builder();
+        //...
+        Voucher voucher = voucherBuilder.build();
+        
+        //post transaction for associated voucher
+        String accountsCode = "11223344";
+        String accountNo2 = "1122334455667777";
+        String accountNo3 = "1122334455667788";
+        Transaction.Builder transactionBuilder = Transaction.builder();
+        transactionBuilder.associate(voucher);
+        transactionBuilder.credit(accountsCode,accountNo1, new BigDecimal("100.00"));
+        transactionBuilder.debit(accountsCode,accountNo2, new BigDecimal("50.00"));
+        transactionBuilder.debit(accountsCode,accountNo3, new BigDecimal("50.00"));
+        Transaction transaction = transactionBuilder.build();
+        detailLedgerService.post(transaction);
+        
+        //audit transaction
+        List<TransactionEntry> transactionEntries=detailLedgerService.auditTransaction(accountNo1, LocalDate.now(), voucher.getBusinessId());
+        
+        //operate account
+        Operation.Builder operationBuilder=Operation.builder();
+        operationBuilder.freeze(accountNo1, new BigDecimal("50.00"));
+        operationBuilder.lock(accountNo1, voucher.getBusinessId());
+        //...
+        Operation operation=operationBuilder.build();
+        detailLedgerService.post(operation);
+        
+        //audit operation
+        List<OperationEntry> operationEntries= detailLedgerService.auditOperation(accountNo1, LocalDate.now(), voucher.getBusinessId());
+      
 ```
 
 
