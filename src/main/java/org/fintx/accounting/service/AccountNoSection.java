@@ -48,13 +48,11 @@ public class AccountNoSection {
 
     private String customerNo;
 
-    private String accountNo;
 
     // private AccountOwnerFlag accountOwnerFlag;
 
-    private String accountOpeningId = UniqueId.get().toString();
+    private String accountNoSectionId = UniqueId.get().toString();
 
-    private Voucher voucher;
 
     // control and buff should be a configuration not a function
     // private ArrayList controlCreditEntrys;
@@ -68,48 +66,42 @@ public class AccountNoSection {
 
     public static class Builder {
 
-        private AccountNoSection accountOpening = new AccountNoSection();
+        private AccountNoSection accountNoSection = new AccountNoSection();
         private Verifier<AccountNoSection> verifer = null;
         private static final Verifier<AccountNoSection> defaultVerifer = new AccountOpeningVerifer();
 
-        public Builder associate(Voucher voucher) {
-            accountOpening.voucher = voucher;
-            return this;
-        }
+        
 
         private Builder() {
         }
 
         public Builder accountsCodeNo(String accountsCodeNo) {
-            accountOpening.accountsCodeNo = accountsCodeNo;
+            accountNoSection.accountsCodeNo = accountsCodeNo;
             return this;
         }
 
         public Builder organizationNo(String organizationNo) {
-            accountOpening.organizationNo = organizationNo;
+            accountNoSection.organizationNo = organizationNo;
             return this;
         }
 
         public Builder productNo(String productNo) {
-            accountOpening.productNo = productNo;
+            accountNoSection.productNo = productNo;
             return this;
         }
 
         public Builder customerNo(String customerNo) {
-            accountOpening.customerNo = customerNo;
+            accountNoSection.customerNo = customerNo;
             return this;
         }
 
-        public Builder accountNo(String accountNo) {
-            accountOpening.accountNo = accountNo;
-            return this;
-        }
+       
 
         /*
          * if operationDate is different with voucher's businessDate
          */
-        public Builder accountOpeningId(String accountOpeningId) {
-            accountOpening.accountOpeningId = accountOpeningId;
+        public Builder accountNoSectionId(String accountNoSectionId) {
+            accountNoSection.accountNoSectionId = accountNoSectionId;
             return this;
         }
 
@@ -122,8 +114,8 @@ public class AccountNoSection {
             if (null == verifer) {
                 verifer = defaultVerifer;
             }
-            if (verifer.verify(accountOpening)) {
-                return accountOpening;
+            if (verifer.verify(accountNoSection)) {
+                return accountNoSection;
             } else {
                 // TODO add special Exception
                 throw new RuntimeException("Fail to verify the accountOpening info");

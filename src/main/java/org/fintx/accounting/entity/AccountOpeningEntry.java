@@ -38,7 +38,7 @@ public class AccountOpeningEntry {
 
     private String accountNo;
 
-    private String operationId;
+    private String accountOpeningId;
 
     private String operatorOrgNo;
 
@@ -46,14 +46,8 @@ public class AccountOpeningEntry {
 
     private String operationDate;
 
-    private String transactionCode;
-
-    /*
-     * dr:debit record/cr:credit record/rr:receipt record/pr:payment record/or:operation record 借/贷/收/付/操作
-     */
-    private short symbol;
-
     private String originbusinessId;
+    
     private String originbusinessDate;
 
     private BigDecimal amount;

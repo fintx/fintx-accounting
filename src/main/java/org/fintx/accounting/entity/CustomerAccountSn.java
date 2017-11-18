@@ -15,11 +15,11 @@ public class CustomerAccountSn {
     /**
      * 客户号
      */
-    private String custNo;
+    private String customerNo;
 
     /**
      * 账户序号
      */
-    private String acctSn;
+    private String accountSn;
 
 }
