@@ -16,10 +16,12 @@ FinTx is an open source group focus on financial technologies.
 
 ## What's is fintx-accounting
 
-fintx-accounting is general accounting project for all fintx projects. It supports:
-Double entry accounting/booking;
-Single entry accounting/booking;
-Account operation/control;
+fintx-accounting is general accounting project for all fintx projects. It supports:    
+* Double entry accounting/booking;
+* Single entry accounting/booking;
+* Account operation/control;
+* 24*7 working;
+* multi time zone region;
 
 ## Using
 This is something that you get for free just by adding the following dependency inside your project:
