@@ -60,7 +60,7 @@ public class Account {
      */
     private String accountingType;
     /*
-     * 1 normal 2closed
+     * 1 normal 2closed 3locked
      */
     private String accountStatus;
 
@@ -125,7 +125,7 @@ public class Account {
     /*
      * move to accountctrl // 销账类型 // 1-一次销账 2-多次销账 private String writeOffType;
      */
-    // write off is a business 销账
+    // write off is a business
     //private String writeOff;
 
     private LocalDate openDate;
