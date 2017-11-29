@@ -122,6 +122,12 @@ public class Account {
  */
     private String accountType;
     private LocalDate latestTransDate;
+    
+    /**
+     * 记录最后一次持久化的 交易ID 未来可用于把account做为内存对象，定期持久化
+     */
+    
+    private String latestTransId;
     /*
      * move to accountctrl // 销账类型 // 1-一次销账 2-多次销账 private String writeOffType;
      */
