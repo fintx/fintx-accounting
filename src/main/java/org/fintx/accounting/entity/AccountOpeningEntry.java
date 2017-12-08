@@ -50,10 +50,6 @@ public class AccountOpeningEntry {
     
     private String originbusinessDate;
 
-    private BigDecimal amount;
-
-    private String summary;
-    
     private String voucherType;
 
     private String voucherId;
