@@ -15,6 +15,7 @@
  */
 package org.fintx.accounting.entity;
 
+import org.fintx.accounting.enumeration.TransactionFlag;
 import org.fintx.accounting.enumeration.TransactionSymbol;
 
 import lombok.Builder;
@@ -69,6 +70,10 @@ public class TransactionEntry {
     private BigDecimal balance;
 
     private BigDecimal balanceAccum;
+    /*
+     * record cancel flash 记账/抹账/冲账
+     */
+    private TransactionFlag flag;
 
     /*
      * dr:debit record/cr:credit record/rr:receipt record/pr:payment record 借/贷/收/付

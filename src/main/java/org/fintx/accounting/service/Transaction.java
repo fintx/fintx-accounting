@@ -42,9 +42,9 @@ public class Transaction {
     private String transactionId=UniqueId.get().toString();
     private ZonedDateTime transactionDateTime=ZonedDateTime.now();
     /*
-     * 1 post 记账 1 flash 冲正 2 cancel 撤销
+     * 1 post 记账 1 flash 冲账 2 cancel 抹账
      */
-    private TransactionFlag transactionflag = TransactionFlag.POST;
+    private TransactionFlag transactionflag = TransactionFlag.RECORD;
     private ArrayList<TransactionEntry> creditEntrys;
     private ArrayList<TransactionEntry> debitEntrys;
     private ArrayList<TransactionEntry> receiptEntrys;
@@ -73,11 +73,11 @@ public class Transaction {
             return this;
         }
 
-        public Builder debit(String accountsCode,String accountNo, BigDecimal amount) {
+        public Builder debit(String codeOfAccounts,String accountNo, BigDecimal amount) {
             return this;
         }
 
-        public Builder credit(String accountsCode,String accountNo, BigDecimal amount) {
+        public Builder credit(String codeOfAccounts,String accountNo, BigDecimal amount) {
             if (null == transaction.creditEntrys) {
                 synchronized (transaction) {
                     if (null == transaction.creditEntrys) {
@@ -89,11 +89,11 @@ public class Transaction {
             return this;
         }
 
-        public Builder receipt(String accountsCode,String accountNo, BigDecimal amount) {
+        public Builder receipt(String codeOfAccounts,String accountNo, BigDecimal amount) {
             return this;
         }
 
-        public Builder pay(String accountsCode,String accountNo, BigDecimal amount) {
+        public Builder pay(String codeOfAccounts,String accountNo, BigDecimal amount) {
             return this;
         }
 

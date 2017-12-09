@@ -16,9 +16,11 @@
 package org.fintx.accounting.service;
 
 import org.fintx.accounting.entity.Account;
-import org.fintx.accounting.entity.AccountOpeningEntry;
 import org.fintx.accounting.entity.OperationEntry;
 import org.fintx.accounting.entity.TransactionEntry;
+import org.fintx.accounting.enumeration.OperationSymbol;
+import org.fintx.accounting.enumeration.TransactionFlag;
+import org.fintx.accounting.enumeration.TransactionSymbol;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -30,8 +32,8 @@ import java.util.List;
  *
  */
 public interface DetailLedgerService {
-    
-    public void post(AccountOpening accountOpening);
+// move to operation    
+//    public void post(AccountOpening accountOpening);
 
     /**
      * 冲正 金额必须为负 更新余额 流水入账 撤销 金额必须为负 更新余额 流水不入账
@@ -47,11 +49,9 @@ public interface DetailLedgerService {
 
     public void post(Operation operation);
 
-    public Account auditAccount(String accountNo);
-    
-    public AccountOpeningEntry auditAccountOpening(String accountNo);
+    public Account auditAccount(String codeOfAccounts,String accountNo);
 
-    public List<TransactionEntry> auditTransaction(String accountNo, LocalDate date,String businessId);
+    public List<TransactionEntry> auditTransaction(String codeOfAccounts,String accountNo, LocalDate date,TransactionFlag[] flag,TransactionSymbol[] symbol,String businessId);
 
-    public List<OperationEntry> auditOperation(String accountNo, LocalDate date,String businessId);
+    public List<OperationEntry> auditOperation(String codeOfAccounts,String accountNo, LocalDate date,OperationSymbol[] symbol,String businessId);
 }

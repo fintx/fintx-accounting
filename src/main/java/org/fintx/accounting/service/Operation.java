@@ -20,7 +20,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import org.fintx.accounting.entity.OperationEntry;
-import org.fintx.accounting.enumeration.OperationFlag;
+import org.fintx.accounting.enumeration.OperationSymbol;
 import org.fintx.util.UniqueId;
 
 import lombok.Getter;
@@ -39,17 +39,22 @@ public class Operation {
     private String operatorNo;
     private String operationId=UniqueId.get().toString();
     private LocalDate operationDate;
+
+    private String businessId;
+    
     /*
      * 1 post 记账 1 flash 冲正 2 cancel 撤销
      */
-    private OperationFlag operationflag;
+    private OperationSymbol operationflag;
 
     private ArrayList<OperationEntry> closeAcctEntrys;
+    private ArrayList<OperationEntry> openAcctEntrys;
     private ArrayList<OperationEntry> freezeEntrys;
-    private ArrayList<OperationEntry> liberateEntrys;
-    private ArrayList<OperationEntry> controlEntrys;
-    private ArrayList<OperationEntry> lockEntrys;
     private ArrayList<OperationEntry> releaseEntrys;
+    private ArrayList<OperationEntry> controlEntrys;
+    private ArrayList<OperationEntry> overdraftEntrys;
+    private ArrayList<OperationEntry> lockEntrys;
+    private ArrayList<OperationEntry> freeEntrys;
 
     // control and buff should be a configuration not a function
     // private ArrayList controlCreditEntrys;
@@ -84,28 +89,47 @@ public class Operation {
 
             return this;
         }
+        
+        public Builder businessId(String businessId) {
 
-        public Builder freeze(String acctNo, BigDecimal amt) {
             return this;
         }
 
-        public Builder release(String acctNo, BigDecimal amt) {
+        public Builder freeze(String codeOfAccounts,String accountNo, BigDecimal amt) {
             return this;
         }
 
-        public Builder control(String acctNo, String accountCtrl) {
+        public Builder release(String codeOfAccounts,String accountNo, BigDecimal amt) {
             return this;
         }
 
-        public Builder close(String acctNo) {
+        public Builder control(String codeOfAccounts,String accountNo, String accountCtrl) {
             return this;
         }
         
-        public Builder lock(String acctNo,String key) {
+        public Builder overdraft(String codeOfAccounts,String accountNo, BigDecimal amt) {
+            return this;
+        }
+        public Builder openInner(String codeOfAccounts,String accountNo,String organizationNo, String productNo) {
+
+            return this;
+        }
+
+        public Builder openCustomer(String codeOfAccounts,String accountNo,String organizationNo, String productNo, String customerNo) {
+
+            return this;
+        }
+
+
+        public Builder close(String codeOfAccounts,String accountNo) {
             return this;
         }
         
-        public Builder free(String acctNo,String key) {
+        public Builder lock(String codeOfAccounts,String accountNo,String key) {
+            return this;
+        }
+        
+        public Builder free(String codeOfAccounts,String accountNo,String key) {
             return this;
         }
         
@@ -119,7 +143,7 @@ public class Operation {
         /*
          * if operationFlag is not post
          */
-        public Builder operationFlag(OperationFlag operationFlag) {
+        public Builder operationFlag(OperationSymbol operationFlag) {
             return this;
         }
 

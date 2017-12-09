@@ -9,15 +9,15 @@ import org.fintx.accounting.dao.InnerAccountSnDao;
 import org.fintx.accounting.dao.OperationEntryDao;
 import org.fintx.accounting.dao.TransactionEntryDao;
 import org.fintx.accounting.entity.Account;
-import org.fintx.accounting.entity.AccountOpeningEntry;
 import org.fintx.accounting.entity.CodeOfAccounts;
 import org.fintx.accounting.entity.CustomerAccountNo;
 import org.fintx.accounting.entity.OperationEntry;
 import org.fintx.accounting.entity.TransactionEntry;
 import org.fintx.accounting.enumeration.AccountsSide;
+import org.fintx.accounting.enumeration.OperationSymbol;
 import org.fintx.accounting.enumeration.Operator;
+import org.fintx.accounting.enumeration.TransactionFlag;
 import org.fintx.accounting.enumeration.TransactionSymbol;
-import org.fintx.accounting.service.AccountOpening;
 import org.fintx.accounting.service.DetailLedgerService;
 import org.fintx.accounting.service.Operation;
 import org.fintx.accounting.service.Transaction;
@@ -81,19 +81,19 @@ public class DetailLedgerServiceImpl implements DetailLedgerService {
     }
 
     @Override
-    public Account auditAccount(String accountNo) {
+    public Account auditAccount(String codeOfAccounts,String accountNo) {
 
         return accountDao.getByAccountNo(accountNo);
     }
 
     @Override
-    public List<TransactionEntry> auditTransaction(String accountNo, LocalDate date, String businessId) {
+    public List<TransactionEntry> auditTransaction(String codeOfAccounts,String accountNo, LocalDate date,TransactionFlag[] flag,TransactionSymbol[] symbol, String businessId) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public List<OperationEntry> auditOperation(String accountNo, LocalDate date, String businessId) {
+    public List<OperationEntry> auditOperation(String codeOfAccounts,String accountNo, LocalDate date,OperationSymbol[] symbol, String businessId) {
         // TODO Auto-generated method stub
         return null;
     }
@@ -371,27 +371,5 @@ public class DetailLedgerServiceImpl implements DetailLedgerService {
         } else {
             return Operator.MINUS;
         }
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.fintx.accounting.service.DetailLedgerService#post(org.fintx.accounting.service.AccountOpening)
-     */
-    @Override
-    public void post(AccountOpening accountOpening) {
-        // TODO Auto-generated method stub
-
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.fintx.accounting.service.DetailLedgerService#auditAccountOpening(java.lang.String, java.time.LocalDate, java.lang.String)
-     */
-    @Override
-    public AccountOpeningEntry auditAccountOpening(String accountNo) {
-        // TODO Auto-generated method stub
-        return null;
     }
 }

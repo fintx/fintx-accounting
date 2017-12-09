@@ -19,11 +19,10 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import org.fintx.accounting.entity.AccountOpeningEntry;
 import org.fintx.accounting.entity.OperationEntry;
 import org.fintx.accounting.entity.Voucher;
 import org.fintx.accounting.enumeration.AccountOwnerFlag;
-import org.fintx.accounting.enumeration.OperationFlag;
+import org.fintx.accounting.enumeration.OperationSymbol;
 import org.fintx.accounting.service.Transaction.Builder;
 import org.fintx.util.UniqueId;
 
@@ -40,7 +39,7 @@ public class AccountNoSection {
 
     }
 
-    private String accountsCodeNo;
+    private String codeOfAccountsNo;
 
     private String organizationNo;
 
@@ -75,8 +74,8 @@ public class AccountNoSection {
         private Builder() {
         }
 
-        public Builder accountsCodeNo(String accountsCodeNo) {
-            accountNoSection.accountsCodeNo = accountsCodeNo;
+        public Builder codeOfAccounts(String accountsCodeNo) {
+            accountNoSection.codeOfAccountsNo = accountsCodeNo;
             return this;
         }
 

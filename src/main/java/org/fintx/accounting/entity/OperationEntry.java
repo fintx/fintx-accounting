@@ -15,6 +15,8 @@
  */
 package org.fintx.accounting.entity;
 
+import org.fintx.accounting.enumeration.OperationSymbol;
+
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -45,12 +47,7 @@ public class OperationEntry {
 
     private String operationDate;
 
-    private String transactionCode;
-
-    /*
-     * dr:debit record/cr:credit record/rr:receipt record/pr:payment record/or:operation record 借/贷/收/付/操作
-     */
-    private short symbol;
+    private OperationSymbol operationSymbol;
 
     private String originbusinessId;
     private String originbusinessDate;
