@@ -52,7 +52,7 @@ public class Account {
 
     private String productNo;
     
-    private String currency
+    private String currency;
     /*
      * 1 debtor 2 creditor
      */
