@@ -42,6 +42,7 @@ public class Account {
     private String accountsCodeNo;
 
     private String organizationNo;
+    
 
     private String customerNo;
 
@@ -50,6 +51,8 @@ public class Account {
     private String accountNo;
 
     private String productNo;
+    
+    private String currency
     /*
      * 1 debtor 2 creditor
      */
