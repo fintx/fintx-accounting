@@ -1,12 +1,12 @@
-package org.fintx.accounting.enumeration;
+package org.fintx.accounting.constant;
 
 import org.fintx.lang.Codeable;
 
-public enum AccountOwnerFlag implements Codeable<Integer> {
-    INNER(1), CUSTOMER(2);
+public enum TransactionSymbol  implements Codeable<Integer>{
+    DEBIT(1), CREDIT(2), RECEIPT(3), PAY(4);
     private Integer code;
 
-    private AccountOwnerFlag(Integer code) {
+    private TransactionSymbol(Integer code) {
         this.code = code;
     }
 

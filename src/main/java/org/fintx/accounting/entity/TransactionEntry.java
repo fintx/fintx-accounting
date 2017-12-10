@@ -15,8 +15,8 @@
  */
 package org.fintx.accounting.entity;
 
-import org.fintx.accounting.enumeration.TransactionFlag;
-import org.fintx.accounting.enumeration.TransactionSymbol;
+import org.fintx.accounting.constant.TransactionFlag;
+import org.fintx.accounting.constant.TransactionSymbol;
 
 import lombok.Builder;
 import lombok.Getter;

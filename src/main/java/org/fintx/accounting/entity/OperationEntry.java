@@ -15,7 +15,7 @@
  */
 package org.fintx.accounting.entity;
 
-import org.fintx.accounting.enumeration.OperationSymbol;
+import org.fintx.accounting.constant.OperationSymbol;
 
 import lombok.Builder;
 import lombok.Getter;

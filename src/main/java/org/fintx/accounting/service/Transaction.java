@@ -19,9 +19,9 @@ import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 
+import org.fintx.accounting.constant.TransactionFlag;
 import org.fintx.accounting.entity.TransactionEntry;
 import org.fintx.accounting.entity.Voucher;
-import org.fintx.accounting.enumeration.TransactionFlag;
 import org.fintx.util.UniqueId;
 
 import lombok.Getter;

@@ -1,5 +1,10 @@
 package org.fintx.accounting.service.impl;
 
+import org.fintx.accounting.constant.AccountsSide;
+import org.fintx.accounting.constant.OperationSymbol;
+import org.fintx.accounting.constant.Operator;
+import org.fintx.accounting.constant.TransactionFlag;
+import org.fintx.accounting.constant.TransactionSymbol;
 import org.fintx.accounting.dao.AccountDao;
 import org.fintx.accounting.dao.CodeOfAccountsDao;
 import org.fintx.accounting.dao.CustomerAccountNoDao;
@@ -13,11 +18,6 @@ import org.fintx.accounting.entity.CodeOfAccounts;
 import org.fintx.accounting.entity.CustomerAccountNo;
 import org.fintx.accounting.entity.OperationEntry;
 import org.fintx.accounting.entity.TransactionEntry;
-import org.fintx.accounting.enumeration.AccountsSide;
-import org.fintx.accounting.enumeration.OperationSymbol;
-import org.fintx.accounting.enumeration.Operator;
-import org.fintx.accounting.enumeration.TransactionFlag;
-import org.fintx.accounting.enumeration.TransactionSymbol;
 import org.fintx.accounting.service.DetailLedgerService;
 import org.fintx.accounting.service.Operation;
 import org.fintx.accounting.service.Transaction;

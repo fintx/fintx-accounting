@@ -1,4 +1,4 @@
-package org.fintx.accounting.enumeration;
+package org.fintx.accounting.constant;
 
 import org.fintx.lang.Codeable;
 

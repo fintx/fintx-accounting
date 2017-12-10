@@ -1,7 +1,7 @@
 package org.fintx.accounting.entity;
 
-import org.fintx.accounting.enumeration.AccountOwnerFlag;
-import org.fintx.accounting.enumeration.AccountsSide;
+import org.fintx.accounting.constant.AccountOwnerFlag;
+import org.fintx.accounting.constant.AccountsSide;
 
 import lombok.Getter;
 import lombok.Setter;

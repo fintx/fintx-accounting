@@ -19,8 +19,8 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import org.fintx.accounting.constant.OperationSymbol;
 import org.fintx.accounting.entity.OperationEntry;
-import org.fintx.accounting.enumeration.OperationSymbol;
 import org.fintx.util.UniqueId;
 
 import lombok.Getter;

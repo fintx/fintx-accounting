@@ -15,12 +15,12 @@
  */
 package org.fintx.accounting.service;
 
+import org.fintx.accounting.constant.OperationSymbol;
+import org.fintx.accounting.constant.TransactionFlag;
+import org.fintx.accounting.constant.TransactionSymbol;
 import org.fintx.accounting.entity.Account;
 import org.fintx.accounting.entity.OperationEntry;
 import org.fintx.accounting.entity.TransactionEntry;
-import org.fintx.accounting.enumeration.OperationSymbol;
-import org.fintx.accounting.enumeration.TransactionFlag;
-import org.fintx.accounting.enumeration.TransactionSymbol;
 
 import java.time.LocalDate;
 import java.util.List;
