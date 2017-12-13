@@ -15,6 +15,8 @@
  */
 package org.fintx.accounting.service;
 
+import javax.annotation.Nonnull;
+
 /**
  * AccountNo service interface
  * 
@@ -23,8 +25,8 @@ package org.fintx.accounting.service;
  */
 public interface AccountNoService {
 
-    public String getAccountNo(AccountNoSection section);
+    public String getAccountNo(@Nonnull final AccountNoSection section);
 
-    public String createAccountNo(AccountNoSection section);
+    public String createAccountNo(@Nonnull final AccountNoSection section);
 
 }

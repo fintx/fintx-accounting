@@ -58,14 +58,14 @@ public class DetailLedgerServiceImpl implements DetailLedgerService {
      * 冲正是否可为负
      *
      */
-    //TODO 放入账户控制标识中
+    // TODO 放入账户控制标识中
     public static Boolean flash_not_negative = false;
 
     /*
      * 是否验证昨日余额
      * 
      */
-  //TODO 放入账户控制标识中
+    // TODO 放入账户控制标识中
     public static Boolean check_last_balance = false;
 
     @Override
@@ -81,19 +81,20 @@ public class DetailLedgerServiceImpl implements DetailLedgerService {
     }
 
     @Override
-    public Account auditAccount(String codeOfAccounts,String accountNo) {
+    public Account auditAccount(String codeOfAccounts, String accountNo) {
 
         return accountDao.getByAccountNo(accountNo);
     }
 
     @Override
-    public List<TransactionEntry> auditTransaction(String codeOfAccounts,String accountNo, LocalDate date,TransactionFlag[] flag,TransactionSymbol[] symbol, String businessId) {
+    public List<TransactionEntry> auditTransaction(String codeOfAccounts, LocalDate date, String accountNo, TransactionFlag[] flag, TransactionSymbol[] symbol,
+            String businessId) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public List<OperationEntry> auditOperation(String codeOfAccounts,String accountNo, LocalDate date,OperationSymbol[] symbol, String businessId) {
+    public List<OperationEntry> auditOperation(String codeOfAccounts, LocalDate date, String accountNo, OperationSymbol[] symbol, String businessId) {
         // TODO Auto-generated method stub
         return null;
     }
@@ -324,22 +325,22 @@ public class DetailLedgerServiceImpl implements DetailLedgerService {
         accountDao.minusToFrozenAmt(entry.getAmount());
         operationEntryDao.save(entry);
     }
-    
+
     public void control(OperationEntry entry) {
         accountDao.minusToFrozenAmt(entry.getAmount());
         operationEntryDao.save(entry);
     }
-    
+
     public void close(OperationEntry entry) {
         accountDao.minusToFrozenAmt(entry.getAmount());
         operationEntryDao.save(entry);
     }
-    
+
     public void lock(OperationEntry entry) {
         accountDao.minusToFrozenAmt(entry.getAmount());
         operationEntryDao.save(entry);
     }
-    
+
     public void free(OperationEntry entry) {
         accountDao.minusToFrozenAmt(entry.getAmount());
         operationEntryDao.save(entry);

@@ -107,7 +107,7 @@ public class DetailLedgerServiceTest {
         TransactionFlag[] transflags = { TransactionFlag.RECORD };
         TransactionSymbol[] transSymbols = { TransactionSymbol.CREDIT };
         List<TransactionEntry> transactionEntries =
-                detailLedgerService.auditTransaction(codeOfAccounts, accountNo1, LocalDate.now(), transflags, transSymbols, voucher.getBusinessId());
+                detailLedgerService.auditTransaction(codeOfAccounts,LocalDate.now(), accountNo1,  transflags, transSymbols, voucher.getBusinessId());
 
         // operate account
         operationBuilder = Operation.builder();
@@ -119,7 +119,7 @@ public class DetailLedgerServiceTest {
 
         // audit operation
         OperationSymbol[] operSymbols= {OperationSymbol.OPEN,OperationSymbol.CLOSE};
-        List<OperationEntry> operationEntries = detailLedgerService.auditOperation(codeOfAccounts, accountNo3, LocalDate.now(),operSymbols, voucher.getBusinessId());
+        List<OperationEntry> operationEntries = detailLedgerService.auditOperation(codeOfAccounts, LocalDate.now(), accountNo3,operSymbols, voucher.getBusinessId());
 
     }
 
