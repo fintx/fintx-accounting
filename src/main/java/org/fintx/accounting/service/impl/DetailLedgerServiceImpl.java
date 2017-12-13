@@ -5,19 +5,19 @@ import org.fintx.accounting.constant.OperationSymbol;
 import org.fintx.accounting.constant.Operator;
 import org.fintx.accounting.constant.TransactionFlag;
 import org.fintx.accounting.constant.TransactionSymbol;
-import org.fintx.accounting.dao.AccountDao;
-import org.fintx.accounting.dao.CodeOfAccountsDao;
-import org.fintx.accounting.dao.CustomerAccountNoDao;
-import org.fintx.accounting.dao.CustomerAccountSnDao;
-import org.fintx.accounting.dao.InnerAccountNoDao;
-import org.fintx.accounting.dao.InnerAccountSnDao;
-import org.fintx.accounting.dao.OperationEntryDao;
-import org.fintx.accounting.dao.TransactionEntryDao;
 import org.fintx.accounting.entity.Account;
 import org.fintx.accounting.entity.CodeOfAccounts;
 import org.fintx.accounting.entity.CustomerAccountNo;
 import org.fintx.accounting.entity.OperationEntry;
 import org.fintx.accounting.entity.TransactionEntry;
+import org.fintx.accounting.repository.AccountRepo;
+import org.fintx.accounting.repository.CodeOfAccountsRepo;
+import org.fintx.accounting.repository.CustomerAccountNoRepo;
+import org.fintx.accounting.repository.CustomerAccountSnRepo;
+import org.fintx.accounting.repository.InnerAccountNoRepo;
+import org.fintx.accounting.repository.InnerAccountSnRepo;
+import org.fintx.accounting.repository.OperationEntryRepo;
+import org.fintx.accounting.repository.TransactionEntryRepo;
 import org.fintx.accounting.service.DetailLedgerService;
 import org.fintx.accounting.service.Operation;
 import org.fintx.accounting.service.Transaction;
@@ -36,23 +36,23 @@ import java.util.Optional;
 
 public class DetailLedgerServiceImpl implements DetailLedgerService {
     @Autowired
-    private AccountDao accountDao;
+    private AccountRepo accountDao;
     @Autowired
-    private TransactionEntryDao transactionEntryDao;
+    private TransactionEntryRepo transactionEntryDao;
 
     @Autowired
-    private OperationEntryDao operationEntryDao;
+    private OperationEntryRepo operationEntryDao;
     @Autowired
-    private CustomerAccountSnDao customerAccountSnDao;
+    private CustomerAccountSnRepo customerAccountSnDao;
     @Autowired
-    private InnerAccountSnDao innerAccountSnDao;
+    private InnerAccountSnRepo innerAccountSnDao;
     @Autowired
-    private CustomerAccountNoDao customerAccountNoDao;
+    private CustomerAccountNoRepo customerAccountNoDao;
     @Autowired
-    private InnerAccountNoDao innerAccountNoDao;
+    private InnerAccountNoRepo innerAccountNoDao;
 
     @Autowired
-    private CodeOfAccountsDao codeOfAccountsDao;
+    private CodeOfAccountsRepo codeOfAccountsDao;
 
     /*
      * 冲正是否可为负
