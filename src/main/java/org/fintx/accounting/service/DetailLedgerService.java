@@ -25,6 +25,8 @@ import org.fintx.accounting.entity.TransactionEntry;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 /**
  * Ledger accounting interface
  * 
@@ -49,9 +51,9 @@ public interface DetailLedgerService {
 
     public void post(Operation operation);
 
-    public Account auditAccount(String codeOfAccounts,String accountNo);
+    public Account auditAccount(@Nonnull final String codeOfAccounts,@Nonnull final String accountNo);
 
-    public List<TransactionEntry> auditTransaction(String codeOfAccounts,String accountNo, LocalDate date,TransactionFlag[] flag,TransactionSymbol[] symbol,String businessId);
+    public List<TransactionEntry> auditTransaction(@Nonnull final String codeOfAccounts,@Nonnull final String accountNo, LocalDate date,TransactionFlag[] flag,TransactionSymbol[] symbol,String businessId);
 
-    public List<OperationEntry> auditOperation(String codeOfAccounts,String accountNo, LocalDate date,OperationSymbol[] symbol,String businessId);
+    public List<OperationEntry> auditOperation(@Nonnull final String codeOfAccounts,@Nonnull final String accountNo, LocalDate date,OperationSymbol[] symbol,String businessId);
 }
