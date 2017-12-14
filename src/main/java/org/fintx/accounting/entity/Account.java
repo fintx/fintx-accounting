@@ -25,6 +25,7 @@ import java.time.LocalDate;
  * @author bluecreator(qiang.x.wang@gmail.com)
  *
  */
+//TODO 对于账户的各种限制是否应该放在交易系统里面限制？？
 @Getter
 @Setter
 public class Account {
@@ -53,7 +54,7 @@ public class Account {
     private String productNo;
     
     private String currency;
-    /*
+    /**
      * 1 debtor 2 creditor
      */
     private String accountSide;
@@ -62,12 +63,33 @@ public class Account {
      * 01-对私活期 02-对公活期 03-对私定期 04-对公定期 05-拨款、贷款 06-损益 07-现金 08-其他内部帐 09-其他 99-表外
      */
     private String accountingType;
-    /*
+    /**
      * 1 normal 2closed 3locked
      */
     private String accountStatus;
 
-    private BigDecimal overdraftLimit;
+    /**
+     * 使用balanceLimit 正数上线 负数下限
+     */
+    //private BigDecimal overdraftLimit;
+    /**
+     * 借发生额限制，如每天累计买入不超过5万
+     */
+    private BigDecimal drTransAmtLimit;
+    /**
+     * 借发生额限制，如每天累计买入不超过5万
+     */
+    private BigDecimal crTransAmtLimit;
+    /**
+     * ？？发生额限制
+     */
+    private BigDecimal transAmtLimit;
+
+    /**
+     * 余额额限制，如小额账户
+     */
+    private BigDecimal balanceLimit;
+
 
     private BigDecimal frozenAmt;
     /*
