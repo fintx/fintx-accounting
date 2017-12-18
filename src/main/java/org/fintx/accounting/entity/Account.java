@@ -68,27 +68,7 @@ public class Account {
      */
     private String accountStatus;
 
-    /**
-     * 使用balanceLimit 正数上线 负数下限
-     */
-    //private BigDecimal overdraftLimit;
-    /**
-     * 借发生额限制，如每天累计买入不超过5万
-     */
-    private BigDecimal drTransAmtLimit;
-    /**
-     * 借发生额限制，如每天累计买入不超过5万
-     */
-    private BigDecimal crTransAmtLimit;
-    /**
-     * ？？发生额限制
-     */
-    private BigDecimal transAmtLimit;
-
-    /**
-     * 余额额限制，如小额账户
-     */
-    private BigDecimal balanceLimit;
+    
 
 
     private BigDecimal frozenAmt;

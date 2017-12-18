@@ -43,7 +43,9 @@ public interface DetailLedgerService {
      * 
      * @param transaction
      */
-    public void post(@Nonnull final Transaction transaction);
+    //public void post(@Nonnull final Transaction transaction);
+    
+    public void post(@Nonnull final Transaction transaction,@Nonnull AccountRestriction... restriction);
 
     /**
      * use TransactionFlag instead of cancel and flush
@@ -53,6 +55,7 @@ public interface DetailLedgerService {
     // public void flush(String transactionId, String transactionDate);
 
     public void post(@Nonnull final Operation operation);
+    
 
     public Account auditAccount(@Nonnull final String codeOfAccounts, @Nonnull final String accountNo);
 

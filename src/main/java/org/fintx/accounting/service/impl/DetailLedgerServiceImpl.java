@@ -18,6 +18,7 @@ import org.fintx.accounting.repository.InnerAccountNoRepo;
 import org.fintx.accounting.repository.InnerAccountSnRepo;
 import org.fintx.accounting.repository.OperationEntryRepo;
 import org.fintx.accounting.repository.TransactionEntryRepo;
+import org.fintx.accounting.service.AccountRestriction;
 import org.fintx.accounting.service.DetailLedgerService;
 import org.fintx.accounting.service.Operation;
 import org.fintx.accounting.service.Transaction;
@@ -33,6 +34,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+
+import javax.annotation.Nonnull;
 
 public class DetailLedgerServiceImpl implements DetailLedgerService {
     @Autowired
@@ -69,7 +72,7 @@ public class DetailLedgerServiceImpl implements DetailLedgerService {
     public static Boolean check_last_balance = false;
 
     @Override
-    public void post(Transaction transaction) {
+    public void post(Transaction transaction,@Nonnull AccountRestriction... restrictions) {
         // TODO Auto-generated method stub
 
     }
