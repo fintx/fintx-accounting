@@ -1,15 +1,18 @@
-package org.fintx.accounting.dao;
+package org.fintx.accounting.repository;
 
 import java.math.BigDecimal;
 
 import org.fintx.accounting.entity.Account;
+
+import org.springframework.stereotype.Repository;
 
 /**
  * 
  * @author 
  *
  */
-public interface AccountDao {
+@Repository
+public interface AccountRepo {
 
     int save(Account account);
 

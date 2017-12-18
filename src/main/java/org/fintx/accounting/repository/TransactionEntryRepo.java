@@ -1,11 +1,13 @@
-package org.fintx.accounting.dao;
+package org.fintx.accounting.repository;
 
 import java.util.Map;
 
 import org.fintx.accounting.entity.TransactionEntry;
 
+import org.springframework.stereotype.Repository;
 
-public interface TransactionEntryDao {
+@Repository
+public interface TransactionEntryRepo {
     int save(TransactionEntry record);
 
     int recordDetailAccount(Map<String, Object> map);

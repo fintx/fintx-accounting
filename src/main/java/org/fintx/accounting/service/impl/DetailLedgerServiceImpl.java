@@ -5,19 +5,20 @@ import org.fintx.accounting.constant.OperationSymbol;
 import org.fintx.accounting.constant.Operator;
 import org.fintx.accounting.constant.TransactionFlag;
 import org.fintx.accounting.constant.TransactionSymbol;
-import org.fintx.accounting.dao.AccountDao;
-import org.fintx.accounting.dao.CodeOfAccountsDao;
-import org.fintx.accounting.dao.CustomerAccountNoDao;
-import org.fintx.accounting.dao.CustomerAccountSnDao;
-import org.fintx.accounting.dao.InnerAccountNoDao;
-import org.fintx.accounting.dao.InnerAccountSnDao;
-import org.fintx.accounting.dao.OperationEntryDao;
-import org.fintx.accounting.dao.TransactionEntryDao;
 import org.fintx.accounting.entity.Account;
 import org.fintx.accounting.entity.CodeOfAccounts;
 import org.fintx.accounting.entity.CustomerAccountNo;
 import org.fintx.accounting.entity.OperationEntry;
 import org.fintx.accounting.entity.TransactionEntry;
+import org.fintx.accounting.repository.AccountRepo;
+import org.fintx.accounting.repository.CodeOfAccountsRepo;
+import org.fintx.accounting.repository.CustomerAccountNoRepo;
+import org.fintx.accounting.repository.CustomerAccountSnRepo;
+import org.fintx.accounting.repository.InnerAccountNoRepo;
+import org.fintx.accounting.repository.InnerAccountSnRepo;
+import org.fintx.accounting.repository.OperationEntryRepo;
+import org.fintx.accounting.repository.TransactionEntryRepo;
+import org.fintx.accounting.service.AccountRestriction;
 import org.fintx.accounting.service.DetailLedgerService;
 import org.fintx.accounting.service.Operation;
 import org.fintx.accounting.service.Transaction;
@@ -34,42 +35,44 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import javax.annotation.Nonnull;
+
 public class DetailLedgerServiceImpl implements DetailLedgerService {
     @Autowired
-    private AccountDao accountDao;
+    private AccountRepo accountDao;
     @Autowired
-    private TransactionEntryDao transactionEntryDao;
+    private TransactionEntryRepo transactionEntryDao;
 
     @Autowired
-    private OperationEntryDao operationEntryDao;
+    private OperationEntryRepo operationEntryDao;
     @Autowired
-    private CustomerAccountSnDao customerAccountSnDao;
+    private CustomerAccountSnRepo customerAccountSnDao;
     @Autowired
-    private InnerAccountSnDao innerAccountSnDao;
+    private InnerAccountSnRepo innerAccountSnDao;
     @Autowired
-    private CustomerAccountNoDao customerAccountNoDao;
+    private CustomerAccountNoRepo customerAccountNoDao;
     @Autowired
-    private InnerAccountNoDao innerAccountNoDao;
+    private InnerAccountNoRepo innerAccountNoDao;
 
     @Autowired
-    private CodeOfAccountsDao codeOfAccountsDao;
+    private CodeOfAccountsRepo codeOfAccountsDao;
 
     /*
      * 冲正是否可为负
      *
      */
-    //TODO 放入账户控制标识中
+    // TODO 放入账户控制标识中
     public static Boolean flash_not_negative = false;
 
     /*
      * 是否验证昨日余额
      * 
      */
-  //TODO 放入账户控制标识中
+    // TODO 放入账户控制标识中
     public static Boolean check_last_balance = false;
 
     @Override
-    public void post(Transaction transaction) {
+    public void post(Transaction transaction,@Nonnull AccountRestriction... restrictions) {
         // TODO Auto-generated method stub
 
     }
@@ -81,19 +84,20 @@ public class DetailLedgerServiceImpl implements DetailLedgerService {
     }
 
     @Override
-    public Account auditAccount(String codeOfAccounts,String accountNo) {
+    public Account auditAccount(String codeOfAccounts, String accountNo) {
 
         return accountDao.getByAccountNo(accountNo);
     }
 
     @Override
-    public List<TransactionEntry> auditTransaction(String codeOfAccounts,String accountNo, LocalDate date,TransactionFlag[] flag,TransactionSymbol[] symbol, String businessId) {
+    public List<TransactionEntry> auditTransaction(String codeOfAccounts, LocalDate date, String accountNo, TransactionFlag[] flag, TransactionSymbol[] symbol,
+            String businessId) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public List<OperationEntry> auditOperation(String codeOfAccounts,String accountNo, LocalDate date,OperationSymbol[] symbol, String businessId) {
+    public List<OperationEntry> auditOperation(String codeOfAccounts, LocalDate date, String accountNo, OperationSymbol[] symbol, String businessId) {
         // TODO Auto-generated method stub
         return null;
     }
@@ -324,22 +328,22 @@ public class DetailLedgerServiceImpl implements DetailLedgerService {
         accountDao.minusToFrozenAmt(entry.getAmount());
         operationEntryDao.save(entry);
     }
-    
+
     public void control(OperationEntry entry) {
         accountDao.minusToFrozenAmt(entry.getAmount());
         operationEntryDao.save(entry);
     }
-    
+
     public void close(OperationEntry entry) {
         accountDao.minusToFrozenAmt(entry.getAmount());
         operationEntryDao.save(entry);
     }
-    
+
     public void lock(OperationEntry entry) {
         accountDao.minusToFrozenAmt(entry.getAmount());
         operationEntryDao.save(entry);
     }
-    
+
     public void free(OperationEntry entry) {
         accountDao.minusToFrozenAmt(entry.getAmount());
         operationEntryDao.save(entry);

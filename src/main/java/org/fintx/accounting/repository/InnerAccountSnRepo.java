@@ -1,9 +1,11 @@
-package org.fintx.accounting.dao;
+package org.fintx.accounting.repository;
 
 import org.fintx.accounting.entity.InnerAccountSn;
 
+import org.springframework.stereotype.Repository;
 
-public interface InnerAccountSnDao {
+@Repository
+public interface InnerAccountSnRepo {
 
     
     public int insert(InnerAccountSn record) throws Exception;

@@ -1,10 +1,13 @@
-package org.fintx.accounting.dao;
+package org.fintx.accounting.repository;
 
 import java.util.List;
 
 import org.fintx.accounting.entity.CodeOfAccounts;
 
-public interface CodeOfAccountsDao {
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface CodeOfAccountsRepo {
     int save(CodeOfAccounts record);
 
     CodeOfAccounts getByAccountsCodeNo(String accountsCodeNo);

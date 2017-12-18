@@ -25,6 +25,9 @@ import org.fintx.accounting.entity.TransactionEntry;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 /**
  * Ledger accounting interface
  * 
@@ -32,26 +35,33 @@ import java.util.List;
  *
  */
 public interface DetailLedgerService {
-// move to operation    
-//    public void post(AccountOpening accountOpening);
+    // move to operation
+    // public void post(AccountOpening accountOpening);
 
     /**
      * 冲正 金额必须为负 更新余额 流水入账 撤销 金额必须为负 更新余额 流水不入账
+     * 
      * @param transaction
      */
-    public void post(Transaction transaction);
-/**
- * use TransactionFlag instead of cancel and flush
- */
+    //public void post(@Nonnull final Transaction transaction);
+    
+    public void post(@Nonnull final Transaction transaction,@Nonnull AccountRestriction... restriction);
+
+    /**
+     * use TransactionFlag instead of cancel and flush
+     */
     // public void cancel(Transaction transaction);
 
     // public void flush(String transactionId, String transactionDate);
 
-    public void post(Operation operation);
+    public void post(@Nonnull final Operation operation);
+    
 
-    public Account auditAccount(String codeOfAccounts,String accountNo);
+    public Account auditAccount(@Nonnull final String codeOfAccounts, @Nonnull final String accountNo);
 
-    public List<TransactionEntry> auditTransaction(String codeOfAccounts,String accountNo, LocalDate date,TransactionFlag[] flag,TransactionSymbol[] symbol,String businessId);
+    public List<TransactionEntry> auditTransaction(@Nonnull final String codeOfAccounts, @Nonnull final LocalDate date, final String accountNo,
+            final TransactionFlag[] flag, final TransactionSymbol[] symbol, final String businessId);
 
-    public List<OperationEntry> auditOperation(String codeOfAccounts,String accountNo, LocalDate date,OperationSymbol[] symbol,String businessId);
+    public List<OperationEntry> auditOperation(@Nonnull final String codeOfAccounts, @Nonnull final LocalDate date, final String accountNo,
+            final OperationSymbol[] symbol, final String businessId);
 }

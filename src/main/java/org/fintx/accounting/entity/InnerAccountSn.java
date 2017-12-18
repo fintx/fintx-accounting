@@ -13,6 +13,6 @@ import lombok.Setter;
 @Setter
 public class InnerAccountSn {
     private String organizationNo;
-    private String accountSn;
+    private int accountSn;
 
 }

@@ -20,6 +20,6 @@ public class CustomerAccountSn {
     /**
      * 账户序号
      */
-    private String accountSn;
+    private int accountSn;
 
 }
