@@ -19,7 +19,7 @@ import org.fintx.accounting.repository.InnerAccountSnRepo;
 import org.fintx.accounting.repository.OperationEntryRepo;
 import org.fintx.accounting.repository.TransactionEntryRepo;
 import org.fintx.accounting.service.AccountRestriction;
-import org.fintx.accounting.service.DetailLedgerService;
+import org.fintx.accounting.service.AccountService;
 import org.fintx.accounting.service.Operation;
 import org.fintx.accounting.service.Transaction;
 import org.fintx.util.Objects;
@@ -37,7 +37,7 @@ import java.util.Optional;
 
 import javax.annotation.Nonnull;
 
-public class DetailLedgerServiceImpl implements DetailLedgerService {
+public class DetailLedgerServiceImpl implements AccountService {
     @Autowired
     private AccountRepo accountDao;
     @Autowired

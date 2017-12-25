@@ -39,12 +39,12 @@ import java.util.List;
  * @author bluecreator(qiang.x.wang@gmail.com)
  *
  */
-public class DetailLedgerServiceTest {
+public class AccountServiceTest {
     @Autowired
     AccountNoService accountNoService = null;
 
     @Autowired
-    DetailLedgerService detailLedgerService = null;
+    AccountService detailLedgerService = null;
 
     @Test
     public void test() {

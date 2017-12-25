@@ -34,7 +34,7 @@ import javax.annotation.Nullable;
  * @author bluecreator(qiang.x.wang@gmail.com)
  *
  */
-public interface DetailLedgerService {
+public interface AccountService {
     // move to operation
     // public void post(AccountOpening accountOpening);
 
