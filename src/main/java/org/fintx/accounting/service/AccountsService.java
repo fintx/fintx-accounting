@@ -21,7 +21,7 @@ import java.math.BigDecimal;
  * @author bluecreator(qiang.x.wang@gmail.com)
  *
  */
-public interface GeneralLedgerService {
+public interface AccountsService {
     public void createDailyAccounts();
 
     public void post(String subject, BigDecimal amount);
