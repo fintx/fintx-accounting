@@ -1,23 +1,12 @@
 package org.fintx.accounting.service.impl;
 
-import org.fintx.accounting.constant.AccountsSide;
 import org.fintx.accounting.constant.OperationSymbol;
-import org.fintx.accounting.constant.Operator;
 import org.fintx.accounting.constant.TransactionFlag;
 import org.fintx.accounting.constant.TransactionSymbol;
 import org.fintx.accounting.entity.Account;
-import org.fintx.accounting.entity.CodeOfAccounts;
-import org.fintx.accounting.entity.CustomerAccountNo;
+import org.fintx.accounting.entity.Accounts;
 import org.fintx.accounting.entity.OperationEntry;
 import org.fintx.accounting.entity.TransactionEntry;
-import org.fintx.accounting.repository.AccountRepo;
-import org.fintx.accounting.repository.CodeOfAccountsRepo;
-import org.fintx.accounting.repository.CustomerAccountNoRepo;
-import org.fintx.accounting.repository.CustomerAccountSnRepo;
-import org.fintx.accounting.repository.InnerAccountNoRepo;
-import org.fintx.accounting.repository.InnerAccountSnRepo;
-import org.fintx.accounting.repository.OperationEntryRepo;
-import org.fintx.accounting.repository.TransactionEntryRepo;
 import org.fintx.accounting.service.Restriction;
 import org.fintx.accounting.service.AccountNoService;
 import org.fintx.accounting.service.AccountService;
@@ -25,21 +14,13 @@ import org.fintx.accounting.service.AccountingService;
 import org.fintx.accounting.service.AccountsService;
 import org.fintx.accounting.service.Operation;
 import org.fintx.accounting.service.Transaction;
-import org.fintx.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.OffsetDateTime;
 import java.util.Arrays;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
-import javax.annotation.Nonnull;
 
 public class AccountingServiceImpl implements AccountingService {
     
@@ -114,28 +95,25 @@ public class AccountingServiceImpl implements AccountingService {
 
     @Override
     public Account auditAccount(String codeOfAccounts, String accountNo) {
-        return null;
+        return accountService.get(codeOfAccounts,accountNo);
     }
 
     @Override
     public List<TransactionEntry> auditTransaction(String codeOfAccounts, LocalDate date, String accountNo, TransactionFlag[] flag, TransactionSymbol[] symbol,
             String businessId) {
-        // TODO Auto-generated method stub
-        return null;
+        return accountService.getTransactions(codeOfAccounts, date, accountNo, flag, symbol, businessId);
     }
 
     @Override
     public List<OperationEntry> auditOperation(String codeOfAccounts, LocalDate date, String accountNo, OperationSymbol[] symbol, String businessId) {
-        // TODO Auto-generated method stub
-        return null;
+        return accountService.getOperations(codeOfAccounts, date, accountNo, symbol, businessId);
     }
 
     /* (non-Javadoc)
      * @see org.fintx.accounting.service.AccountingService#auditAccounts(java.lang.String)
      */
     @Override
-    public Account auditAccounts(String codeOfAccounts) {
-        // TODO Auto-generated method stub
-        return null;
+    public Accounts auditAccounts(String codeOfAccounts) {
+        return accountsService.get(codeOfAccounts);
     }
 }

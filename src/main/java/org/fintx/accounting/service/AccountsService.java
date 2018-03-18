@@ -15,16 +15,22 @@
  */
 package org.fintx.accounting.service;
 
+import org.fintx.accounting.entity.Accounts;
+
 import java.math.BigDecimal;
+
+import javax.annotation.Nonnull;
 
 /**
  * @author bluecreator(qiang.x.wang@gmail.com)
  *
  */
 public interface AccountsService {
+    public Accounts get(@Nonnull final String codeOfAccounts);
+    
     public void createDailyAccounts();
 
-    public void post(String codeOfAccounts, BigDecimal amount);
+    public void post(@Nonnull final String codeOfAccounts,@Nonnull final  BigDecimal amount);
 
     public void check();
 
