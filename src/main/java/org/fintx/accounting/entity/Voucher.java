@@ -17,6 +17,7 @@ package org.fintx.accounting.entity;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.ZoneOffset;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -41,6 +42,11 @@ public class Voucher {
      * 凭证号码
      */
     private String voucherNo;
+    
+    /*
+     * 凭证Offset
+     */
+    private ZoneOffset zoneOffset;
     /*
      * 凭证日期
      */
