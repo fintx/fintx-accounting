@@ -44,7 +44,7 @@ public class AccountServiceTest {
     AccountNoService accountNoService = null;
 
     @Autowired
-    AccountService detailLedgerService = null;
+    AccountingService accountingService = null;
 
     @Test
     public void test() {
@@ -85,7 +85,7 @@ public class AccountServiceTest {
         operationBuilder.openCustomer(codeOfAccounts, accountNo1, organizationNo, productNo, customerNo);
         // ...
         Operation operation = operationBuilder.build();
-        detailLedgerService.post(operation);
+        accountingService.post(operation);
         
 
         // build voucher
@@ -101,13 +101,13 @@ public class AccountServiceTest {
         transactionBuilder.debit(codeOfAccounts, accountNo2, new BigDecimal("50.00"));
         transactionBuilder.debit(codeOfAccounts, accountNo3, new BigDecimal("50.00"));
         Transaction transaction = transactionBuilder.build();
-        detailLedgerService.post(transaction);
+        accountingService.post(transaction);
 
         // audit transaction
         TransactionFlag[] transflags = { TransactionFlag.RECORD };
         TransactionSymbol[] transSymbols = { TransactionSymbol.CREDIT };
         List<TransactionEntry> transactionEntries =
-                detailLedgerService.auditTransaction(codeOfAccounts,LocalDate.now(), accountNo1,  transflags, transSymbols, voucher.getBusinessId());
+                accountingService.auditTransaction(codeOfAccounts,LocalDate.now(), accountNo1,  transflags, transSymbols, voucher.getBusinessId());
 
         // operate account
         operationBuilder = Operation.builder();
@@ -115,11 +115,11 @@ public class AccountServiceTest {
         operationBuilder.lock(codeOfAccounts, accountNo1, voucher.getBusinessId());
         // ...
         operation = operationBuilder.build();
-        detailLedgerService.post(operation);
+        accountingService.post(operation);
 
         // audit operation
         OperationSymbol[] operSymbols= {OperationSymbol.OPEN,OperationSymbol.CLOSE};
-        List<OperationEntry> operationEntries = detailLedgerService.auditOperation(codeOfAccounts, LocalDate.now(), accountNo3,operSymbols, voucher.getBusinessId());
+        List<OperationEntry> operationEntries = accountingService.auditOperation(codeOfAccounts, LocalDate.now(), accountNo3,operSymbols, voucher.getBusinessId());
 
     }
 

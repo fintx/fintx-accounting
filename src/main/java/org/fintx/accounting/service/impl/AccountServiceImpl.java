@@ -37,7 +37,7 @@ import java.util.Optional;
 
 import javax.annotation.Nonnull;
 
-public class DetailLedgerServiceImpl implements AccountService {
+public class AccountServiceImpl implements AccountService {
     @Autowired
     private AccountRepo accountDao;
     @Autowired
@@ -71,38 +71,28 @@ public class DetailLedgerServiceImpl implements AccountService {
     // TODO 放入账户控制标识中
     public static Boolean check_last_balance = false;
 
-    @Override
-    public void post(Transaction transaction,@Nonnull Restriction... restrictions) {
-        // TODO Auto-generated method stub
-
-    }
+   
 
     @Override
-    public void post(Operation operation) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public Account auditAccount(String codeOfAccounts, String accountNo) {
+    public Account get(String codeOfAccounts, String accountNo) {
 
         return accountDao.getByAccountNo(accountNo);
     }
 
     @Override
-    public List<TransactionEntry> auditTransaction(String codeOfAccounts, LocalDate date, String accountNo, TransactionFlag[] flag, TransactionSymbol[] symbol,
+    public List<TransactionEntry> getTransactions(String codeOfAccounts, LocalDate date, String accountNo, TransactionFlag[] flag, TransactionSymbol[] symbol,
             String businessId) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public List<OperationEntry> auditOperation(String codeOfAccounts, LocalDate date, String accountNo, OperationSymbol[] symbol, String businessId) {
+    public List<OperationEntry> getOperations(String codeOfAccounts, LocalDate date, String accountNo, OperationSymbol[] symbol, String businessId) {
         // TODO Auto-generated method stub
         return null;
     }
 
-    private Account updateBalance(TransactionEntry entry) {
+    public Account update(TransactionEntry entry,Restriction res) {
         // TODO 余额为负时，冲正报余额不足
         LocalDate txnDate = entry.getTransactionDate();// 渠道账期
 
@@ -260,7 +250,7 @@ public class DetailLedgerServiceImpl implements AccountService {
                 }
 
                 // TODO
-                // 补一笔不入账的最终交易日期的账，备注下昨日账不然余额会突然减少造成误解//检查伟荣日终的逻辑是否能满足这种情况//和伟荣核对透支标志是
+                // 补一笔不入账的最终交易日期的账，备注下昨日账不然余额会突然减少造成误解//检查日终的逻辑是否能满足这种情况//核对透支标志是
                 // 2还是0？？？？？？？？？？//科目明细的唯一键为
                 // 流水号加入账标志！！！！！！！//去掉科目明细
                 // 日切时间不用修改---不用
@@ -295,56 +285,43 @@ public class DetailLedgerServiceImpl implements AccountService {
         return account;
     }
 
-    // @Override
-    // public void updateBalanceBA(TransactionEntry detail) throws CoreException, Exception {
-    // String txnDate = detail.getTxndate();// 渠道账期
-    // // 获取分户账表名
-    // String tableName = SysInitService.getAcctTableName(detail.getAccttitlecode());
-    // Map<String, Object> map4Update = new HashMap<String, Object>();
-    // map4Update.put("tableName", tableName);
-    // map4Update.put("acctno", detail.getAccountNo());
-    // // 流水表余额记录为交易后余额
-    // detail.setBalance(BigDecimal.ZERO);
-    // detail.setBalanceAccum(BigDecimal.ZERO);
-    // Account accountA = new Account();
-    // accountA.setAccountNo(detail.getAccountNo());
-    //
-    // Map<String, Object> coreMap = new HashMap<String, Object>();
-    // coreMap.put("tableName", "t_det_core_" + txnDate);
-    // coreMap.put("detail", detail);
-    // transactionEntryDao.recordDetailAccount(coreMap);
-    // Map<String, Object> acctTitleMap = new HashMap<String, Object>();
-    // acctTitleMap.put("tableName", "t_det_" + detail.getAccttitlecode());
-    // acctTitleMap.put("detail", detail);
-    // transactionEntryDao.recordDetailAccount(acctTitleMap);
-    // }
+    public Account update(OperationEntry entry) {
+        accountDao.plusToFrozenAmt(entry.getAmount());
+        operationEntryDao.save(entry);
+        return null;
+    }
 
-    public void freeze(OperationEntry entry) {
+    private void freeze(OperationEntry entry) {
         accountDao.plusToFrozenAmt(entry.getAmount());
         operationEntryDao.save(entry);
     }
 
-    public void release(OperationEntry entry) {
+    private void release(OperationEntry entry) {
         accountDao.minusToFrozenAmt(entry.getAmount());
         operationEntryDao.save(entry);
     }
 
-    public void control(OperationEntry entry) {
+    private void control(OperationEntry entry) {
+        accountDao.minusToFrozenAmt(entry.getAmount());
+        operationEntryDao.save(entry);
+    }
+    
+    private void open(OperationEntry entry) {
         accountDao.minusToFrozenAmt(entry.getAmount());
         operationEntryDao.save(entry);
     }
 
-    public void close(OperationEntry entry) {
+    private void close(OperationEntry entry) {
         accountDao.minusToFrozenAmt(entry.getAmount());
         operationEntryDao.save(entry);
     }
 
-    public void lock(OperationEntry entry) {
+    private void lock(OperationEntry entry) {
         accountDao.minusToFrozenAmt(entry.getAmount());
         operationEntryDao.save(entry);
     }
 
-    public void free(OperationEntry entry) {
+    private void free(OperationEntry entry) {
         accountDao.minusToFrozenAmt(entry.getAmount());
         operationEntryDao.save(entry);
     }
@@ -356,7 +333,7 @@ public class DetailLedgerServiceImpl implements AccountService {
      * @param side AccountSide
      * @return Operator the plus or minus
      */
-    public Operator getOperatorBySymbolAndSide(TransactionSymbol symbol, AccountsSide side) {
+    private Operator getOperatorBySymbolAndSide(TransactionSymbol symbol, AccountsSide side) {
         if (symbol.equals(TransactionSymbol.DEBIT)) {
             if (side.equals(AccountsSide.DEBTOR)) {
                 return Operator.PLUS;
@@ -375,5 +352,23 @@ public class DetailLedgerServiceImpl implements AccountService {
         } else {
             return Operator.MINUS;
         }
+    }
+
+    /* (non-Javadoc)
+     * @see org.fintx.accounting.service.AccountService#wipe(org.fintx.accounting.entity.TransactionEntry)
+     */
+    @Override
+    public void wipe(TransactionEntry entry) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    /* (non-Javadoc)
+     * @see org.fintx.accounting.service.AccountService#strike(org.fintx.accounting.entity.TransactionEntry)
+     */
+    @Override
+    public void strike(TransactionEntry entry) {
+        // TODO Auto-generated method stub
+        
     }
 }

@@ -24,7 +24,7 @@ import java.math.BigDecimal;
 public interface AccountsService {
     public void createDailyAccounts();
 
-    public void post(String subject, BigDecimal amount);
+    public void post(String codeOfAccounts, BigDecimal amount);
 
     public void check();
 

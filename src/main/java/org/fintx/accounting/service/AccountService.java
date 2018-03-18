@@ -22,11 +22,12 @@ import org.fintx.accounting.entity.Account;
 import org.fintx.accounting.entity.OperationEntry;
 import org.fintx.accounting.entity.TransactionEntry;
 
+import lombok.NonNull;
+
 import java.time.LocalDate;
 import java.util.List;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 /**
  * Ledger accounting interface
@@ -35,33 +36,31 @@ import javax.annotation.Nullable;
  *
  */
 public interface AccountService {
-    // move to operation
-    // public void post(AccountOpening accountOpening);
 
     /**
      * 冲正 金额必须为负 更新余额 流水入账 撤销 金额必须为负 更新余额 流水不入账
      * 
      * @param transaction
      */
-    //public void post(@Nonnull final Transaction transaction);
+    public Account update(@Nonnull final TransactionEntry entry,@Nonnull final Restriction res);
     
-    public void post(@Nonnull final Transaction transaction,@Nonnull Restriction... restriction);
 
     /**
-     * use TransactionFlag instead of cancel and flush
+     * 冲正 金额必须为负 更新余额 流水入账 撤销 金额必须为负 更新余额 流水不入账
+     * 
+     * @param transaction
      */
-    // public void cancel(Transaction transaction);
-
-    // public void flush(String transactionId, String transactionDate);
-
-    public void post(@Nonnull final Operation operation);
+    public Account update(@Nonnull final OperationEntry entry);
     
+    public void wipe(@NonNull final TransactionEntry entry);
 
-    public Account auditAccount(@Nonnull final String codeOfAccounts, @Nonnull final String accountNo);
+    public void strike(@NonNull final TransactionEntry entry);
 
-    public List<TransactionEntry> auditTransaction(@Nonnull final String codeOfAccounts, @Nonnull final LocalDate date, final String accountNo,
+    public Account get(@Nonnull final String codeOfAccounts, @Nonnull final String accountNo);
+
+    public List<TransactionEntry> getTransactions(@Nonnull final String codeOfAccounts, @Nonnull final LocalDate date, final String accountNo,
             final TransactionFlag[] flag, final TransactionSymbol[] symbol, final String businessId);
 
-    public List<OperationEntry> auditOperation(@Nonnull final String codeOfAccounts, @Nonnull final LocalDate date, final String accountNo,
+    public List<OperationEntry> getOperations(@Nonnull final String codeOfAccounts, @Nonnull final LocalDate date, final String accountNo,
             final OperationSymbol[] symbol, final String businessId);
 }
