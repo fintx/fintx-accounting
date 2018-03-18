@@ -24,7 +24,7 @@ import java.math.BigDecimal;
  *
  */
 @Builder(builderClassName="Builder")
-public class AccountRestriction {
+public class Restriction {
     /**
      * 透支限制-->使用MinBalanceLimit
      */

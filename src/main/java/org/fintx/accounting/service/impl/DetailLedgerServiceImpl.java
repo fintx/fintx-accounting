@@ -18,7 +18,7 @@ import org.fintx.accounting.repository.InnerAccountNoRepo;
 import org.fintx.accounting.repository.InnerAccountSnRepo;
 import org.fintx.accounting.repository.OperationEntryRepo;
 import org.fintx.accounting.repository.TransactionEntryRepo;
-import org.fintx.accounting.service.AccountRestriction;
+import org.fintx.accounting.service.Restriction;
 import org.fintx.accounting.service.AccountService;
 import org.fintx.accounting.service.Operation;
 import org.fintx.accounting.service.Transaction;
@@ -72,7 +72,7 @@ public class DetailLedgerServiceImpl implements AccountService {
     public static Boolean check_last_balance = false;
 
     @Override
-    public void post(Transaction transaction,@Nonnull AccountRestriction... restrictions) {
+    public void post(Transaction transaction,@Nonnull Restriction... restrictions) {
         // TODO Auto-generated method stub
 
     }

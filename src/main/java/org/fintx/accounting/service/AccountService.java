@@ -45,7 +45,7 @@ public interface AccountService {
      */
     //public void post(@Nonnull final Transaction transaction);
     
-    public void post(@Nonnull final Transaction transaction,@Nonnull AccountRestriction... restriction);
+    public void post(@Nonnull final Transaction transaction,@Nonnull Restriction... restriction);
 
     /**
      * use TransactionFlag instead of cancel and flush
