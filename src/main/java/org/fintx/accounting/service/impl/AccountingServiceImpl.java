@@ -94,26 +94,26 @@ public class AccountingServiceImpl implements AccountingService {
     }
 
     @Override
-    public Account auditAccount(String codeOfAccounts, String accountNo) {
-        return accountService.get(codeOfAccounts,accountNo);
+    public Account auditAccount(String accountsNo, String accountNo) {
+        return accountService.get(accountsNo,accountNo);
     }
 
     @Override
-    public List<TransactionEntry> auditTransaction(String codeOfAccounts, LocalDate date, String accountNo, TransactionFlag[] flag, TransactionSymbol[] symbol,
+    public List<TransactionEntry> auditTransaction(String accountsNo, LocalDate date, String accountNo, TransactionFlag[] flag, TransactionSymbol[] symbol,
             String businessId) {
-        return accountService.getTransactions(codeOfAccounts, date, accountNo, flag, symbol, businessId);
+        return accountService.getTransactions(accountsNo, date, accountNo, flag, symbol, businessId);
     }
 
     @Override
-    public List<OperationEntry> auditOperation(String codeOfAccounts, LocalDate date, String accountNo, OperationSymbol[] symbol, String businessId) {
-        return accountService.getOperations(codeOfAccounts, date, accountNo, symbol, businessId);
+    public List<OperationEntry> auditOperation(String accountsNo, LocalDate date, String accountNo, OperationSymbol[] symbol, String businessId) {
+        return accountService.getOperations(accountsNo, date, accountNo, symbol, businessId);
     }
 
     /* (non-Javadoc)
      * @see org.fintx.accounting.service.AccountingService#auditAccounts(java.lang.String)
      */
     @Override
-    public Accounts auditAccounts(String codeOfAccounts) {
-        return accountsService.get(codeOfAccounts);
+    public Accounts auditAccounts(String accountsNo) {
+        return accountsService.get(accountsNo);
     }
 }

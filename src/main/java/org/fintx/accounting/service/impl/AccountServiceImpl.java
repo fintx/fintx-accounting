@@ -74,20 +74,20 @@ public class AccountServiceImpl implements AccountService {
    
 
     @Override
-    public Account get(String codeOfAccounts, String accountNo) {
+    public Account get(String accountsNo, String accountNo) {
 
         return accountDao.getByAccountNo(accountNo);
     }
 
     @Override
-    public List<TransactionEntry> getTransactions(String codeOfAccounts, LocalDate date, String accountNo, TransactionFlag[] flag, TransactionSymbol[] symbol,
+    public List<TransactionEntry> getTransactions(String accountsNo, LocalDate date, String accountNo, TransactionFlag[] flag, TransactionSymbol[] symbol,
             String businessId) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public List<OperationEntry> getOperations(String codeOfAccounts, LocalDate date, String accountNo, OperationSymbol[] symbol, String businessId) {
+    public List<OperationEntry> getOperations(String accountsNo, LocalDate date, String accountNo, OperationSymbol[] symbol, String businessId) {
         // TODO Auto-generated method stub
         return null;
     }
