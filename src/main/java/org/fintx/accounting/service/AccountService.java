@@ -56,11 +56,11 @@ public interface AccountService {
 
     public void strike(@NonNull final TransactionEntry entry);
 
-    public Account get(@Nonnull final String codeOfAccounts, @Nonnull final String accountNo);
+    public Account get(@Nonnull final String accountsNo, @Nonnull final String accountNo);
 
-    public List<TransactionEntry> getTransactions(@Nonnull final String codeOfAccounts, @Nonnull final LocalDate date, final String accountNo,
+    public List<TransactionEntry> getTransactions(@Nonnull final String accountsNo, @Nonnull final LocalDate date, final String accountNo,
             final TransactionFlag[] flag, final TransactionSymbol[] symbol, final String businessId);
 
-    public List<OperationEntry> getOperations(@Nonnull final String codeOfAccounts, @Nonnull final LocalDate date, final String accountNo,
+    public List<OperationEntry> getOperations(@Nonnull final String accountsNo, @Nonnull final LocalDate date, final String accountNo,
             final OperationSymbol[] symbol, final String businessId);
 }

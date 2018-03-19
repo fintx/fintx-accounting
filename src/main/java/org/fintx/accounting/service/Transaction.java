@@ -78,11 +78,11 @@ public class Transaction {
             return this;
         }
 
-        public Builder debit(String codeOfAccounts, String accountNo, BigDecimal amount) {
+        public Builder debit(String accountsNo, String accountNo, BigDecimal amount) {
             return this;
         }
 
-        public Builder credit(String codeOfAccounts, String accountNo, BigDecimal amount) {
+        public Builder credit(String accountsNo, String accountNo, BigDecimal amount) {
             // if (null == transaction.creditEntries) {
             // synchronized (transaction) {
             // if (null == transaction.creditEntries) {

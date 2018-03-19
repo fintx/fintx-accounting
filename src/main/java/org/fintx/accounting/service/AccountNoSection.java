@@ -39,7 +39,7 @@ public class AccountNoSection {
 
     }
 
-    private String codeOfAccountsNo;
+    private String accountsNo;
 
     private String organizationNo;
 
@@ -74,8 +74,8 @@ public class AccountNoSection {
         private Builder() {
         }
 
-        public Builder codeOfAccounts(String accountsCodeNo) {
-            accountNoSection.codeOfAccountsNo = accountsCodeNo;
+        public Builder accountsNo(String accountsCodeNo) {
+            accountNoSection.accountsNo = accountsCodeNo;
             return this;
         }
 

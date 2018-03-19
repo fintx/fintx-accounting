@@ -26,11 +26,11 @@ import javax.annotation.Nonnull;
  *
  */
 public interface AccountsService {
-    public Accounts get(@Nonnull final String codeOfAccounts);
+    public Accounts get(@Nonnull final String accountsNo);
     
     public void createDailyAccounts();
 
-    public void post(@Nonnull final String codeOfAccounts,@Nonnull final  BigDecimal amount);
+    public void post(@Nonnull final String accountsNo,@Nonnull final  BigDecimal amount);
 
     public void check();
 

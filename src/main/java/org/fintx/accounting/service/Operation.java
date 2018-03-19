@@ -95,41 +95,41 @@ public class Operation {
             return this;
         }
 
-        public Builder freeze(String codeOfAccounts,String accountNo, BigDecimal amt) {
+        public Builder freeze(String accountsNo,String accountNo, BigDecimal amt) {
             return this;
         }
 
-        public Builder release(String codeOfAccounts,String accountNo, BigDecimal amt) {
+        public Builder release(String accountsNo,String accountNo, BigDecimal amt) {
             return this;
         }
 
-        public Builder control(String codeOfAccounts,String accountNo, String accountCtrl) {
+        public Builder control(String accountsNo,String accountNo, String accountCtrl) {
             return this;
         }
         
-        public Builder overdraft(String codeOfAccounts,String accountNo, BigDecimal amt) {
+        public Builder overdraft(String accountsNo,String accountNo, BigDecimal amt) {
             return this;
         }
-        public Builder openInner(String codeOfAccounts,String accountNo,String organizationNo, String productNo) {
-
-            return this;
-        }
-
-        public Builder openCustomer(String codeOfAccounts,String accountNo,String organizationNo, String productNo, String customerNo) {
+        public Builder openInner(String accountsNo,String accountNo,String organizationNo, String productNo) {
 
             return this;
         }
 
+        public Builder openCustomer(String accountsNo,String accountNo,String organizationNo, String productNo, String customerNo) {
 
-        public Builder close(String codeOfAccounts,String accountNo) {
             return this;
         }
-        
-        public Builder lock(String codeOfAccounts,String accountNo,String key) {
+
+
+        public Builder close(String accountsNo,String accountNo) {
             return this;
         }
         
-        public Builder free(String codeOfAccounts,String accountNo,String key) {
+        public Builder lock(String accountsNo,String accountNo,String key) {
+            return this;
+        }
+        
+        public Builder free(String accountsNo,String accountNo,String key) {
             return this;
         }
         

@@ -53,13 +53,13 @@ public interface AccountingService {
     public void post(@Nonnull final Operation operation);
     
 
-    public Account auditAccount(@Nonnull final String codeOfAccounts, @Nonnull final String accountNo);
+    public Account auditAccount(@Nonnull final String accountsNo, @Nonnull final String accountNo);
 
-    public List<TransactionEntry> auditTransaction(@Nonnull final String codeOfAccounts, @Nonnull final LocalDate date, final String accountNo,
+    public List<TransactionEntry> auditTransaction(@Nonnull final String accountsNo, @Nonnull final LocalDate date, final String accountNo,
             final TransactionFlag[] flag, final TransactionSymbol[] symbol, final String businessId);
 
-    public List<OperationEntry> auditOperation(@Nonnull final String codeOfAccounts, @Nonnull final LocalDate date, final String accountNo,
+    public List<OperationEntry> auditOperation(@Nonnull final String accountsNo, @Nonnull final LocalDate date, final String accountNo,
             final OperationSymbol[] symbol, final String businessId);
     
-    public Accounts auditAccounts(@Nonnull final String codeOfAccounts);
+    public Accounts auditAccounts(@Nonnull final String accountsNo);
 }

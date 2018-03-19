@@ -10,12 +10,12 @@ import lombok.Setter;
 @Setter
 public class CodeOfAccounts {
     /**
-     * 科目代号
+     * 科目号
      */
-    private String accountsCodeNo;
+    private String accountsNo;
 
     /**
-     * 系统科目号--用于内部科目修改
+     * 系统科目代码--用于内部科目修改
      */
     private String accountsCode;
 
@@ -25,7 +25,7 @@ public class CodeOfAccounts {
     private AccountsSide accountsSide;
 
     /**
-     * 管理科目号
+     * 管理科目代码
      */
     private String manageAcctsCode;
 
@@ -35,9 +35,9 @@ public class CodeOfAccounts {
     private String accountType;
 
     /**
-     * 父科目代号
+     * 父科目号
      */
-    private String parentAcctsCodeNo;
+    private String parentAcctsNo;
 
     /**
      * 科目级别
@@ -45,7 +45,7 @@ public class CodeOfAccounts {
     private String AccountsLevel;
 
     /**
-     * 科目号控制
+     * 科目控制
      */
     private String accountsControl;
     
