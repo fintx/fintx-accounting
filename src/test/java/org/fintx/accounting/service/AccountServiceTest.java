@@ -61,7 +61,7 @@ public class AccountServiceTest {
         // localDate = offsetDateTime.toLocalDate();
         // System.out.println(localDate.format(DateTimeFormatter.ISO_DATE));
 
-        String codeOfAccounts = "11223344";
+        String accountsNo = "11223344";
         String organizationNo = "010101";
         String productNo = "010101";
         String customerNo = "120222";
@@ -70,7 +70,7 @@ public class AccountServiceTest {
         
         // build and persist accountNo
         AccountNoSection.Builder accountNoSectionBuilder = AccountNoSection.builder();
-        accountNoSectionBuilder.codeOfAccounts(codeOfAccounts);
+        accountNoSectionBuilder.accountsNo(accountsNo);
         accountNoSectionBuilder.organizationNo(organizationNo);
         accountNoSectionBuilder.productNo(productNo);
         accountNoSectionBuilder.customerNo(customerNo);
@@ -82,7 +82,7 @@ public class AccountServiceTest {
 
         // Open account
         Operation.Builder operationBuilder = Operation.builder();
-        operationBuilder.openCustomer(codeOfAccounts, accountNo1, organizationNo, productNo, customerNo);
+        operationBuilder.openCustomer(accountsNo, accountNo1, organizationNo, productNo, customerNo);
         // ...
         Operation operation = operationBuilder.build();
         accountingService.post(operation);
@@ -97,9 +97,9 @@ public class AccountServiceTest {
         
         Transaction.Builder transactionBuilder = Transaction.builder();
         transactionBuilder.associate(voucher);
-        transactionBuilder.credit(codeOfAccounts, accountNo1, new BigDecimal("100.00"));
-        transactionBuilder.debit(codeOfAccounts, accountNo2, new BigDecimal("50.00"));
-        transactionBuilder.debit(codeOfAccounts, accountNo3, new BigDecimal("50.00"));
+        transactionBuilder.credit(accountsNo, accountNo1, new BigDecimal("100.00"));
+        transactionBuilder.debit(accountsNo, accountNo2, new BigDecimal("50.00"));
+        transactionBuilder.debit(accountsNo, accountNo3, new BigDecimal("50.00"));
         Transaction transaction = transactionBuilder.build();
         accountingService.post(transaction);
 
@@ -107,19 +107,19 @@ public class AccountServiceTest {
         TransactionFlag[] transflags = { TransactionFlag.RECORD };
         TransactionSymbol[] transSymbols = { TransactionSymbol.CREDIT };
         List<TransactionEntry> transactionEntries =
-                accountingService.auditTransaction(codeOfAccounts,LocalDate.now(), accountNo1,  transflags, transSymbols, voucher.getBusinessId());
+                accountingService.auditTransaction(accountsNo,LocalDate.now(), accountNo1,  transflags, transSymbols, voucher.getBusinessId());
 
         // operate account
         operationBuilder = Operation.builder();
-        operationBuilder.freeze(codeOfAccounts, accountNo1, new BigDecimal("50.00"));
-        operationBuilder.lock(codeOfAccounts, accountNo1, voucher.getBusinessId());
+        operationBuilder.freeze(accountsNo, accountNo1, new BigDecimal("50.00"));
+        operationBuilder.lock(accountsNo, accountNo1, voucher.getBusinessId());
         // ...
         operation = operationBuilder.build();
         accountingService.post(operation);
 
         // audit operation
         OperationSymbol[] operSymbols= {OperationSymbol.OPEN,OperationSymbol.CLOSE};
-        List<OperationEntry> operationEntries = accountingService.auditOperation(codeOfAccounts, LocalDate.now(), accountNo3,operSymbols, voucher.getBusinessId());
+        List<OperationEntry> operationEntries = accountingService.auditOperation(accountsNo, LocalDate.now(), accountNo3,operSymbols, voucher.getBusinessId());
 
     }
 
