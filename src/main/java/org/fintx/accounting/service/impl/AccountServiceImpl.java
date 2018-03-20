@@ -39,23 +39,23 @@ import javax.annotation.Nonnull;
 
 public class AccountServiceImpl implements AccountService {
     @Autowired
-    private AccountRepo accountDao;
+    private AccountRepo accountRepo;
     @Autowired
-    private TransactionEntryRepo transactionEntryDao;
+    private TransactionEntryRepo transactionEntryRepo;
 
     @Autowired
-    private OperationEntryRepo operationEntryDao;
+    private OperationEntryRepo operationEntryRepo;
     @Autowired
-    private CustomerAccountSnRepo customerAccountSnDao;
+    private CustomerAccountSnRepo customerAccountSnRepo;
     @Autowired
-    private InnerAccountSnRepo innerAccountSnDao;
+    private InnerAccountSnRepo innerAccountSnRepo;
     @Autowired
-    private CustomerAccountNoRepo customerAccountNoDao;
+    private CustomerAccountNoRepo customerAccountNoRepo;
     @Autowired
-    private InnerAccountNoRepo innerAccountNoDao;
+    private InnerAccountNoRepo innerAccountNoRepo;
 
     @Autowired
-    private CodeOfAccountsRepo codeOfAccountsDao;
+    private CodeOfAccountsRepo codeOfAccountsRepo;
 
     /*
      * 冲正是否可为负
@@ -76,7 +76,7 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public Account get(String accountsNo, String accountNo) {
 
-        return accountDao.getByAccountNo(accountNo);
+        return accountRepo.getByAccountNo(accountNo);
     }
 
     @Override
@@ -97,7 +97,7 @@ public class AccountServiceImpl implements AccountService {
         LocalDate txnDate = entry.getTransactionDate();// 渠道账期
 
         // 获取分户账
-        Account currentAccount = accountDao.lockAccount(entry.getAccountNo());
+        Account currentAccount = accountRepo.lockAccount(entry.getAccountNo());
 
         if (currentAccount == null) {
             // 返回
@@ -114,7 +114,7 @@ public class AccountServiceImpl implements AccountService {
         BigDecimal drBalance = currentAccount.getDrBalance();
         BigDecimal crBalance = currentAccount.getCrBalance();
         entry.setBalanceAccum(new BigDecimal("0.00"));
-        Operator operator = getOperatorBySymbolAndSide(entry.getSymbol(), codeOfAccountsDao.getByAccountsCodeNo(entry.getAccountsCodeNo()).getAccountsSide());
+        Operator operator = getOperatorBySymbolAndSide(entry.getSymbol(), codeOfAccountsRepo.getByAccountsCodeNo(entry.getAccountsCodeNo()).getAccountsSide());
 
         // 处理冻结金额为负的情况，负数的冻结金额是异常情况，但是不影响交易
         if (frozenAmt.compareTo(BigDecimal.ZERO) < 0) {
@@ -262,11 +262,11 @@ public class AccountServiceImpl implements AccountService {
                 Map<String, Object> latestCoreMap = new HashMap<String, Object>();
                 latestCoreMap.put("tableName", "t_det_core_" + latestTxnDate);
                 latestCoreMap.put("detail", latestDetail);
-                transactionEntryDao.recordDetailAccount(latestCoreMap);
+                transactionEntryRepo.recordDetailAccount(latestCoreMap);
                 Map<String, Object> latestAcctTitleMap = new HashMap<String, Object>();
                 latestAcctTitleMap.put("tableName", "t_det_" + latestDetail.getAccountsCodeNo());
                 latestAcctTitleMap.put("detail", latestDetail);
-                transactionEntryDao.recordDetailAccount(latestAcctTitleMap);
+                transactionEntryRepo.recordDetailAccount(latestAcctTitleMap);
                 entry.setBalance(newLastBal);// 计入昨天的流水余额为昨日余额最终值
             } else {// 上次交易日期在账期后一天之后（跨两日及以上），此为账期异常
                     // 账期异常
@@ -275,55 +275,55 @@ public class AccountServiceImpl implements AccountService {
 
         }
 
-        transactionEntryDao.save(entry);
+        transactionEntryRepo.save(entry);
         // TODO move to save...
         // Map<String, Object> acctTitleMap = new HashMap<String, Object>();
         // acctTitleMap.put("tableName", "t_det_" + entry.getAccttitlecode());
         // acctTitleMap.put("detail", entry);
-        // transactionEntryDao.recordDetailAccount(acctTitleMap);
-        accountDao.modifyBalance(account);
+        // transactionEntryRepo.recordDetailAccount(acctTitleMap);
+        accountRepo.modifyBalance(account);
         return account;
     }
 
     public Account update(OperationEntry entry) {
-        accountDao.plusToFrozenAmt(entry.getAmount());
-        operationEntryDao.save(entry);
+        accountRepo.plusToFrozenAmt(entry.getAmount());
+        operationEntryRepo.save(entry);
         return null;
     }
 
     private void freeze(OperationEntry entry) {
-        accountDao.plusToFrozenAmt(entry.getAmount());
-        operationEntryDao.save(entry);
+        accountRepo.plusToFrozenAmt(entry.getAmount());
+        operationEntryRepo.save(entry);
     }
 
     private void release(OperationEntry entry) {
-        accountDao.minusToFrozenAmt(entry.getAmount());
-        operationEntryDao.save(entry);
+        accountRepo.minusToFrozenAmt(entry.getAmount());
+        operationEntryRepo.save(entry);
     }
 
     private void control(OperationEntry entry) {
-        accountDao.minusToFrozenAmt(entry.getAmount());
-        operationEntryDao.save(entry);
+        accountRepo.minusToFrozenAmt(entry.getAmount());
+        operationEntryRepo.save(entry);
     }
     
     private void open(OperationEntry entry) {
-        accountDao.minusToFrozenAmt(entry.getAmount());
-        operationEntryDao.save(entry);
+        accountRepo.minusToFrozenAmt(entry.getAmount());
+        operationEntryRepo.save(entry);
     }
 
     private void close(OperationEntry entry) {
-        accountDao.minusToFrozenAmt(entry.getAmount());
-        operationEntryDao.save(entry);
+        accountRepo.minusToFrozenAmt(entry.getAmount());
+        operationEntryRepo.save(entry);
     }
 
     private void lock(OperationEntry entry) {
-        accountDao.minusToFrozenAmt(entry.getAmount());
-        operationEntryDao.save(entry);
+        accountRepo.minusToFrozenAmt(entry.getAmount());
+        operationEntryRepo.save(entry);
     }
 
     private void free(OperationEntry entry) {
-        accountDao.minusToFrozenAmt(entry.getAmount());
-        operationEntryDao.save(entry);
+        accountRepo.minusToFrozenAmt(entry.getAmount());
+        operationEntryRepo.save(entry);
     }
 
     /**
