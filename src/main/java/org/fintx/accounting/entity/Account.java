@@ -25,7 +25,7 @@ import java.time.LocalDate;
  * @author bluecreator(qiang.x.wang@gmail.com)
  *
  */
-//TODO 对于账户的各种限制是否应该放在交易系统里面限制？？
+//TODO 对于账户的各种限制是否应该放在交易系统里面限制？？---不应在交易系统限制，应暴露出参数或方法开放给调用方
 @Getter
 @Setter
 public class Account {
@@ -163,4 +163,9 @@ public class Account {
      * DAC: Data Anti Change
      */
     private String checksum;
+    
+    /**
+     * 用于系统版本升级兼容
+     */
+    private short  version;
 }
