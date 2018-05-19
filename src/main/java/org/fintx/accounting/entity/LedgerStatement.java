@@ -19,6 +19,6 @@ package org.fintx.accounting.entity;
  * @author bluecreator(qiang.x.wang@gmail.com)
  *
  */
-public class AccountsStatement {
+public class LedgerStatement {
 
 }

@@ -4,14 +4,14 @@ import org.fintx.accounting.constant.OperationSymbol;
 import org.fintx.accounting.constant.TransactionFlag;
 import org.fintx.accounting.constant.TransactionSymbol;
 import org.fintx.accounting.entity.Account;
-import org.fintx.accounting.entity.Accounts;
+import org.fintx.accounting.entity.Ledger;
 import org.fintx.accounting.entity.OperationEntry;
 import org.fintx.accounting.entity.TransactionEntry;
 import org.fintx.accounting.service.Restriction;
 import org.fintx.accounting.service.AccountNoService;
 import org.fintx.accounting.service.AccountService;
 import org.fintx.accounting.service.AccountingService;
-import org.fintx.accounting.service.AccountsService;
+import org.fintx.accounting.service.LedgerService;
 import org.fintx.accounting.service.Operation;
 import org.fintx.accounting.service.Transaction;
 
@@ -28,7 +28,7 @@ public class AccountingServiceImpl implements AccountingService {
     AccountService accountService;
     
     @Autowired
-    AccountsService accountsService;
+    LedgerService accountsService;
     
     @Autowired
     AccountNoService accountNoService;
@@ -113,7 +113,7 @@ public class AccountingServiceImpl implements AccountingService {
      * @see org.fintx.accounting.service.AccountingService#auditAccounts(java.lang.String)
      */
     @Override
-    public Accounts auditAccounts(String accountsNo) {
+    public Ledger auditAccounts(String accountsNo) {
         return accountsService.get(accountsNo);
     }
 }

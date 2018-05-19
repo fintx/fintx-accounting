@@ -6,7 +6,7 @@ import org.fintx.accounting.constant.Operator;
 import org.fintx.accounting.constant.TransactionFlag;
 import org.fintx.accounting.constant.TransactionSymbol;
 import org.fintx.accounting.entity.Account;
-import org.fintx.accounting.entity.CodeOfAccounts;
+import org.fintx.accounting.entity.CodeOfLedger;
 import org.fintx.accounting.entity.CustomerAccountNo;
 import org.fintx.accounting.entity.OperationEntry;
 import org.fintx.accounting.entity.TransactionEntry;

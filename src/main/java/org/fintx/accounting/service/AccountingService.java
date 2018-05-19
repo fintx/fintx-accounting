@@ -19,7 +19,7 @@ import org.fintx.accounting.constant.OperationSymbol;
 import org.fintx.accounting.constant.TransactionFlag;
 import org.fintx.accounting.constant.TransactionSymbol;
 import org.fintx.accounting.entity.Account;
-import org.fintx.accounting.entity.Accounts;
+import org.fintx.accounting.entity.Ledger;
 import org.fintx.accounting.entity.OperationEntry;
 import org.fintx.accounting.entity.TransactionEntry;
 
@@ -61,5 +61,5 @@ public interface AccountingService {
     public List<OperationEntry> auditOperation(@Nonnull final String accountsNo, @Nonnull final LocalDate date, final String accountNo,
             final OperationSymbol[] symbol, final String businessId);
     
-    public Accounts auditAccounts(@Nonnull final String accountsNo);
+    public Ledger auditAccounts(@Nonnull final String accountsNo);
 }

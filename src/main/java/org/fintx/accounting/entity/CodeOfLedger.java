@@ -8,7 +8,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class CodeOfAccounts {
+public class CodeOfLedger {
     /**
      * 科目号
      */

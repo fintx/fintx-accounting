@@ -13,11 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.fintx.accounting.entity;
+package org.fintx.accounting.service;
+
+import org.fintx.accounting.entity.Ledger;
+
+import java.math.BigDecimal;
+
+import javax.annotation.Nonnull;
 
 /**
  * @author bluecreator(qiang.x.wang@gmail.com)
  *
  */
-public class Accounts {
+public interface LedgerService {
+    public Ledger get(@Nonnull final String accountsNo);
+    
+    public void createDailyAccounts();
+
+    public void post(@Nonnull final String accountsNo,@Nonnull final  BigDecimal amount);
+
+    public void check();
+
 }
