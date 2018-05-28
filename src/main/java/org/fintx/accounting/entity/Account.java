@@ -168,4 +168,11 @@ public class Account {
      * 用于系统版本升级兼容
      */
     private short  version;
+    
+    /**
+     * 用于系统版本升级兼容
+     */
+    private long  dataVersion;
+    
+    
 }

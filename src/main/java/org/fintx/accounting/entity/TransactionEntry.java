@@ -35,9 +35,9 @@ import java.time.ZoneOffset;
 @Builder
 public class TransactionEntry {
 
-    private String accountsCodeNo;
+    private String accountCodeNo;
 
-    private String coAccountsCodeNo;
+    private String coAccountCodeNo;
 
     private String customerNo;
 
@@ -174,4 +174,14 @@ public class TransactionEntry {
      * DAC: Data Anti Change
      */
     private String checksum;
+    
+    /*
+     * Version for Account update
+     */
+    private short version;
+    
+    /*
+     * Version for Optimistic locking
+     */
+    private long dataVersion;
 }

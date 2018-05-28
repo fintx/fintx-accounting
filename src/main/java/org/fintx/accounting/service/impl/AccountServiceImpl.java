@@ -6,7 +6,7 @@ import org.fintx.accounting.constant.Operator;
 import org.fintx.accounting.constant.TransactionFlag;
 import org.fintx.accounting.constant.TransactionSymbol;
 import org.fintx.accounting.entity.Account;
-import org.fintx.accounting.entity.CodeOfLedger;
+import org.fintx.accounting.entity.AccountCode;
 import org.fintx.accounting.entity.CustomerAccountNo;
 import org.fintx.accounting.entity.OperationEntry;
 import org.fintx.accounting.entity.TransactionEntry;
@@ -114,7 +114,7 @@ public class AccountServiceImpl implements AccountService {
         BigDecimal drBalance = currentAccount.getDrBalance();
         BigDecimal crBalance = currentAccount.getCrBalance();
         entry.setBalanceAccum(new BigDecimal("0.00"));
-        Operator operator = getOperatorBySymbolAndSide(entry.getSymbol(), codeOfAccountsRepo.getByAccountsCodeNo(entry.getAccountsCodeNo()).getAccountsSide());
+        Operator operator = getOperatorBySymbolAndSide(entry.getSymbol(), codeOfAccountsRepo.getByAccountsCodeNo(entry.getAccountCodeNo()).getAccountSide());
 
         // 处理冻结金额为负的情况，负数的冻结金额是异常情况，但是不影响交易
         if (frozenAmt.compareTo(BigDecimal.ZERO) < 0) {
@@ -264,7 +264,7 @@ public class AccountServiceImpl implements AccountService {
                 latestCoreMap.put("detail", latestDetail);
                 transactionEntryRepo.recordDetailAccount(latestCoreMap);
                 Map<String, Object> latestAcctTitleMap = new HashMap<String, Object>();
-                latestAcctTitleMap.put("tableName", "t_det_" + latestDetail.getAccountsCodeNo());
+                latestAcctTitleMap.put("tableName", "t_det_" + latestDetail.getAccountCodeNo());
                 latestAcctTitleMap.put("detail", latestDetail);
                 transactionEntryRepo.recordDetailAccount(latestAcctTitleMap);
                 entry.setBalance(newLastBal);// 计入昨天的流水余额为昨日余额最终值
