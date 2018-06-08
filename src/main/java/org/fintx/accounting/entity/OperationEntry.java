@@ -15,7 +15,7 @@
  */
 package org.fintx.accounting.entity;
 
-import org.fintx.accounting.constant.OperationSymbol;
+import org.fintx.accounting.constant.OperationSymbolEnum;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -47,7 +47,7 @@ public class OperationEntry {
 
     private String operationDate;
 
-    private OperationSymbol operationSymbol;
+    private OperationSymbolEnum operationSymbol;
 
     private String originbusinessId;
     private String originbusinessDate;

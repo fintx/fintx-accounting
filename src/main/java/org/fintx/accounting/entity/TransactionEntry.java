@@ -15,8 +15,8 @@
  */
 package org.fintx.accounting.entity;
 
-import org.fintx.accounting.constant.TransactionFlag;
-import org.fintx.accounting.constant.TransactionSymbol;
+import org.fintx.accounting.constant.TransactionFlagEnum;
+import org.fintx.accounting.constant.TransactionSymbolEnum;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -73,12 +73,12 @@ public class TransactionEntry {
     /*
      * record cancel flash 记账/抹账/冲账
      */
-    private TransactionFlag flag;
+    private TransactionFlagEnum flag;
 
     /*
      * dr:debit record/cr:credit record/rr:receipt record/pr:payment record 借/贷/收/付
      */
-    private TransactionSymbol symbol;
+    private TransactionSymbolEnum symbol;
     /*
      * is this accounting entry effective to account
      */

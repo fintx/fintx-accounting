@@ -1,8 +1,8 @@
 package org.fintx.accounting.service.impl;
 
-import org.fintx.accounting.constant.OperationSymbol;
-import org.fintx.accounting.constant.TransactionFlag;
-import org.fintx.accounting.constant.TransactionSymbol;
+import org.fintx.accounting.constant.OperationSymbolEnum;
+import org.fintx.accounting.constant.TransactionFlagEnum;
+import org.fintx.accounting.constant.TransactionSymbolEnum;
 import org.fintx.accounting.entity.Account;
 import org.fintx.accounting.entity.Ledger;
 import org.fintx.accounting.entity.OperationEntry;
@@ -99,13 +99,13 @@ public class AccountingServiceImpl implements AccountingService {
     }
 
     @Override
-    public List<TransactionEntry> auditTransaction(String accountsNo, LocalDate date, String accountNo, TransactionFlag[] flag, TransactionSymbol[] symbol,
+    public List<TransactionEntry> auditTransaction(String accountsNo, LocalDate date, String accountNo, TransactionFlagEnum[] flag, TransactionSymbolEnum[] symbol,
             String businessId) {
         return accountService.getTransactions(accountsNo, date, accountNo, flag, symbol, businessId);
     }
 
     @Override
-    public List<OperationEntry> auditOperation(String accountsNo, LocalDate date, String accountNo, OperationSymbol[] symbol, String businessId) {
+    public List<OperationEntry> auditOperation(String accountsNo, LocalDate date, String accountNo, OperationSymbolEnum[] symbol, String businessId) {
         return accountService.getOperations(accountsNo, date, accountNo, symbol, businessId);
     }
 

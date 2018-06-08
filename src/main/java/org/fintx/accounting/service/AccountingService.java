@@ -15,9 +15,9 @@
  */
 package org.fintx.accounting.service;
 
-import org.fintx.accounting.constant.OperationSymbol;
-import org.fintx.accounting.constant.TransactionFlag;
-import org.fintx.accounting.constant.TransactionSymbol;
+import org.fintx.accounting.constant.OperationSymbolEnum;
+import org.fintx.accounting.constant.TransactionFlagEnum;
+import org.fintx.accounting.constant.TransactionSymbolEnum;
 import org.fintx.accounting.entity.Account;
 import org.fintx.accounting.entity.Ledger;
 import org.fintx.accounting.entity.OperationEntry;
@@ -56,10 +56,10 @@ public interface AccountingService {
     public Account auditAccount(@Nonnull final String accountsNo, @Nonnull final String accountNo);
 
     public List<TransactionEntry> auditTransaction(@Nonnull final String accountsNo, @Nonnull final LocalDate date, final String accountNo,
-            final TransactionFlag[] flag, final TransactionSymbol[] symbol, final String businessId);
+            final TransactionFlagEnum[] flag, final TransactionSymbolEnum[] symbol, final String businessId);
 
     public List<OperationEntry> auditOperation(@Nonnull final String accountsNo, @Nonnull final LocalDate date, final String accountNo,
-            final OperationSymbol[] symbol, final String businessId);
+            final OperationSymbolEnum[] symbol, final String businessId);
     
     public Ledger auditAccounts(@Nonnull final String accountsNo);
 }

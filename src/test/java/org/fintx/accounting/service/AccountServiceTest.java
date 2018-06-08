@@ -17,9 +17,9 @@ package org.fintx.accounting.service;
 
 import static org.junit.Assert.*;
 
-import org.fintx.accounting.constant.OperationSymbol;
-import org.fintx.accounting.constant.TransactionFlag;
-import org.fintx.accounting.constant.TransactionSymbol;
+import org.fintx.accounting.constant.OperationSymbolEnum;
+import org.fintx.accounting.constant.TransactionFlagEnum;
+import org.fintx.accounting.constant.TransactionSymbolEnum;
 import org.fintx.accounting.entity.Account;
 import org.fintx.accounting.entity.OperationEntry;
 import org.fintx.accounting.entity.TransactionEntry;
@@ -104,8 +104,8 @@ public class AccountServiceTest {
         accountingService.post(transaction);
 
         // audit transaction
-        TransactionFlag[] transflags = { TransactionFlag.RECORD };
-        TransactionSymbol[] transSymbols = { TransactionSymbol.CREDIT };
+        TransactionFlagEnum[] transflags = { TransactionFlagEnum.RECORD };
+        TransactionSymbolEnum[] transSymbols = { TransactionSymbolEnum.CREDIT };
         List<TransactionEntry> transactionEntries =
                 accountingService.auditTransaction(accountsNo,LocalDate.now(), accountNo1,  transflags, transSymbols, voucher.getBusinessId());
 
@@ -118,7 +118,7 @@ public class AccountServiceTest {
         accountingService.post(operation);
 
         // audit operation
-        OperationSymbol[] operSymbols= {OperationSymbol.OPEN,OperationSymbol.CLOSE};
+        OperationSymbolEnum[] operSymbols= {OperationSymbolEnum.OPEN,OperationSymbolEnum.CLOSE};
         List<OperationEntry> operationEntries = accountingService.auditOperation(accountsNo, LocalDate.now(), accountNo3,operSymbols, voucher.getBusinessId());
 
     }

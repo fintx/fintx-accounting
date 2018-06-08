@@ -1,10 +1,10 @@
 package org.fintx.accounting.service.impl;
 
-import org.fintx.accounting.constant.AccountsSide;
-import org.fintx.accounting.constant.OperationSymbol;
-import org.fintx.accounting.constant.Operator;
-import org.fintx.accounting.constant.TransactionFlag;
-import org.fintx.accounting.constant.TransactionSymbol;
+import org.fintx.accounting.constant.AccountsSideEnum;
+import org.fintx.accounting.constant.OperationSymbolEnum;
+import org.fintx.accounting.constant.OperatorEnum;
+import org.fintx.accounting.constant.TransactionFlagEnum;
+import org.fintx.accounting.constant.TransactionSymbolEnum;
 import org.fintx.accounting.entity.Account;
 import org.fintx.accounting.entity.AccountCode;
 import org.fintx.accounting.entity.CustomerAccountNo;
@@ -80,14 +80,14 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public List<TransactionEntry> getTransactions(String accountsNo, LocalDate date, String accountNo, TransactionFlag[] flag, TransactionSymbol[] symbol,
+    public List<TransactionEntry> getTransactions(String accountsNo, LocalDate date, String accountNo, TransactionFlagEnum[] flag, TransactionSymbolEnum[] symbol,
             String businessId) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public List<OperationEntry> getOperations(String accountsNo, LocalDate date, String accountNo, OperationSymbol[] symbol, String businessId) {
+    public List<OperationEntry> getOperations(String accountsNo, LocalDate date, String accountNo, OperationSymbolEnum[] symbol, String businessId) {
         // TODO Auto-generated method stub
         return null;
     }
@@ -114,14 +114,14 @@ public class AccountServiceImpl implements AccountService {
         BigDecimal drBalance = currentAccount.getDrBalance();
         BigDecimal crBalance = currentAccount.getCrBalance();
         entry.setBalanceAccum(new BigDecimal("0.00"));
-        Operator operator = getOperatorBySymbolAndSide(entry.getSymbol(), codeOfAccountsRepo.getByAccountsCodeNo(entry.getAccountCodeNo()).getAccountSide());
+        OperatorEnum operator = getOperatorBySymbolAndSide(entry.getSymbol(), codeOfAccountsRepo.getByAccountsCodeNo(entry.getAccountCodeNo()).getAccountSide());
 
         // 处理冻结金额为负的情况，负数的冻结金额是异常情况，但是不影响交易
         if (frozenAmt.compareTo(BigDecimal.ZERO) < 0) {
             frozenAmt = new BigDecimal("0.00");
         }
         // 判断余额是加还是减，加负和减的时候要判断余额是否充足
-        if (Operator.PLUS.equals(operator)) {
+        if (OperatorEnum.PLUS.equals(operator)) {
             // 冲正的情况交易金额为负数，此时要检查余额是否足够冲正
             if (txnAmt.compareTo(BigDecimal.ZERO) < 0) {
                 // 先判断余额是否足够做交易,并且标志不允许余额为负
@@ -133,7 +133,7 @@ public class AccountServiceImpl implements AccountService {
                 }
             }
             newBalance = balance.add(txnAmt);// 余额加交易金额
-        } else if (Operator.MINUS.equals(operator)) {
+        } else if (OperatorEnum.MINUS.equals(operator)) {
             // 先判断余额是否足够做交易,并且标志不允许余额为负
             if (balance.subtract(frozenAmt).subtract(txnAmt).compareTo(BigDecimal.ZERO) < 0 && "1".equals(currentAccount.getAccountCtrl().substring(2, 3))) {
                 // 余额不足做交易，返回
@@ -160,7 +160,7 @@ public class AccountServiceImpl implements AccountService {
                 account.setBalance(newBalance);
                 // 冻结金额不变
                 // accountA.setFrozenamt(frozenAmt);
-                if (TransactionSymbol.DEBIT.equals(entry.getSymbol())) {
+                if (TransactionSymbolEnum.DEBIT.equals(entry.getSymbol())) {
                     // accountA.setDrTransAmt(drTxnAmt);
                     account.setDrTransAmt(txnAmt);
                     account.setCrTransAmt(BigDecimal.ZERO);
@@ -181,7 +181,7 @@ public class AccountServiceImpl implements AccountService {
                 account.setLatestTransDate(txnDate);
                 account.setBalance(newBalance);
 
-                if (TransactionSymbol.DEBIT.equals(entry.getSymbol())) {
+                if (TransactionSymbolEnum.DEBIT.equals(entry.getSymbol())) {
                     account.setDrTransAmt(txnAmt);
                     account.setCrTransAmt(BigDecimal.ZERO);
                     account.setDrBalance(currentAccount.getDrBalance().add(txnAmt));
@@ -193,7 +193,7 @@ public class AccountServiceImpl implements AccountService {
                 }
             } else if (latestTxnDate.until(txnDate).getDays() == 0) {// Dates.getDayGap(latestTxnDate, txnDate) 上次交易日期为同日，交易不是当天第一笔，交易金额累计进借方或贷方发生额
                 account.setBalance(newBalance);
-                if (TransactionSymbol.DEBIT.equals(entry.getSymbol())) {
+                if (TransactionSymbolEnum.DEBIT.equals(entry.getSymbol())) {
                     account.setDrTransAmt(drTxnAmt.add(txnAmt));
                     account.setDrBalance(currentAccount.getDrBalance().add(txnAmt));
                 } else {
@@ -212,7 +212,7 @@ public class AccountServiceImpl implements AccountService {
                 // lastFrozenAmt = new BigDecimal("0.00");
                 // }
                 BigDecimal lastBal = currentAccount.getLastBalance();
-                if (Operator.PLUS.equals(operator)) {
+                if (OperatorEnum.PLUS.equals(operator)) {
                     // 冲正的情况交易金额为负数，此时要检查余额是否足够冲正
                     if (txnAmt.compareTo(BigDecimal.ZERO) < 0) {
                         // 检查昨日余额，并且账户不允许透支,断昨日余额是否足够做交易
@@ -240,7 +240,7 @@ public class AccountServiceImpl implements AccountService {
 
                 BigDecimal lastDrTxnAmt = currentAccount.getLastDrTransAmt();
                 BigDecimal lastCrTxnAmt = currentAccount.getLastCrTransAmt();
-                if (TransactionSymbol.DEBIT.equals(entry.getSymbol())) {
+                if (TransactionSymbolEnum.DEBIT.equals(entry.getSymbol())) {
                     account.setLastDrTransAmt(lastDrTxnAmt.add(txnAmt));
                     account.setLastDrBalance(currentAccount.getLastDrBalance().add(txnAmt));
                 } else {
@@ -333,24 +333,24 @@ public class AccountServiceImpl implements AccountService {
      * @param side AccountSide
      * @return Operator the plus or minus
      */
-    private Operator getOperatorBySymbolAndSide(TransactionSymbol symbol, AccountsSide side) {
-        if (symbol.equals(TransactionSymbol.DEBIT)) {
-            if (side.equals(AccountsSide.DEBTOR)) {
-                return Operator.PLUS;
+    private OperatorEnum getOperatorBySymbolAndSide(TransactionSymbolEnum symbol, AccountsSideEnum side) {
+        if (symbol.equals(TransactionSymbolEnum.DEBIT)) {
+            if (side.equals(AccountsSideEnum.DEBTOR)) {
+                return OperatorEnum.PLUS;
             } else {
-                return Operator.MINUS;
+                return OperatorEnum.MINUS;
             }
 
-        } else if (symbol.equals(TransactionSymbol.CREDIT)) {
-            if (side.equals(AccountsSide.CREDITOR)) {
-                return Operator.PLUS;
+        } else if (symbol.equals(TransactionSymbolEnum.CREDIT)) {
+            if (side.equals(AccountsSideEnum.CREDITOR)) {
+                return OperatorEnum.PLUS;
             } else {
-                return Operator.MINUS;
+                return OperatorEnum.MINUS;
             }
-        } else if (symbol.equals(TransactionSymbol.RECEIPT)) {
-            return Operator.PLUS;
+        } else if (symbol.equals(TransactionSymbolEnum.RECEIPT)) {
+            return OperatorEnum.PLUS;
         } else {
-            return Operator.MINUS;
+            return OperatorEnum.MINUS;
         }
     }
 

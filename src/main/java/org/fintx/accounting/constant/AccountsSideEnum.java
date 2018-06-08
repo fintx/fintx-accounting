@@ -2,11 +2,12 @@ package org.fintx.accounting.constant;
 
 import org.fintx.lang.Codeable;
 
-public enum OperationSymbol  implements Codeable<Integer> {
-    OPEN(1),CLOSE(2), FREEZE(3),RELEASE(4),CONTROL(5),LOCK(6),FREE(7);
+public enum AccountsSideEnum implements Codeable<Integer> {
+    DEBTOR(1), CREDITOR(2),NONE(3);
+    
     private Integer code;
 
-    private OperationSymbol(Integer code) {
+    private AccountsSideEnum(Integer code) {
         this.code = code;
     }
 

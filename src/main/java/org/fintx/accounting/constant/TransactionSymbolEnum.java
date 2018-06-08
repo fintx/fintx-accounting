@@ -2,11 +2,11 @@ package org.fintx.accounting.constant;
 
 import org.fintx.lang.Codeable;
 
-public enum AccountsLevel implements Codeable<Integer> {
-    ONE(1), TWO(2), THREE(3);
+public enum TransactionSymbolEnum  implements Codeable<Integer>{
+    DEBIT(1), CREDIT(2), RECEIPT(3), PAY(4);
     private Integer code;
 
-    private AccountsLevel(Integer code) {
+    private TransactionSymbolEnum(Integer code) {
         this.code = code;
     }
 

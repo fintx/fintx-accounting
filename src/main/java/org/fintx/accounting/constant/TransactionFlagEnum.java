@@ -2,12 +2,11 @@ package org.fintx.accounting.constant;
 
 import org.fintx.lang.Codeable;
 
-public enum AccountsSide implements Codeable<Integer> {
-    DEBTOR(1), CREDITOR(2),NONE(3);
-    
+public enum TransactionFlagEnum  implements Codeable<Integer> {
+    RECORD(1), CANCEL(2), FLASH(3);
     private Integer code;
 
-    private AccountsSide(Integer code) {
+    private TransactionFlagEnum(Integer code) {
         this.code = code;
     }
 

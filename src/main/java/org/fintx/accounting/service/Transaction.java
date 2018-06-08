@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.fintx.accounting.constant.TransactionFlag;
+import org.fintx.accounting.constant.TransactionFlagEnum;
 import org.fintx.accounting.entity.TransactionEntry;
 import org.fintx.accounting.entity.Voucher;
 import org.fintx.accounting.util.Ids;
@@ -48,7 +48,7 @@ public class Transaction {
     /*
      * 1 post 记账 1 flash 冲账 2 cancel 抹账
      */
-    private TransactionFlag transactionflag = TransactionFlag.RECORD;
+    private TransactionFlagEnum transactionflag = TransactionFlagEnum.RECORD;
     private ArrayList<TransactionEntry> creditEntries;
     private ArrayList<TransactionEntry> debitEntries;
     private ArrayList<TransactionEntry> receiptEntries;
@@ -145,7 +145,7 @@ public class Transaction {
         /*
          * if transactionDate is different with voucher's businessDate
          */
-        public Builder transactionFlag(TransactionFlag transactionFlag) {
+        public Builder transactionFlag(TransactionFlagEnum transactionFlag) {
             return this;
         }
 

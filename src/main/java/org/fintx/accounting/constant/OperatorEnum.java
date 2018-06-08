@@ -1,6 +1,6 @@
 package org.fintx.accounting.constant;
 
-public enum Operator {
+public enum OperatorEnum {
     PLUS, MINUS;
 
 }

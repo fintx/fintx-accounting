@@ -19,7 +19,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import org.fintx.accounting.constant.OperationSymbol;
+import org.fintx.accounting.constant.OperationSymbolEnum;
 import org.fintx.accounting.entity.OperationEntry;
 import org.fintx.util.UniqueId;
 
@@ -43,7 +43,7 @@ public class Operation {
     private String businessId;
     
    
-    private OperationSymbol operationflag;
+    private OperationSymbolEnum operationflag;
 
     private ArrayList<OperationEntry> closeAcctEntrys;
     private ArrayList<OperationEntry> openAcctEntrys;
@@ -141,7 +141,7 @@ public class Operation {
         /*
          * if operationFlag is not post
          */
-        public Builder operationFlag(OperationSymbol operationFlag) {
+        public Builder operationFlag(OperationSymbolEnum operationFlag) {
             return this;
         }
 
