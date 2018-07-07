@@ -114,13 +114,13 @@ public class Account {
 
     private BigDecimal lastCrBalance;
 
-    private BigDecimal drTransAmt;
+    private BigDecimal drTransactionAmt;
 
-    private BigDecimal lastDrTransAmt;
+    private BigDecimal lastDrTransactionAmt;
 
-    private BigDecimal crTransAmt;
+    private BigDecimal crTransactionAmt;
 
-    private BigDecimal lastCrTransAmt;
+    private BigDecimal lastCrTransactionAmt;
 
     //Calculate the interest is a business!
     //private BigDecimal rate;
@@ -130,13 +130,14 @@ public class Account {
  * 甲 乙 丙  丁
  */
     private String accountType;
-    private LocalDate latestTransDate;
+    private LocalDate latestTransactionDate;
     
     /**
      * 记录最后一次持久化的 交易ID 未来可用于把account做为内存对象，定期持久化
+     * 与transactionId做偏向锁的功能合并，因为两种方式不会同时使用
      */
     
-    private String latestTransId;
+    //private String latestTransactionId;
     /*
      * move to accountctrl // 销账类型 // 1-一次销账 2-多次销账 private String writeOffType;
      */
@@ -150,9 +151,9 @@ public class Account {
     private int ZoneOffset;
     
     /**
-     * 当前transId
+     * 当前transactionId，用于偏向锁，与latestTransactionId应该可以合并
      */
-    private String transId;
+    private String transactionId;
 
     /*
      * extend column
@@ -173,7 +174,7 @@ public class Account {
     private short  version;
     
     /**
-     * 用于系统版本升级兼容
+     * 用于乐观事务锁？？与
      */
     private long  transaction_version;
     
