@@ -134,7 +134,7 @@ public class Account {
     
     /**
      * 记录最后一次持久化的 交易ID 未来可用于把account做为内存对象，定期持久化
-     * 与transactionId做偏向锁的功能合并，因为两种方式不会同时使用
+     * 与transactionId做偏向锁的功能合并，因为做内存对象时使用本地锁，不会需要持久化偏向事务ID
      */
     
     //private String latestTransactionId;
@@ -151,7 +151,8 @@ public class Account {
     private int ZoneOffset;
     
     /**
-     * 当前transactionId，用于偏向锁，与latestTransactionId应该可以合并
+     * 1记录当前transactionId，用于偏向锁，
+     * 2当账户使用内存对象（领域对象）时用于记录最后一次持久化时的事务ID，用于应用异常终止时的数据快速恢复
      */
     private String transactionId;
 
@@ -174,7 +175,7 @@ public class Account {
     private short  version;
     
     /**
-     * 用于乐观事务锁？？与
+     * 用于乐观事务锁？？可虑是否还可以与
      */
     private long  transaction_version;
     
