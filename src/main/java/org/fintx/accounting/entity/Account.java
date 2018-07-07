@@ -40,7 +40,7 @@ public class Account {
     // 设有借方、贷方发生额和借方、贷方余额四栏，适用于借、贷双方反映余额的存贷往来账户。
     // 丁种账
     // 设有借方、贷方发生额、余额和销账四栏，适用于逐笔销账的一次性业务，并兼有分户核算作用的账户。
-    private String accountsCodeNo;
+    private String accountCodeNo;
 
     private String organizationNo;
     
@@ -149,7 +149,10 @@ public class Account {
     
     private int ZoneOffset;
     
-    private String lockKey;
+    /**
+     * 当前transId
+     */
+    private String transId;
 
     /*
      * extend column
@@ -172,7 +175,7 @@ public class Account {
     /**
      * 用于系统版本升级兼容
      */
-    private long  dataVersion;
+    private long  transaction_version;
     
     
 }
