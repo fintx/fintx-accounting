@@ -107,10 +107,10 @@ public class AccountServiceImpl implements AccountService {
         BigDecimal balance = currentAccount.getBalance();
         BigDecimal frozenAmt = currentAccount.getFrozenAmt();
         BigDecimal newBalance = new BigDecimal("0.00");
-        LocalDate latestTxnDate = currentAccount.getLatestTransDate();// 最终交易日期
+        LocalDate latestTxnDate = currentAccount.getLatestTransactionDate();// 最终交易日期
         BigDecimal txnAmt = entry.getAmount();// 交易金额
-        BigDecimal drTxnAmt = currentAccount.getDrTransAmt();// 借发生额
-        BigDecimal crTxnAmt = currentAccount.getCrTransAmt();// 贷发生额
+        BigDecimal drTxnAmt = currentAccount.getDrTransactionAmt();// 借发生额
+        BigDecimal crTxnAmt = currentAccount.getCrTransactionAmt();// 贷发生额
         BigDecimal drBalance = currentAccount.getDrBalance();
         BigDecimal crBalance = currentAccount.getCrBalance();
         entry.setBalanceAccum(new BigDecimal("0.00"));
@@ -153,22 +153,22 @@ public class AccountServiceImpl implements AccountService {
                                                                // 上次交易日期是账期前一天，借贷发生额抄到昨日借贷发生额，冻结金额抄录到昨日冻结金额，冻结金额不变，交易为今天此账户第一笔交易,借方或贷方发生额为交易金额
                 account.setLastBalance(balance);
                 account.setLastDrBalance(drBalance);
-                account.setLastDrTransAmt(drTxnAmt);
+                account.setLastDrTransactionAmt(drTxnAmt);
                 account.setLastCrBalance(crBalance);
-                account.setLastCrTransAmt(crTxnAmt);
-                account.setLatestTransDate(txnDate);
+                account.setLastCrTransactionAmt(crTxnAmt);
+                account.setLatestTransactionDate(txnDate);
                 account.setBalance(newBalance);
                 // 冻结金额不变
                 // accountA.setFrozenamt(frozenAmt);
                 if (TransactionSymbolEnum.DEBIT.equals(entry.getSymbol())) {
                     // accountA.setDrTransAmt(drTxnAmt);
-                    account.setDrTransAmt(txnAmt);
-                    account.setCrTransAmt(BigDecimal.ZERO);
+                    account.setDrTransactionAmt(txnAmt);
+                    account.setCrTransactionAmt(BigDecimal.ZERO);
                     account.setDrBalance(currentAccount.getDrBalance().add(txnAmt));
                 } else {
-                    account.setDrTransAmt(BigDecimal.ZERO);
+                    account.setDrTransactionAmt(BigDecimal.ZERO);
                     // accountA.setCrTransAmt(crTxnAmt);
-                    account.setCrTransAmt(txnAmt);
+                    account.setCrTransactionAmt(txnAmt);
                     // 不变
                     // accountA.setDrBalance(bean.getDrBalance());
                 }
@@ -176,28 +176,28 @@ public class AccountServiceImpl implements AccountService {
                                                                     // 上次交易日期在账期前一天之前，昨日借贷发生额清零，冻结金额抄录到昨日冻结金额，交易为今天此账户第一笔交易,借方或贷方发生额为交易金额
                 account.setLastBalance(balance);
                 account.setLastDrBalance(drBalance);
-                account.setLastDrTransAmt(BigDecimal.ZERO);
-                account.setLastCrTransAmt(BigDecimal.ZERO);
-                account.setLatestTransDate(txnDate);
+                account.setLastDrTransactionAmt(BigDecimal.ZERO);
+                account.setLastCrTransactionAmt(BigDecimal.ZERO);
+                account.setLatestTransactionDate(txnDate);
                 account.setBalance(newBalance);
 
                 if (TransactionSymbolEnum.DEBIT.equals(entry.getSymbol())) {
-                    account.setDrTransAmt(txnAmt);
-                    account.setCrTransAmt(BigDecimal.ZERO);
+                    account.setDrTransactionAmt(txnAmt);
+                    account.setCrTransactionAmt(BigDecimal.ZERO);
                     account.setDrBalance(currentAccount.getDrBalance().add(txnAmt));
                 } else {
-                    account.setDrTransAmt(BigDecimal.ZERO);
-                    account.setCrTransAmt(txnAmt);
+                    account.setDrTransactionAmt(BigDecimal.ZERO);
+                    account.setCrTransactionAmt(txnAmt);
                     // 不变
                     // accountA.setDrBalance(bean.getDrBalance());
                 }
             } else if (latestTxnDate.until(txnDate).getDays() == 0) {// Dates.getDayGap(latestTxnDate, txnDate) 上次交易日期为同日，交易不是当天第一笔，交易金额累计进借方或贷方发生额
                 account.setBalance(newBalance);
                 if (TransactionSymbolEnum.DEBIT.equals(entry.getSymbol())) {
-                    account.setDrTransAmt(drTxnAmt.add(txnAmt));
+                    account.setDrTransactionAmt(drTxnAmt.add(txnAmt));
                     account.setDrBalance(currentAccount.getDrBalance().add(txnAmt));
                 } else {
-                    account.setCrTransAmt(crTxnAmt.add(txnAmt));
+                    account.setCrTransactionAmt(crTxnAmt.add(txnAmt));
                     // 不变
                     // accountA.setDrBalance(bean.getDrBalance());
                 }
@@ -238,13 +238,13 @@ public class AccountServiceImpl implements AccountService {
 
                 account.setLastBalance(newLastBal);
 
-                BigDecimal lastDrTxnAmt = currentAccount.getLastDrTransAmt();
-                BigDecimal lastCrTxnAmt = currentAccount.getLastCrTransAmt();
+                BigDecimal lastDrTxnAmt = currentAccount.getLastDrTransactionAmt();
+                BigDecimal lastCrTxnAmt = currentAccount.getLastCrTransactionAmt();
                 if (TransactionSymbolEnum.DEBIT.equals(entry.getSymbol())) {
-                    account.setLastDrTransAmt(lastDrTxnAmt.add(txnAmt));
+                    account.setLastDrTransactionAmt(lastDrTxnAmt.add(txnAmt));
                     account.setLastDrBalance(currentAccount.getLastDrBalance().add(txnAmt));
                 } else {
-                    account.setLastCrTransAmt(lastCrTxnAmt.add(txnAmt));
+                    account.setLastCrTransactionAmt(lastCrTxnAmt.add(txnAmt));
                     // 不变
                     // accountA.setDrBalance(bean.getDrBalance());
                 }
