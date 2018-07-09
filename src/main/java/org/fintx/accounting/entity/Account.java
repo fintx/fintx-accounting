@@ -153,6 +153,7 @@ public class Account {
     /**
      * 1记录当前transactionId，用于偏向锁，
      * 2当账户使用内存对象（领域对象）时用于记录最后一次持久化时的事务ID，用于应用异常终止时的数据快速恢复
+     * 3前两种情况不会同时使用
      */
     private String transactionId;
 
@@ -175,7 +176,7 @@ public class Account {
     private short  version;
     
     /**
-     * 用于乐观事务锁？？可虑是否还可以与
+     * 用于乐观事务锁？？可虑是否还可以与transactionId合并
      */
     private long  transaction_version;
     
