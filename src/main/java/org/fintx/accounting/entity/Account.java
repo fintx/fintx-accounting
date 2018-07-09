@@ -45,9 +45,9 @@ public class Account {
     private String organizationNo;
     
     /**
-     * ?? 业务条线
+     * ?? 业务条线--用于与部门organizationNo网格化管理
      */
-    //private String line;
+    private String businessLine;
 
     private String customerNo;
 
