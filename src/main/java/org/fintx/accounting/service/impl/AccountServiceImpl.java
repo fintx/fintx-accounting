@@ -6,7 +6,7 @@ import org.fintx.accounting.constant.OperatorEnum;
 import org.fintx.accounting.constant.TransactionFlagEnum;
 import org.fintx.accounting.constant.TransactionSymbolEnum;
 import org.fintx.accounting.entity.Account;
-import org.fintx.accounting.entity.AccountCode;
+import org.fintx.accounting.entity.AccountsCode;
 import org.fintx.accounting.entity.CustomerAccountNo;
 import org.fintx.accounting.entity.OperationEntry;
 import org.fintx.accounting.entity.TransactionEntry;
@@ -114,7 +114,7 @@ public class AccountServiceImpl implements AccountService {
         BigDecimal drBalance = currentAccount.getDrBalance();
         BigDecimal crBalance = currentAccount.getCrBalance();
         entry.setBalanceAccum(new BigDecimal("0.00"));
-        OperatorEnum operator = getOperatorBySymbolAndSide(entry.getSymbol(), codeOfAccountsRepo.getByAccountsCodeNo(entry.getAccountCodeNo()).getAccountSide());
+        OperatorEnum operator = getOperatorBySymbolAndSide(entry.getSymbol(), codeOfAccountsRepo.getByAccountsCodeNo(entry.getAccountCodeNo()).getAccountsSide());
 
         // 处理冻结金额为负的情况，负数的冻结金额是异常情况，但是不影响交易
         if (frozenAmt.compareTo(BigDecimal.ZERO) < 0) {

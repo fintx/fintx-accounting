@@ -2,11 +2,11 @@ package org.fintx.accounting.constant;
 
 import org.fintx.lang.Codeable;
 
-public enum AccountOwnerFlagEnum implements Codeable<Integer> {
+public enum AccountsOwnerFlagEnum implements Codeable<Integer> {
     INNER(1), CUSTOMER(2);
     private Integer code;
 
-    private AccountOwnerFlagEnum(Integer code) {
+    private AccountsOwnerFlagEnum(Integer code) {
         this.code = code;
     }
 

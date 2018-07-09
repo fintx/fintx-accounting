@@ -19,7 +19,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import org.fintx.accounting.constant.AccountOwnerFlagEnum;
+import org.fintx.accounting.constant.AccountsOwnerFlagEnum;
 import org.fintx.accounting.constant.OperationSymbolEnum;
 import org.fintx.accounting.entity.OperationEntry;
 import org.fintx.accounting.entity.Voucher;

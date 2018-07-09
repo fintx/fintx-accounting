@@ -1,6 +1,6 @@
 package org.fintx.accounting.entity;
 
-import org.fintx.accounting.constant.AccountOwnerFlagEnum;
+import org.fintx.accounting.constant.AccountsOwnerFlagEnum;
 import org.fintx.accounting.constant.AccountsSideEnum;
 
 import lombok.Getter;
@@ -8,54 +8,54 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class AccountCode {
+public class AccountsCode {
     /**
      * 科目代号
      */
-    private String accountCodeNo;
+    private String accountsCodeNo;
 
     /**
      * 系统科目编码--用于内部科目修改
      */
-    private String accountCode;
+    private String accountsCode;
 
     /**
      * 科目借贷方向
      */
-    private AccountsSideEnum accountSide;
+    private AccountsSideEnum accountsSide;
 
     /**
      * 管理科目编码
      */
-    private String manageAccountCode;
+    private String manageAccountsCode;
 
     /**
      * 账类 01-对私活期 02-对公活期 03-对私定期 04-对公定期 05-拨款、贷款 06-损益 07-现金 08-其他内部帐 09-其他 99-表外
      */
-    private String accountType;
+    private String accountsType;
 
     /**
      * 父科目号
      */
-    private String parentAccountCodeNo;
+    private String parentAccountsCodeNo;
 
     /**
      * 科目级别
      */
-    private String AccountCodeLevel;
+    private String AccountsCodeLevel;
 
     /**
      * 科目控制
      */
-    private String accountControl;
+    private String accountsControl;
     
     
     
-    private AccountOwnerFlagEnum accountOwnerFlag;
+    private AccountsOwnerFlagEnum accountsOwnerFlag;
 
     /**
      * 是否是叶子科目
      */
-    private boolean leafAccountCode;
+    private boolean leafAccountsCode;
 
 }

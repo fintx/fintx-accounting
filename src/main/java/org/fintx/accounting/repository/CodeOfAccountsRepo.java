@@ -2,15 +2,15 @@ package org.fintx.accounting.repository;
 
 import java.util.List;
 
-import org.fintx.accounting.entity.AccountCode;
+import org.fintx.accounting.entity.AccountsCode;
 
 import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CodeOfAccountsRepo {
-    int save(AccountCode record);
+    int save(AccountsCode record);
 
-    AccountCode getByAccountsCodeNo(String accountsCodeNo);
+    AccountsCode getByAccountsCodeNo(String accountsCodeNo);
 
-    List<AccountCode> getAll();
+    List<AccountsCode> getAll();
 }
