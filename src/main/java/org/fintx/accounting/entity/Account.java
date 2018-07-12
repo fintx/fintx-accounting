@@ -15,6 +15,12 @@
  */
 package org.fintx.accounting.entity;
 
+import org.fintx.accounting.constant.AccountStatusEnum;
+import org.fintx.accounting.constant.AccountType;
+import org.fintx.accounting.constant.AccountsOwnerFlagEnum;
+import org.fintx.accounting.constant.AccountsSideEnum;
+import org.fintx.accounting.constant.AccountsType;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -61,16 +67,18 @@ public class Account {
     /**
      * 1 debtor 2 creditor
      */
-    private String accountSide;
+    private AccountsSideEnum accountsSide;
     // 账类
     /**
      * 01-对私活期 02-对公活期 03-对私定期 04-对公定期 05-拨款、贷款 06-损益 07-现金 08-其他内部帐 09-其他 99-表外
      */
-    private String accountingType;
+    private AccountsType accountsType;
     /**
-     * 1 normal 2closed 3locked
+     * 1 normal 2closed 3locked--禁止任何交易
      */
-    private String accountStatus;
+    private AccountStatusEnum accountStatus;
+    
+    private AccountsOwnerFlagEnum accountsOwnerFlag;
 
     
 
@@ -91,7 +99,7 @@ public class Account {
     /*
      * account control characters
      */
-    private String accountCtrl;
+    private String accountCtrl;//??还需要吗
 
     private BigDecimal balance;
 
@@ -129,7 +137,8 @@ public class Account {
 /**
  * 甲 乙 丙  丁
  */
-    private String accountType;
+    private AccountType accountType;
+    
     private LocalDate latestTransactionDate;
     
     /**
