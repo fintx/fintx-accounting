@@ -15,7 +15,7 @@
  */
 package org.fintx.accounting.service;
 
-import org.fintx.accounting.entity.Ledger;
+import org.fintx.accounting.entity.GeneralLedgerAccount;
 
 import java.math.BigDecimal;
 
@@ -26,7 +26,7 @@ import javax.annotation.Nonnull;
  *
  */
 public interface LedgerService {
-    public Ledger get(@Nonnull final String accountsNo);
+    public GeneralLedgerAccount get(@Nonnull final String accountsNo);
     
     public void createDailyAccounts();
 
