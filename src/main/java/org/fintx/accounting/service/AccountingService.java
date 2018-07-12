@@ -42,7 +42,7 @@ public interface AccountingService {
      * @param transaction
      */
     
-    public void post(@Nonnull final Transaction transaction,RestrictionVisitor[] restrictions);
+    public void post(@Nonnull final Transaction transaction,Restriction[] restrictions);
 
     /**
      * use TransactionFlag instead of cancel and flush
@@ -50,7 +50,7 @@ public interface AccountingService {
      */
  
 
-    public void post(@Nonnull final Operation operation,RestrictionVisitor[] restrictions);
+    public void post(@Nonnull final Operation operation,Restriction[] restrictions);
     
 
     public Account auditAccount(@Nonnull final String accountsNo, @Nonnull final String accountNo);

@@ -53,7 +53,7 @@ public class Transaction {
     private ArrayList<TransactionEntry> debitEntries;
     private ArrayList<TransactionEntry> receiptEntries;
     private ArrayList<TransactionEntry> payEntries;
-    private Map<String, RestrictionVisitor> restrictEntries;
+    private Map<String, Restriction> restrictEntries;
 
     // control and buff should be a configuration not a function
     // private ArrayList controlCreditEntrys;
@@ -119,7 +119,7 @@ public class Transaction {
             return this;
         }
 
-        public Builder restrict(@NonNull final String accountNo, @NonNull final RestrictionVisitor res) {
+        public Builder restrict(@NonNull final String accountNo, @NonNull final Restriction res) {
             if (null == transaction.restrictEntries) {
                 transaction.restrictEntries = new HashMap<>(4);
             }

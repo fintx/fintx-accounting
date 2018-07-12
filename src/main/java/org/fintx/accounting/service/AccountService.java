@@ -42,7 +42,7 @@ public interface AccountService {
      * 
      * @param transaction
      */
-    public Account update(@Nonnull final TransactionEntry entry,@Nonnull final RestrictionVisitor res);
+    public Account update(@Nonnull final TransactionEntry entry,@Nonnull final Restriction res);
     
 
     /**
