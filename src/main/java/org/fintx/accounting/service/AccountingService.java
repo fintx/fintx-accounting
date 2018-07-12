@@ -19,7 +19,7 @@ import org.fintx.accounting.constant.OperationSymbolEnum;
 import org.fintx.accounting.constant.TransactionFlagEnum;
 import org.fintx.accounting.constant.TransactionSymbolEnum;
 import org.fintx.accounting.entity.Account;
-import org.fintx.accounting.entity.Ledger;
+import org.fintx.accounting.entity.GeneralLedgerAccount;
 import org.fintx.accounting.entity.OperationEntry;
 import org.fintx.accounting.entity.TransactionEntry;
 
@@ -42,7 +42,7 @@ public interface AccountingService {
      * @param transaction
      */
     
-    public void post(@Nonnull final Transaction transaction);
+    public void post(@Nonnull final Transaction transaction,RestrictionVisitor[] restrictions);
 
     /**
      * use TransactionFlag instead of cancel and flush
@@ -50,7 +50,7 @@ public interface AccountingService {
      */
  
 
-    public void post(@Nonnull final Operation operation);
+    public void post(@Nonnull final Operation operation,RestrictionVisitor[] restrictions);
     
 
     public Account auditAccount(@Nonnull final String accountsNo, @Nonnull final String accountNo);
@@ -61,5 +61,5 @@ public interface AccountingService {
     public List<OperationEntry> auditOperation(@Nonnull final String accountsNo, @Nonnull final LocalDate date, final String accountNo,
             final OperationSymbolEnum[] symbol, final String businessId);
     
-    public Ledger auditAccounts(@Nonnull final String accountsNo);
+    public GeneralLedgerAccount auditGeneralLedgerAccount(@Nonnull final String accountsCodeNo);
 }

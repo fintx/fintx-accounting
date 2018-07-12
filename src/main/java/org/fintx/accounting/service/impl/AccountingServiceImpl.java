@@ -4,10 +4,10 @@ import org.fintx.accounting.constant.OperationSymbolEnum;
 import org.fintx.accounting.constant.TransactionFlagEnum;
 import org.fintx.accounting.constant.TransactionSymbolEnum;
 import org.fintx.accounting.entity.Account;
-import org.fintx.accounting.entity.Ledger;
+import org.fintx.accounting.entity.GeneralLedgerAccount;
 import org.fintx.accounting.entity.OperationEntry;
 import org.fintx.accounting.entity.TransactionEntry;
-import org.fintx.accounting.service.Restriction;
+import org.fintx.accounting.service.RestrictionVisitor;
 import org.fintx.accounting.service.AccountNoService;
 import org.fintx.accounting.service.AccountService;
 import org.fintx.accounting.service.AccountingService;
@@ -48,7 +48,7 @@ public class AccountingServiceImpl implements AccountingService {
     public static Boolean check_last_balance = false;
 
     @Override
-    public void post(Transaction trans) {
+    public void post(Transaction trans,RestrictionVisitor[] restrictions) {
         TransactionEntry[] entries = null;
         if (trans.getPayEntries().addAll(trans.getReceiptEntries())) {
             // Sort AccountEentry by accountNo to prevent deadlock
@@ -58,7 +58,7 @@ public class AccountingServiceImpl implements AccountingService {
                 for (TransactionEntry e : entries) {
 //                    // lock the account so the balance can be wipe if there is any exception.
 //                    accountService.lock(e.getAccountNo(), trans.getTransactionId(), true);
-                    Restriction res = trans.getRestrictEntries().get(e.getAccountNo());
+                    RestrictionVisitor res = trans.getRestrictEntries().get(e.getAccountNo());
                     accountService.update(e, res);
                 }
             } catch (Throwable t) {
@@ -88,7 +88,7 @@ public class AccountingServiceImpl implements AccountingService {
     }
 
     @Override
-    public void post(Operation operation) {
+    public void post(Operation operation,RestrictionVisitor[] restrictions) {
         // TODO Auto-generated method stub
 
     }
@@ -113,7 +113,7 @@ public class AccountingServiceImpl implements AccountingService {
      * @see org.fintx.accounting.service.AccountingService#auditAccounts(java.lang.String)
      */
     @Override
-    public Ledger auditAccounts(String accountsNo) {
+    public GeneralLedgerAccount auditGeneralLedgerAccount(String accountsNo) {
         return accountsService.get(accountsNo);
     }
 }
