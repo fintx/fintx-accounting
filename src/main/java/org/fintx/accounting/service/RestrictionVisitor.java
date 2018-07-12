@@ -15,7 +15,6 @@
  */
 package org.fintx.accounting.service;
 
-import lombok.Builder;
 
 import java.math.BigDecimal;
 
@@ -23,32 +22,33 @@ import java.math.BigDecimal;
  * @author bluecreator(qiang.x.wang@gmail.com)
  *
  */
-@Builder(builderClassName="Builder")
-public class Restriction {
-    /**
-     * 透支限制-->使用MinBalanceLimit
-     */
-    //private BigDecimal overdraftLimit;
-    /**
-     * 借发生额限制，如每天累计买入不超过5万
-     */
-    private BigDecimal drTransAmtLimit;
-    /**
-     * 借发生额限制，如每天累计买入不超过5万
-     */
-    private BigDecimal crTransAmtLimit;
-    /**
-     * ？？发生额限制
-     */
-    private BigDecimal transAmtLimit;
-
-    /**
-     * 余额额限制，如小额账户
-     */
-    private BigDecimal MaxBalanceLimit;
-    /**
-     * 余额额限制，如小额账户
-     */
-    private BigDecimal MinBalanceLimit;
+public interface RestrictionVisitor<P,T> {
+//    /**
+//     * 透支限制-->使用MinBalanceLimit
+//     */
+//    //private BigDecimal overdraftLimit;
+//    /**
+//     * 借发生额限制，如每天累计买入不超过5万
+//     */
+//    private BigDecimal drTransAmtLimit;
+//    /**
+//     * 借发生额限制，如每天累计买入不超过5万
+//     */
+//    private BigDecimal crTransAmtLimit;
+//    /**
+//     * ？？发生额限制
+//     */
+//    private BigDecimal transAmtLimit;
+//
+//    /**
+//     * 余额额限制，如小额账户
+//     */
+//    private BigDecimal MaxBalanceLimit;
+//    /**
+//     * 余额额限制，如小额账户
+//     */
+//    private BigDecimal MinBalanceLimit;
+    
+    public Boolean restrict(P parameter,T target);
 
 }
