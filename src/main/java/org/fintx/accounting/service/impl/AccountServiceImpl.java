@@ -18,7 +18,7 @@ import org.fintx.accounting.repository.InnerAccountNoRepo;
 import org.fintx.accounting.repository.InnerAccountSnRepo;
 import org.fintx.accounting.repository.OperationEntryRepo;
 import org.fintx.accounting.repository.TransactionEntryRepo;
-import org.fintx.accounting.service.Restriction;
+import org.fintx.accounting.service.RestrictionVisitor;
 import org.fintx.accounting.service.AccountService;
 import org.fintx.accounting.service.Operation;
 import org.fintx.accounting.service.Transaction;
@@ -92,7 +92,7 @@ public class AccountServiceImpl implements AccountService {
         return null;
     }
 
-    public Account update(TransactionEntry entry,Restriction res) {
+    public Account update(TransactionEntry entry,RestrictionVisitor res) {
         // TODO 余额为负时，冲正报余额不足
         LocalDate txnDate = entry.getTransactionDate();// 渠道账期
 
