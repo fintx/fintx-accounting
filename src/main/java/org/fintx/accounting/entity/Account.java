@@ -187,7 +187,7 @@ public class Account {
     /**
      * 用于乐观事务锁？？可虑是否还可以与transactionId合并
      */
-    private long  transaction_version;
+    private long  transactionVersion;
     
     
 }
