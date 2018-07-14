@@ -16,6 +16,9 @@
 package org.fintx.accounting.service;
 
 
+import lombok.Builder;
+import lombok.Getter;
+
 import java.math.BigDecimal;
 
 /**
@@ -23,6 +26,8 @@ import java.math.BigDecimal;
  *
  */
 //TODO 改成属性名，金额，> < =的列表？
+@Getter
+@Builder
 public class Restriction {
     /**
      * 透支限制-->使用MinBalanceLimit
