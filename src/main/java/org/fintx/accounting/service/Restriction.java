@@ -22,6 +22,7 @@ import java.math.BigDecimal;
  * @author bluecreator(qiang.x.wang@gmail.com)
  *
  */
+//TODO 改成属性名，金额，> < =的列表？
 public class Restriction {
     /**
      * 透支限制-->使用MinBalanceLimit
