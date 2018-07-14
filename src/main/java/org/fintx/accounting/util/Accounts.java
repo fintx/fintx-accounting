@@ -1,6 +1,6 @@
 package org.fintx.accounting.util;
 
-public class AccountUtil {
+public class Accounts {
 
     /**
      * Parse code of accounts number from account nnumber
