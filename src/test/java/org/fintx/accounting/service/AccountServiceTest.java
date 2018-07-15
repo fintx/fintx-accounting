@@ -67,7 +67,7 @@ public class AccountServiceTest {
         String customerNo = "120222";
         String accountNo2 = "1122334455667777";
         String accountNo3 = "1122334455667788";
-        
+
         // build and persist accountNo
         AccountNoSection.Builder accountNoSectionBuilder = AccountNoSection.builder();
         accountNoSectionBuilder.accountsNo(accountsNo);
@@ -85,8 +85,7 @@ public class AccountServiceTest {
         operationBuilder.openCustomer(accountsNo, accountNo1, organizationNo, productNo, customerNo);
         // ...
         Operation operation = operationBuilder.build();
-        accountingService.post(operation,null);
-        
+        accountingService.post(operation, null);
 
         // build voucher
         Voucher.Builder voucherBuilder = Voucher.builder();
@@ -94,20 +93,20 @@ public class AccountServiceTest {
         Voucher voucher = voucherBuilder.build();
 
         // post transaction for associated voucher
-        
+
         Transaction.Builder transactionBuilder = Transaction.builder();
         transactionBuilder.associate(voucher);
         transactionBuilder.credit(accountsNo, accountNo1, new BigDecimal("100.00"));
         transactionBuilder.debit(accountsNo, accountNo2, new BigDecimal("50.00"));
         transactionBuilder.debit(accountsNo, accountNo3, new BigDecimal("50.00"));
         Transaction transaction = transactionBuilder.build();
-        accountingService.post(transaction,null);
+        accountingService.post(transaction, null);
 
         // audit transaction
         TransactionFlagEnum[] transflags = { TransactionFlagEnum.RECORD };
         TransactionSymbolEnum[] transSymbols = { TransactionSymbolEnum.CREDIT };
         List<TransactionEntry> transactionEntries =
-                accountingService.auditTransaction(accountsNo,LocalDate.now(), accountNo1,  transflags, transSymbols, voucher.getBusinessId());
+                accountingService.auditTransaction(accountsNo, LocalDate.now(), accountNo1, transflags, transSymbols, voucher.getBusinessId());
 
         // operate account
         operationBuilder = Operation.builder();
@@ -115,11 +114,11 @@ public class AccountServiceTest {
         operationBuilder.lock(accountsNo, accountNo1, voucher.getBusinessId());
         // ...
         operation = operationBuilder.build();
-        accountingService.post(operation,null);
+        accountingService.post(operation, null);
 
         // audit operation
-        OperationSymbolEnum[] operSymbols= {OperationSymbolEnum.OPEN,OperationSymbolEnum.CLOSE};
-        List<OperationEntry> operationEntries = accountingService.auditOperation(accountsNo, LocalDate.now(), accountNo3,operSymbols, voucher.getBusinessId());
+        OperationSymbolEnum[] operSymbols = { OperationSymbolEnum.OPEN, OperationSymbolEnum.CLOSE };
+        List<OperationEntry> operationEntries = accountingService.auditOperation(accountsNo, LocalDate.now(), accountNo3, operSymbols, voucher.getBusinessId());
 
     }
 

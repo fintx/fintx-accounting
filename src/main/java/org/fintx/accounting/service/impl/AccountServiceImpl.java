@@ -71,8 +71,6 @@ public class AccountServiceImpl implements AccountService {
     // TODO 放入账户控制标识中
     public static Boolean check_last_balance = false;
 
-   
-
     @Override
     public Account get(String accountsNo, String accountNo) {
 
@@ -80,8 +78,8 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public List<TransactionEntry> getTransactions(String accountsNo, LocalDate date, String accountNo, TransactionFlagEnum[] flag, TransactionSymbolEnum[] symbol,
-            String businessId) {
+    public List<TransactionEntry> getTransactions(String accountsNo, LocalDate date, String accountNo, TransactionFlagEnum[] flag,
+            TransactionSymbolEnum[] symbol, String businessId) {
         // TODO Auto-generated method stub
         return null;
     }
@@ -92,7 +90,7 @@ public class AccountServiceImpl implements AccountService {
         return null;
     }
 
-    public Account update(TransactionEntry entry,Restriction res) {
+    public Account update(TransactionEntry entry, Restriction res) {
         // TODO 余额为负时，冲正报余额不足
         LocalDate txnDate = entry.getTransactionDate();// 渠道账期
 
@@ -114,7 +112,8 @@ public class AccountServiceImpl implements AccountService {
         BigDecimal drBalance = currentAccount.getDrBalance();
         BigDecimal crBalance = currentAccount.getCrBalance();
         entry.setBalanceAccum(new BigDecimal("0.00"));
-        OperatorEnum operator = getOperatorBySymbolAndSide(entry.getSymbol(), codeOfAccountsRepo.getByAccountsCodeNo(entry.getAccountCodeNo()).getAccountsSide());
+        OperatorEnum operator =
+                getOperatorBySymbolAndSide(entry.getSymbol(), codeOfAccountsRepo.getByAccountsCodeNo(entry.getAccountCodeNo()).getAccountsSide());
 
         // 处理冻结金额为负的情况，负数的冻结金额是异常情况，但是不影响交易
         if (frozenAmt.compareTo(BigDecimal.ZERO) < 0) {
@@ -305,7 +304,7 @@ public class AccountServiceImpl implements AccountService {
         accountRepo.minusToFrozenAmt(entry.getAmount());
         operationEntryRepo.save(entry);
     }
-    
+
     private void open(OperationEntry entry) {
         accountRepo.minusToFrozenAmt(entry.getAmount());
         operationEntryRepo.save(entry);
@@ -354,21 +353,25 @@ public class AccountServiceImpl implements AccountService {
         }
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see org.fintx.accounting.service.AccountService#wipe(org.fintx.accounting.entity.TransactionEntry)
      */
     @Override
     public void wipe(TransactionEntry entry) {
         // TODO Auto-generated method stub
-        
+
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see org.fintx.accounting.service.AccountService#strike(org.fintx.accounting.entity.TransactionEntry)
      */
     @Override
     public void strike(TransactionEntry entry) {
         // TODO Auto-generated method stub
-        
+
     }
 }

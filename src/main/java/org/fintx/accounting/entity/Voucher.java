@@ -31,7 +31,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-@Builder(builderClassName="Builder")
+@Builder(builderClassName = "Builder")
 public class Voucher {
 
     /**
@@ -42,7 +42,7 @@ public class Voucher {
      * 凭证号码
      */
     private String voucherNo;
-    
+
     /**
      * 凭证Offset
      */
@@ -75,8 +75,7 @@ public class Voucher {
      * 订单日期
      */
     private LocalDate orderDate;
-    
-    
+
     /**
      * 辅助核算项目
      */

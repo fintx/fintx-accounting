@@ -21,15 +21,14 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
-
 public class AccountingServiceImpl implements AccountingService {
-    
+
     @Autowired
     AccountService accountService;
-    
+
     @Autowired
     GeneralLedgerService accountsService;
-    
+
     @Autowired
     AccountNoService accountNoService;
 
@@ -48,7 +47,7 @@ public class AccountingServiceImpl implements AccountingService {
     public static Boolean check_last_balance = false;
 
     @Override
-    public void post(Transaction trans,Restriction[] restrictions) {
+    public void post(Transaction trans, Restriction[] restrictions) {
         TransactionEntry[] entries = null;
         if (trans.getPayEntries().addAll(trans.getReceiptEntries())) {
             // Sort AccountEentry by accountNo to prevent deadlock
@@ -56,15 +55,15 @@ public class AccountingServiceImpl implements AccountingService {
             Arrays.sort(entries, (x, y) -> x.getAccountNo().compareTo(y.getAccountNo()));
             try {
                 for (TransactionEntry e : entries) {
-//                    // lock the account so the balance can be wipe if there is any exception.
-//                    accountService.lock(e.getAccountNo(), trans.getTransactionId(), true);
+                    // // lock the account so the balance can be wipe if there is any exception.
+                    // accountService.lock(e.getAccountNo(), trans.getTransactionId(), true);
                     Restriction res = trans.getRestrictEntries().get(e.getAccountNo());
                     accountService.update(e, res);
                 }
             } catch (Throwable t) {
                 for (TransactionEntry e : entries) {
                     try {
-//                        accountService.lock(e.getAccountNo(), e.getTransactionId(), true);
+                        // accountService.lock(e.getAccountNo(), e.getTransactionId(), true);
                         accountService.wipe(e);
                     } catch (Throwable t1) {
                         // the lock can be re-enter
@@ -76,7 +75,7 @@ public class AccountingServiceImpl implements AccountingService {
             } finally {
                 if (null != entries) {
                     for (TransactionEntry e : entries) {
-//                        accountService.lock(e.getAccountNo(), e.getTransactionId(), false);
+                        // accountService.lock(e.getAccountNo(), e.getTransactionId(), false);
                     }
                 }
             }
@@ -88,19 +87,19 @@ public class AccountingServiceImpl implements AccountingService {
     }
 
     @Override
-    public void post(Operation operation,Restriction[] restrictions) {
+    public void post(Operation operation, Restriction[] restrictions) {
         // TODO Auto-generated method stub
 
     }
 
     @Override
     public Account auditAccount(String accountsNo, String accountNo) {
-        return accountService.get(accountsNo,accountNo);
+        return accountService.get(accountsNo, accountNo);
     }
 
     @Override
-    public List<TransactionEntry> auditTransaction(String accountsNo, LocalDate date, String accountNo, TransactionFlagEnum[] flag, TransactionSymbolEnum[] symbol,
-            String businessId) {
+    public List<TransactionEntry> auditTransaction(String accountsNo, LocalDate date, String accountNo, TransactionFlagEnum[] flag,
+            TransactionSymbolEnum[] symbol, String businessId) {
         return accountService.getTransactions(accountsNo, date, accountNo, flag, symbol, businessId);
     }
 
@@ -109,7 +108,9 @@ public class AccountingServiceImpl implements AccountingService {
         return accountService.getOperations(accountsNo, date, accountNo, symbol, businessId);
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see org.fintx.accounting.service.AccountingService#auditAccounts(java.lang.String)
      */
     @Override

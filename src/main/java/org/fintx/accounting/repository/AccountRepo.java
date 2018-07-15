@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 /**
  * 
- * @author 
+ * @author
  *
  */
 @Repository
@@ -23,10 +23,9 @@ public interface AccountRepo {
     Account lockAccount(String accountNo);
 
     int modifyBalance(Account account);
-  
+
     Account getByAccountNo(String accountNo);
 
-    
     BigDecimal selectAcctTitleSumAmtList(String accountsNo, String orderId);
 
 }

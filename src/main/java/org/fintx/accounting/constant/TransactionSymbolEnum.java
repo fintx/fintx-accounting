@@ -2,7 +2,7 @@ package org.fintx.accounting.constant;
 
 import org.fintx.lang.Codeable;
 
-public enum TransactionSymbolEnum  implements Codeable<Integer>{
+public enum TransactionSymbolEnum implements Codeable<Integer> {
     DEBIT(1), CREDIT(2), RECEIPT(3), PAY(4);
     private Integer code;
 

@@ -15,7 +15,6 @@
  */
 package org.fintx.accounting.service;
 
-
 import lombok.Builder;
 import lombok.Getter;
 
@@ -25,14 +24,14 @@ import java.math.BigDecimal;
  * @author bluecreator(qiang.x.wang@gmail.com)
  *
  */
-//TODO 改成属性名，金额，> < =的列表？
+// TODO 改成属性名，金额，> < =的列表？
 @Getter
 @Builder
 public class Restriction {
     /**
      * 透支限制-->使用MinBalanceLimit
      */
-    //private BigDecimal overdraftLimit;
+    // private BigDecimal overdraftLimit;
     /**
      * 借发生额限制，如每天累计买入不超过5万
      */
@@ -54,7 +53,7 @@ public class Restriction {
      * 余额额限制，如小额账户
      */
     private BigDecimal MinBalanceLimit;
-    
-//    public Boolean restrict(P parameter,T target);
+
+    // public Boolean restrict(P parameter,T target);
 
 }

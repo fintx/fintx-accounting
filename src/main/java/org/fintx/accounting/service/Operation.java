@@ -35,14 +35,14 @@ public class Operation {
     private Operation() {
 
     }
+
     private String authorizerNo;
     private String operatorNo;
-    private String operationId=UniqueId.get().toString();
+    private String operationId = UniqueId.get().toString();
     private LocalDate operationDate;
 
     private String businessId;
-    
-   
+
     private OperationSymbolEnum operationflag;
 
     private ArrayList<OperationEntry> closeAcctEntrys;
@@ -72,7 +72,7 @@ public class Operation {
 
         private Builder() {
         }
-        
+
         public Builder authorizerNo(String authorizerNo) {
 
             return this;
@@ -87,57 +87,57 @@ public class Operation {
 
             return this;
         }
-        
+
         public Builder businessId(String businessId) {
 
             return this;
         }
 
-        public Builder freeze(String accountsNo,String accountNo, BigDecimal amt) {
+        public Builder freeze(String accountsNo, String accountNo, BigDecimal amt) {
             return this;
         }
 
-        public Builder release(String accountsNo,String accountNo, BigDecimal amt) {
+        public Builder release(String accountsNo, String accountNo, BigDecimal amt) {
             return this;
         }
 
-        public Builder control(String accountsNo,String accountNo, String accountCtrl) {
-            return this;
-        }
-        
-        public Builder overdraft(String accountsNo,String accountNo, BigDecimal amt) {
-            return this;
-        }
-        public Builder openInner(String accountsNo,String accountNo,String organizationNo, String productNo) {
-
+        public Builder control(String accountsNo, String accountNo, String accountCtrl) {
             return this;
         }
 
-        public Builder openCustomer(String accountsNo,String accountNo,String organizationNo, String productNo, String customerNo) {
+        public Builder overdraft(String accountsNo, String accountNo, BigDecimal amt) {
+            return this;
+        }
+
+        public Builder openInner(String accountsNo, String accountNo, String organizationNo, String productNo) {
 
             return this;
         }
 
+        public Builder openCustomer(String accountsNo, String accountNo, String organizationNo, String productNo, String customerNo) {
 
-        public Builder close(String accountsNo,String accountNo) {
             return this;
         }
-        
-        public Builder lock(String accountsNo,String accountNo,String key) {
+
+        public Builder close(String accountsNo, String accountNo) {
             return this;
         }
-        
-        public Builder free(String accountsNo,String accountNo,String key) {
+
+        public Builder lock(String accountsNo, String accountNo, String key) {
             return this;
         }
-        
+
+        public Builder free(String accountsNo, String accountNo, String key) {
+            return this;
+        }
+
         /*
          * if operationDate is different with voucher's businessDate
          */
-         public Builder operationId(String operationId) {
-         return this;
-         }
-        
+        public Builder operationId(String operationId) {
+            return this;
+        }
+
         /*
          * if operationFlag is not post
          */
@@ -154,10 +154,10 @@ public class Operation {
             if (null == verifer) {
                 verifer = defaultVerifer;
             }
-            if(verifer.verify(operation)) {
-                return operation; 
-            }else {
-                //TODO add special Exception
+            if (verifer.verify(operation)) {
+                return operation;
+            } else {
+                // TODO add special Exception
                 throw new RuntimeException("Fail to verify the transaction info");
             }
         };

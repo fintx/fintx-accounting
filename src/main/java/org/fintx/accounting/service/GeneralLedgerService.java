@@ -27,10 +27,10 @@ import javax.annotation.Nonnull;
  */
 public interface GeneralLedgerService {
     public GeneralLedgerAccount get(@Nonnull final String accountsNo);
-    
+
     public void createDailyAccounts();
 
-    public void post(@Nonnull final String accountsNo,@Nonnull final  BigDecimal amount);
+    public void post(@Nonnull final String accountsNo, @Nonnull final BigDecimal amount);
 
     public void check();
 

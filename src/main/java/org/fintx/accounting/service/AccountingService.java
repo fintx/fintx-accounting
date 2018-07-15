@@ -41,17 +41,16 @@ public interface AccountingService {
      * 
      * @param transaction
      */
-    
-    public void post(@Nonnull final Transaction transaction,Restriction[] restrictions);
+
+    public void post(@Nonnull final Transaction transaction, Restriction[] restrictions);
 
     /**
      * use TransactionFlag instead of cancel and flush
+     * 
      * @param opertion
      */
- 
 
-    public void post(@Nonnull final Operation operation,Restriction[] restrictions);
-    
+    public void post(@Nonnull final Operation operation, Restriction[] restrictions);
 
     public Account auditAccount(@Nonnull final String accountsNo, @Nonnull final String accountNo);
 
@@ -60,6 +59,6 @@ public interface AccountingService {
 
     public List<OperationEntry> auditOperation(@Nonnull final String accountsNo, @Nonnull final LocalDate date, final String accountNo,
             final OperationSymbolEnum[] symbol, final String businessId);
-    
+
     public GeneralLedgerAccount auditGeneralLedgerAccount(@Nonnull final String accountsCodeNo);
 }

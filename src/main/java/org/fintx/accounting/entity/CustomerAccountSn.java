@@ -4,8 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * CustomerAccountSn CustomerAccountNo InnerAccountSn InnerAccountNo could put in seperated database.
- * they should use in transaction scope.
+ * CustomerAccountSn CustomerAccountNo InnerAccountSn InnerAccountNo could put in seperated database. they should use in transaction scope.
+ * 
  * @author bluecreator(qiang.x.wang@gmail.com)
  *
  */

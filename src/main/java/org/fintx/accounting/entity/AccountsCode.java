@@ -48,8 +48,7 @@ public class AccountsCode {
      * 科目控制
      */
     private String accountsControl;
-    
-    
+
     /**
      * 内部账 客户账
      */

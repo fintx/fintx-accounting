@@ -2,7 +2,7 @@ package org.fintx.accounting.constant;
 
 import org.fintx.lang.Codeable;
 
-public enum TransactionFlagEnum  implements Codeable<Integer> {
+public enum TransactionFlagEnum implements Codeable<Integer> {
     RECORD(1), CANCEL(2), FLASH(3);
     private Integer code;
 

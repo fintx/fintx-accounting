@@ -47,11 +47,9 @@ public class AccountNoSection {
 
     private String customerNo;
 
-
     // private AccountOwnerFlag accountOwnerFlag;
 
     private String accountNoSectionId = UniqueId.get().toString();
-
 
     // control and buff should be a configuration not a function
     // private ArrayList controlCreditEntrys;
@@ -68,8 +66,6 @@ public class AccountNoSection {
         private AccountNoSection accountNoSection = new AccountNoSection();
         private Verifier<AccountNoSection> verifer = null;
         private static final Verifier<AccountNoSection> defaultVerifer = new AccountOpeningVerifer();
-
-        
 
         private Builder() {
         }
@@ -93,8 +89,6 @@ public class AccountNoSection {
             accountNoSection.customerNo = customerNo;
             return this;
         }
-
-       
 
         /*
          * if operationDate is different with voucher's businessDate

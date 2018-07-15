@@ -42,8 +42,7 @@ public interface AccountService {
      * 
      * @param transaction
      */
-    public Account update(@Nonnull final TransactionEntry entry,@Nonnull final Restriction res);
-    
+    public Account update(@Nonnull final TransactionEntry entry, @Nonnull final Restriction res);
 
     /**
      * 冲正 金额必须为负 更新余额 流水入账 撤销 金额必须为负 更新余额 流水不入账
@@ -51,7 +50,7 @@ public interface AccountService {
      * @param transaction
      */
     public Account update(@Nonnull final OperationEntry entry);
-    
+
     public void wipe(@NonNull final TransactionEntry entry);
 
     public void strike(@NonNull final TransactionEntry entry);

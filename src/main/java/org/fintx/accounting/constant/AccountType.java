@@ -4,7 +4,7 @@ import org.fintx.lang.Codeable;
 
 public enum AccountType implements Codeable<Integer> {
     /**
-     * 甲 乙 丙  丁
+     * 甲 乙 丙 丁
      */
     A(1), B(2), C(3), D(3);
     private Integer code;
