@@ -85,7 +85,7 @@ public class AccountServiceTest {
         operationBuilder.openCustomer(accountsNo, accountNo1, organizationNo, productNo, customerNo);
         // ...
         Operation operation = operationBuilder.build();
-        accountingService.post(operation);
+        accountingService.post(operation,null);
         
 
         // build voucher
@@ -101,7 +101,7 @@ public class AccountServiceTest {
         transactionBuilder.debit(accountsNo, accountNo2, new BigDecimal("50.00"));
         transactionBuilder.debit(accountsNo, accountNo3, new BigDecimal("50.00"));
         Transaction transaction = transactionBuilder.build();
-        accountingService.post(transaction);
+        accountingService.post(transaction,null);
 
         // audit transaction
         TransactionFlagEnum[] transflags = { TransactionFlagEnum.RECORD };
@@ -115,7 +115,7 @@ public class AccountServiceTest {
         operationBuilder.lock(accountsNo, accountNo1, voucher.getBusinessId());
         // ...
         operation = operationBuilder.build();
-        accountingService.post(operation);
+        accountingService.post(operation,null);
 
         // audit operation
         OperationSymbolEnum[] operSymbols= {OperationSymbolEnum.OPEN,OperationSymbolEnum.CLOSE};
