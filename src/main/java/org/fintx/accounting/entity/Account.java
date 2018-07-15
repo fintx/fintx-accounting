@@ -31,7 +31,7 @@ import java.time.LocalDate;
  * @author bluecreator(qiang.x.wang@gmail.com)
  *
  */
-//TODO 对于账户的各种限制是否应该放在交易系统里面限制？？---不应在交易系统限制，应暴露出参数或方法开放给调用方
+// TODO 对于账户的各种限制是否应该放在交易系统里面限制？？---不应在交易系统限制，应暴露出参数或方法开放给调用方
 @Getter
 @Setter
 public class Account {
@@ -49,7 +49,7 @@ public class Account {
     private String accountCodeNo;
 
     private String organizationNo;
-    
+
     /**
      * ?? 业务条线--用于与部门organizationNo网格化管理
      */
@@ -57,12 +57,12 @@ public class Account {
 
     private String customerNo;
 
-    //private String accountSn;
+    // private String accountSn;
 
     private String accountNo;
 
     private String productNo;
-    
+
     private String currency;
     /**
      * 1 debtor 2 creditor
@@ -77,39 +77,36 @@ public class Account {
      * 1 normal 2closed 3locked--禁止任何交易
      */
     private AccountStatusEnum accountStatus;
-    
+
     private AccountsOwnerFlagEnum accountsOwnerFlag;
 
-    
-
-
     private BigDecimal frozenAmt;
-    /*
+    /**
      * do not use double value
      */
     // private BigDecimal lastfrozenamt;
-    /*
+    /**
      * control amount
      */
     private BigDecimal ctrlAmt;
-    /*
+    /**
      * last control amount
      */
     // private BigDecimal lastCtrlAmt;
-    /*
+    /**
      * account control characters
      */
-    private String accountCtrl;//??还需要吗
+    private String accountCtrl;// ??还需要吗
 
     private BigDecimal balance;
 
     private BigDecimal lastBalance;
 
-    /*
+    /**
      * accumulation 积数
      **/
     private BigDecimal balanceAccum;
-    /*
+    /**
      * last balance accumulation 上期余额
      **/
     private BigDecimal lastBalanceAccum;
@@ -130,64 +127,60 @@ public class Account {
 
     private BigDecimal lastCrTransactionAmt;
 
-    //Calculate the interest is a business!
-    //private BigDecimal rate;
+    // Calculate the interest is a business!
+    // private BigDecimal rate;
 
-    //private LocalDate interestSettleDate;
-/**
- * 甲 乙 丙  丁
- */
-    private AccountType accountType;
-    
-    private LocalDate latestTransactionDate;
-    
+    // private LocalDate interestSettleDate;
     /**
-     * 记录最后一次持久化的 交易ID 未来可用于把account做为内存对象，定期持久化
-     * 与transactionId做偏向锁的功能合并，因为做内存对象时使用本地锁，不会需要持久化偏向事务ID
+     * 甲 乙 丙 丁
      */
-    
-    //private String latestTransactionId;
-    /*
+    private AccountType accountType;
+
+    private LocalDate latestTransactionDate;
+
+    /**
+     * 记录最后一次持久化的 交易ID 未来可用于把account做为内存对象，定期持久化 与transactionId做偏向锁的功能合并，因为做内存对象时使用本地锁，不会需要持久化偏向事务ID
+     */
+
+    // private String latestTransactionId;
+    /**
      * move to accountctrl // 销账类型 // 1-一次销账 2-多次销账 private String writeOffType;
      */
     // write off is a business
-    //private String writeOff;
+    // private String writeOff;
 
     private LocalDate openDate;
 
     private LocalDate closeDate;
-    
+
     private int ZoneOffset;
-    
+
     /**
-     * 1记录当前transactionId，用于偏向锁，
-     * 2当账户使用内存对象（领域对象）时用于记录最后一次持久化时的事务ID，用于应用异常终止时的数据快速恢复
-     * 3前两种情况不会同时使用
+     * 1记录当前transactionId，用于偏向锁， 2当账户使用内存对象（领域对象）时用于记录最后一次持久化时的事务ID，用于应用异常终止时的数据快速恢复 3前两种情况不会同时使用
      */
     private String transactionId;
 
-    /*
+    /**
      * extend column
      */
     private String extend1;
-    /*
+    /**
      * extend column
      */
     private String extend2;
-    /*
+    /**
      * DAC: Data Anti Change
      */
     private String checksum;
-    
+
     /**
      * 用于系统版本升级兼容
      */
-    private short  version;
-    
+    private short version;
+
     /**
      * 用于乐观事务锁？？可虑是否还可以与transactionId合并
      */
-    private long  transactionVersion;
-    
-    
+    private long transactionVersion;
+
 }

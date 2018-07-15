@@ -50,7 +50,9 @@ public class AccountsCode {
     private String accountsControl;
     
     
-    
+    /**
+     * 内部账 客户账
+     */
     private AccountsOwnerFlagEnum accountsOwnerFlag;
 
     /**

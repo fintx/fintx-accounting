@@ -42,7 +42,7 @@ public class TransactionEntry {
     private String customerNo;
 
     private String coCustomerNo;
-    /*
+    /**
      * 原账户机构??是否需要 账户中有原账户机构--需要，是凭证必备属性，记账应校验
      */
     private String organizationNo;
@@ -54,7 +54,7 @@ public class TransactionEntry {
     private String coAccountNo;
 
     private String transactionId;
-    /*
+    /**
      * 操作账户机构
      */
     private String operatorOrgNo;
@@ -70,16 +70,16 @@ public class TransactionEntry {
     private BigDecimal balance;
 
     private BigDecimal balanceAccum;
-    /*
+    /**
      * record cancel flash 记账/抹账/冲账
      */
     private TransactionFlagEnum flag;
 
-    /*
+    /**
      * dr:debit record/cr:credit record/rr:receipt record/pr:payment record 借/贷/收/付
      */
     private TransactionSymbolEnum symbol;
-    /*
+    /**
      * is this accounting entry effective to account
      */
     private boolean effective;
@@ -87,18 +87,18 @@ public class TransactionEntry {
     private String voucherType;
 
     private String voucherId;
-    /*
+    /**
      * 凭证号码
      */
     private String voucherNo;
-    /*
+    /**
      * 凭证日期
      */
     private LocalDate voucherDate;
-    
+
     private ZoneOffset zoneOffset;
 
-    /*
+    /**
      * 款项 现金、银行存款以及其他视同现金和银行存款的银行汇票存款、银行本票存款、信用卡存款、信用证保证金存款、外埠存款和存出投资款等 三方备付金。
      */
     private String cashType;
@@ -111,76 +111,76 @@ public class TransactionEntry {
     // it is transaction date
     // private String businessDate;
 
-    /*
+    /**
      * 
      */
     private String changeflag;
 
-    /*
+    /**
      * 是否已结算
      */
     private Boolean settlement;
 
-    /*
+    /**
      * 币种
      */
     private String currency;
 
-    /*
+    /**
      * 原币种
      */
     private String naturalCurrency;
-    /*
+    /**
      * 汇率
      */
     private String exchangeRate;
-    /*
+    /**
      * 订单类型
      */
     private String orderType;
-    /*
+    /**
      * 订单Id
      */
     private String orderId;
-    /*
+    /**
      * 订单日期
      */
     private LocalDate orderDate;
-    /*
+    /**
      * 辅助核算项目
      */
     private String auxiliaryItem;
 
     private String summary;
 
-    /*
+    /**
      * 备注
      */
     private String remark;
-    /*
+    /**
      * 说明 用于程序使用
      */
     private String comment;
-    /*
+    /**
      * extend column
      */
     private String extend1;
-    /*
+    /**
      * extend column
      */
     private String extend2;
 
-    /*
+    /**
      * DAC: Data Anti Change
      */
     private String checksum;
-    
-    /*
+
+    /**
      * Version for Account update
      */
     private short version;
-    
-    /*
+
+    /**
      * Version for Optimistic locking
      */
     private long transactionVersion;

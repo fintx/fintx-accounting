@@ -56,11 +56,11 @@ public class OperationEntry {
 
     private String summary;
 
-    /*
+    /**
      * extend column
      */
     private String extend1;
-    /*
+    /**
      * extend column
      */
     private String extend2;
@@ -69,7 +69,7 @@ public class OperationEntry {
     private String businessId;
     private String businessDate;
     private String changeflag;
-    /*
+    /**
      * DAC: Data Anti Change
      */
     private String checksum;
