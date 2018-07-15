@@ -11,7 +11,7 @@ import org.fintx.accounting.service.Restriction;
 import org.fintx.accounting.service.AccountNoService;
 import org.fintx.accounting.service.AccountService;
 import org.fintx.accounting.service.AccountingService;
-import org.fintx.accounting.service.LedgerService;
+import org.fintx.accounting.service.GeneralLedgerService;
 import org.fintx.accounting.service.Operation;
 import org.fintx.accounting.service.Transaction;
 
@@ -28,7 +28,7 @@ public class AccountingServiceImpl implements AccountingService {
     AccountService accountService;
     
     @Autowired
-    LedgerService accountsService;
+    GeneralLedgerService accountsService;
     
     @Autowired
     AccountNoService accountNoService;

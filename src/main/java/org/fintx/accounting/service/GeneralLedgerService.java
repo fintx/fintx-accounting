@@ -25,7 +25,7 @@ import javax.annotation.Nonnull;
  * @author bluecreator(qiang.x.wang@gmail.com)
  *
  */
-public interface LedgerService {
+public interface GeneralLedgerService {
     public GeneralLedgerAccount get(@Nonnull final String accountsNo);
     
     public void createDailyAccounts();
