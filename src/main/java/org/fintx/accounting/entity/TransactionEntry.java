@@ -183,5 +183,5 @@ public class TransactionEntry {
     /**
      * Version for Optimistic locking
      */
-    private long transactionVersion;
+    private long transaction;
 }
