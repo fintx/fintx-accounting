@@ -179,8 +179,8 @@ public class Account {
     private short version;
 
     /**
-     * 用于乐观事务锁？？可虑是否还可以与transactionId合并
+     * Optimistic lock 用于乐观事务锁？？可虑是否还可以与transactionId合并
      */
-    private long transactionVersion;
+    private long transaction;
 
 }
